@@ -1,4 +1,4 @@
-// // When the user scrolls down 80px from the top of the document, resize the navbar's padding and the logo's font size
+
 window.onscroll = function() {
   scrollFunction()};
 function scrollFunction() {
@@ -19,6 +19,7 @@ function toggleMenu() {
       menuBox.style.display = "block";
   }
 }
+// End of navigator
 
 var myIndex = 0;
 carousel();
@@ -32,5 +33,16 @@ function carousel() {
   myIndex++;
   if (myIndex > x.length) {myIndex = 1}    
   x[myIndex-1].style.display = "block";  
-  setTimeout(carousel, 5000); // Change image every 2 seconds
+  setTimeout(carousel, 10000); // Change image every 10 seconds
+}
+// section for personal review 
+const slideshowImages = document.querySelectorAll(".review-slideshow li");
+const nextImageDelay = 10000;
+let currentImageCounter = 0; 
+slideshowImages[currentImageCounter].style.opacity = 1;
+setInterval(nextImage, nextImageDelay);
+function nextImage() {
+  slideshowImages[currentImageCounter].style.opacity = 0;
+  currentImageCounter = (currentImageCounter+1) % slideshowImages.length;
+  slideshowImages[currentImageCounter].style.opacity = 1;
 }
