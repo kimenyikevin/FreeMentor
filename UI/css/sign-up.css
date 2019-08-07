@@ -1,0 +1,69 @@
+body{
+    margin: 0px;
+    font-family: "Open Sans", sans-serif;
+    background: #f1f1f1;
+}
+header{
+    height: 80px;
+    background-color: #111111;
+}
+.logo{
+    position: absolute;
+    padding: 20px 20px 20px 80px;
+    cursor: pointer;
+}
+.logo a{
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 2em;
+}
+/* End of navigator */
+.sign-up-container{
+    max-width: 100%;
+    background: #f1f1f1;
+    height: 100%;
+}
+.sign-up-container h1{
+    margin-left: 150px;
+    margin-top: 50px;
+}
+.sign-up-container label{
+    margin-left: 150px;
+    font-size: 1.2em;
+}
+.sign-up-container input{
+    margin-left: 150px;
+    margin-bottom: 30px;
+    width: 600px;
+    padding: 5px;
+    font-size: 1.3em;
+    border: none;
+}
+.sign-up-container  input:focus {
+    background-color: #ddd;
+    outline: none;
+  }
+.sign-up-container p{
+    margin-left: 150px;
+}
+.sign-up-container p a{
+    text-decoration: none;
+}
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin-left: 150px;
+    border: none;
+    cursor: pointer;
+    width: 20%;
+    opacity: 0.9;
+    font-size: 1.2em;
+    border-radius: 5px;
+  }
+  .sign-up-container .sign-up-btn h3{
+      float: right;
+      margin-right: 660px;
+      font-weight: 300;
+
+  }
