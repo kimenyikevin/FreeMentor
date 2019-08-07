@@ -31,10 +31,14 @@ header{
     margin-left: 150px;
     font-size: 1.2em;
 }
+.sign-up-container label b{
+    font-size: 1.2em;
+    color: #4CAF50;
+}
 .sign-up-container input{
     margin-left: 150px;
     margin-bottom: 30px;
-    width: 600px;
+    width: 700px;
     padding: 5px;
     font-size: 1.3em;
     border: none;
@@ -65,5 +69,74 @@ button {
       float: right;
       margin-right: 660px;
       font-weight: 300;
-
+  }
+  @media only screen and (max-width: 1024px){
+    .sign-up-container .sign-up-btn h3{
+        margin-right: 400px !important;
+    }
+  }
+  @media only screen and (max-width: 768px){
+    .sign-up-container .sign-up-btn h3{
+        margin-right: 280px;
+    }
+    button {
+        font-size: 1em;
+        margin-left: 50px;
+      }
+      .sign-up-container input{
+        margin-left: 50px;
+        font-size: 1.1em;
+    }
+    .sign-up-container label{
+        margin-left: 50px;
+        font-size: 1.1em;
+    }
+    .sign-up-container h1{
+        margin-left: 50px;
+    }
+    .sign-up-container p{
+        margin-left: 50px;
+    }
+  }
+  @media only screen and (max-width: 425px){
+    .logo{
+        padding: 10px 10px 10px 20px;
+    }
+    button {
+        font-size: 1em;
+        width: 40%;
+      }
+      .sign-up-container input{
+        max-width: 80%;
+    }
+    .sign-up-container .sign-up-btn h3{
+        margin-right: 100px;
+    }
+    .sign-up-container label b{
+        font-size: .6em;
+        
+    }
+  }
+  @media only screen and (max-width: 375px){
+    button {
+        width: 60%;
+      }
+    .sign-up-container label b{
+        font-size: .5em;    
+    }
+    .sign-up-container .sign-up-btn h3{
+        margin-right: 50px;
+    }
+  }
+  @media only screen and (max-width: 320px){
+    .sign-up-container h1{
+        font-size: 1.3em;
+    }
+    .sign-up-container label b{
+        display: none;   
+    }
+    .sign-up-container .sign-up-btn h3{
+        margin-right: 40px;
+        font-size: 1em;
+    }
   }
