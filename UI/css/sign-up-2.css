@@ -25,6 +25,7 @@ header{
 }
 .container > div:nth-child(even){
     background-color: #c7b9b9;
+    height: 545px;
 }
 .sign-up-container-cln{
     /* border: 4px solid red; */
