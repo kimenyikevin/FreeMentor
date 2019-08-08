@@ -1,0 +1,128 @@
+body{
+    margin: 0px;
+    font-family: "Open Sans", sans-serif;
+    background: #f1f1f1;
+}
+header{
+    height: 80px;
+    background-color: #111111;
+}
+.logo{
+    position: absolute;
+    padding: 20px 20px 20px 80px;
+    cursor: pointer;
+}
+.logo a{
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 2em;
+}
+/* End of navigator */
+.container{
+    display: grid;
+    grid-template-columns: 70% 30% ;
+    
+}
+.container > div:nth-child(even){
+    background-color: #c7b9b9;
+    height: 545px;
+}
+.sign-up-container-cln{
+    /* border: 4px solid red; */
+    display: grid;
+    grid-template-columns: 20% 80% ;
+}
+.sign-up-container-cln h1{
+    font-size: 2em;
+    margin-top: 50px;
+}
+
+.sign-up-container-cln >div:nth-child(odd){
+     border: 1px solid #ffffff;
+     border-radius: 50%;
+     width: 50%;
+     height: 20%;
+     color:  #c7b9b9;
+     margin-left: 5px;
+     background-color: #ddd;
+}
+#sign-up-point{
+    color: #ffffff;
+    font-weight: 900;
+    font-size: 1.5em;
+}
+.sign-up-container{
+    margin-top: 50px;
+}
+.sign-up-container h1{
+    font-size: 1.5em
+}
+.sign-up-container label b{
+    font-size: 0.9em;
+}
+.sign-up-container input{
+    margin-bottom: 30px;
+    width: 60%;
+    padding: 10px 10px;
+    font-size: 1em;
+    border: none;
+}
+.sign-up-container textarea{
+    padding: 10px 10px;
+    font-size: 1.2em;
+    border: none;
+    margin-bottom: 30px;
+    width: 60%;
+}
+.sign-up-container  textarea:focus {
+    background-color: #ddd;
+    outline: none;
+  }
+.sign-up-container  input:focus {
+    background-color: #ddd;
+    outline: none;
+  }
+  .sign-up-container p a{
+    text-decoration: none;
+}
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer; 
+    font-size:1.1em;
+    border-radius: 5px;
+    padding:  15px 30px 15px 30px;
+  }
+  .sign-up-container .sign-up-btn h3{
+    font-weight: 200;
+    margin-left: 5px;
+    font-size: 1.1em;
+    }
+    @media (min-width: 768px){
+        .sign-up-btn {
+           display: grid;
+           grid-template-columns: 1fr 3fr ;
+           justify-self: start;
+       }
+       .sign-up-container-cln >div:nth-child(odd){
+        width: 30%;
+        height: 30%;
+        margin-left: 40px;
+   }
+   .sign-up-container-cln h1{
+    font-size: 2em;
+    margin-top: 100px;
+    width: 400%;
+    height: 30%;
+    margin-left: 30px;
+    color: #ffffff;
+    font-weight: 900;
+}
+.sign-up-container-cln{
+    height: 545px;
+}
+.container > div:nth-child(odd){
+    margin-left: 10%;
+}
+    }
