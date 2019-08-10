@@ -1,0 +1,220 @@
+body{
+    margin: 0px;
+    font-family: "Open Sans", sans-serif;
+    background: #f1f1f1;
+}
+header{
+    height: 60px;
+    background-color: #111111;
+    
+}
+#nav-container{
+display: grid;
+grid-template-columns: 3fr 1fr;
+}
+#nav-container > :nth-child(even){
+    font-size: 1.5em;
+    padding: 10px 10px;
+}
+#nav-container div a{
+    text-decoration: none;
+    color: #ffffff;
+}
+.logo{
+    margin: 2% 6%; 
+    cursor: pointer;
+}
+.logo a{
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 2em;
+}
+/* End of navigator */
+.main-grid{
+    display: grid;
+    /* grid-gap: 0.8rem; */
+    grid-template-columns: 18% 82%;
+    /* padding: 0rem 1.2rem; */
+}
+#left-main{
+    background-color: #2b2e33;
+    height: 90vh;
+    padding: 20px 0px;
+}
+#left-main button{
+    line-height: 40px;
+    font-size: 1.2em;
+    color: #ffffff;
+    background-color:  #2b2e33;
+    width: 100%;
+    cursor: pointer;
+    border: 0px;
+}
+#left-main button:focus {
+    outline: none;
+  }
+#left-main button.active{
+    background-color: #000000;
+}
+.top-container{
+    display: grid;
+    grid-gap: 10px;
+    grid-template-rows: 30% 50% 10%;
+    padding: 1rem;
+}
+.up-box{
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 10px;
+}
+.number-user{
+    background-color:#c9c9c9;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 5px;
+}
+.number-user p{
+    font-size: 1.5em;
+    text-align: center;
+}
+  /* displaing mentors section */
+  .top-container{
+      background-color: #6c5e5e
+  }
+  /* search box */
+  .search-container {
+    display: flex;
+    justify-content: flex-end;
+    justify-content: space-between;
+  }
+  .search-container h1{
+      font-size: 1.5em;
+      color: #ffffff;
+      padding-left: 2em;
+  }
+  .search-container input {
+    padding: 6px;
+    margin-top: 8px;
+    font-size: 17px;
+    border: none;
+    outline: none;
+  }
+  .search-container button {
+    float: right;
+    padding: 6px;
+    margin-top: 8px;
+    margin-right: 16px;
+    background: #ddd;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+  }
+  .search-container button:hover {
+    background: #ccc;
+  }
+  .mentor-container{
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    padding: 10px;
+}
+.mentor-container div{
+    /* border: 1px solid red; */
+    background-color:#c9c9c9;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19);  
+}
+.mentor-box{
+    border-radius: 5px;
+    padding: 10px;    
+}
+.mentor-box img{
+    width: 40%;
+    /* padding: 0 5em 0 7em; */
+    padding: 0  5%  0  30%;
+}
+.mentor-box h3{
+    font-size: 1em;
+    text-align: center;
+}
+.mentor-box p{
+    font-size: 1em;
+    text-align: center;
+} 
+.mentor-box button{
+    font-size: 1.5em;
+    width: 100%;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #ffffff;
+    background-color: #28a745;
+    border: 0px;
+}
+.mentor-box  button:focus {
+    outline: none;
+  }
+  #Users{
+      display: none;
+  }
+  #mentors{
+      display: none;
+  }
+  .mentor-page {
+      margin-left: 40%;
+  }
+  .mentor-page a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+  } 
+  .mentor-page a.active {
+    background-color: #28a745;
+    color: white;
+  }
+  .mentor-page a:hover:not(.active) {
+      background-color: #ddd;
+    }
+
+    @media (max-width:800px){
+        .mentor-container{
+            display: grid;
+            grid-gap: 20px;
+            grid-template-columns: 1fr 1fr;
+            padding: 10px;
+        }
+        .search-container {
+         display: grid;
+         grid-template-rows: 1fr 1fr;
+          }
+          .search-container h1{
+            font-size: 1em;
+            padding-left: 0.2em;
+        }
+        .search-container input {
+          padding: 2px;
+          margin-top: 5px;
+          font-size: 12px;
+        }
+        .search-container button {
+          padding: 2px 12px 2px 12px;
+          margin-top: 5px;
+          margin-right: 16px;
+          font-size: 12px;
+        }
+        .mentor-page {
+            margin-left: 10%;
+        }
+        .mentor-page a {
+          padding: 4px 8px;
+        } 
+    }
+    @media (max-width: 425px){
+        .mentor-container{
+            display: grid;
+            grid-gap: 20px;
+            grid-template-columns: 1fr;
+            padding: 10px;
+        }
+    }
+   
