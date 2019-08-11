@@ -17,7 +17,6 @@
             <div id="left-main">
                 <button class="left-links active" onclick="openCity(event, 'Dashboard')" >Dash board</button>
                 <button class="left-links" onclick="openCity(event, 'mentors')">All Mentors</button>
-                <button class="left-links" onclick="openCity(event, 'Users')"></button>
             </div>
             <div  class="top-container main-content" id="Dashboard">
                 <!-- users dashboard report  -->
@@ -40,6 +39,50 @@
                             <p>Sessions Completed</p>
                             <p>50</p>   
                    </div>
+                </div>
+                <div>
+                    <table>
+                        <tr>
+                            <th>#</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                             <th>Expertise</th>
+                            <th>Status</th>
+                            <th id="action-clmn">Action</th>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>KIMENKI</td>
+                            <td>Kevin</td>
+                            <td>Software Engineering</td>
+                            <td>Accepted</td>
+                            <td> <button class="mentor-box left-links" onclick="openCity(event, 'create-session')"> Create Session</button> </td>
+                        </tr>
+                        <tr>
+                                <td>2</td>
+                                <td>KIMENKI</td>
+                                <td>Kevin</td>
+                                <td>Software Engineering</td>
+                                <td>Pending</td>
+                                <td> <button> cancel</button> </td>
+                        </tr>
+                        <tr>
+                                <td>3</td>
+                                <td>KIMENKI</td>
+                                <td>Kevin</td>
+                                <td>Software Engineering</td>
+                                <td>Rejected</td>
+                                <td> <button> Delete</button> </td>
+                        </tr>
+                        <tr>
+                                <td>3</td>
+                                <td>KIMENKI</td>
+                                <td>Kevin</td>
+                                <td>Software Engineering</td>
+                                <td>Completed</td>
+                                <td> <button>FeedBack</button> </td>
+                        </tr>
+                    </table>
                 </div>
             </div>
 
@@ -171,6 +214,30 @@
                             cupiditate dolore illum provident perspiciatis,
                                 neque earum, iste ipsam!</p>
                     </div>
+            </div>
+
+
+           <!-- display all mentorship session -->
+
+            <div  class="session-container main-content" id="create-session">
+                <div class="session-container-1">
+                        <div class="session-area">
+                                <h1>Mentorship Session</h1>
+                                <h2> Describe your Problem</h2>
+                                <textarea ></textarea>
+                                <button>Send Message</button>
+                            </div>
+                        <div class="session-completed">
+                                <h1>Recent Mentorship Completed</h1>
+                                <table>
+                                    <tr><td><p>KIMENYI Kevin</p><p>Thanks for working with us</p></td></tr>
+                                    <tr><td><p>KIMENYI Kevin</p><p>Thanks for working with us</p></td></tr>
+                                    <tr><td><p>KIMENYI Kevin</p><p>Thanks for working with us</p></td></tr>
+                                </table>
+                        </div>
+
+                </div>
+
             </div>
                         
     </div>
