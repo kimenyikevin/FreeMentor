@@ -373,3 +373,37 @@ grid-template-columns: 3fr 1fr;
 .session-completed table tr td p:nth-child(even){
        margin-top: -15px;
 }
+@media(max-width:530px ){
+    table{
+        font-size: 0.8em;
+        padding: 0px;
+    }
+}
+@media(max-width: 390px ){
+    table{
+        font-size: 0.7em;
+        padding: 0px;
+    }
+}
+@media(max-width: 480px ){
+    .session-container-1{
+        display: grid ;
+        grid-template-columns: 1fr;
+}
+.session-container-1 .session-area textarea{
+    height: 20vh;
+    font-size: 0.8em;
+}
+.session-container-1 .session-area h1{
+    font-size: 1.2em
+}
+.session-container-1 .session-area h2{
+    font-size: 0.9em;
+}
+.session-container-1 .session-area button{
+    font-size: 0.9em;
+}
+.session-container-1 div{
+    height: 50vh;
+}
+}
