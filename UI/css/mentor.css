@@ -29,6 +29,17 @@ grid-template-columns: 3fr 1fr;
     color: #ffffff;
     font-size: 2em;
 }
+@media (max-width: 500px){
+    .logo a{
+        font-size: 1em;
+    }  
+    #nav-container > :nth-child(even){
+        font-size: 0.9em;
+    }
+    header{
+        height: auto;       
+    }
+}
 /* End of navigator */
 .main-grid{
     display: grid;
@@ -137,7 +148,7 @@ grid-template-columns: 3fr 1fr;
 } 
 .mentor-box button{
     font-size: 1em;
-    width: 49%;
+    width: 45%;
     padding: 5px 10px 5px 10px;
     border-radius: 5px;
     cursor: pointer;
@@ -209,7 +220,7 @@ grid-template-columns: 3fr 1fr;
           padding: 4px 8px;
         } 
     }
-    @media (max-width: 425px){
+    @media (max-width: 530px){
         .mentor-container{
             display: grid;
             grid-gap: 20px;
@@ -219,6 +230,9 @@ grid-template-columns: 3fr 1fr;
         .up-box{
             display: grid;
             grid-template-columns: 1fr;
+        }
+        #left-main button{
+            font-size: 0.8em;
         }
     }
 
@@ -348,9 +362,9 @@ grid-template-columns: 3fr 1fr;
     font-size: 0.9em;
 }
 .session-container-1 .session-area button{
-    font-size: 0.9em;
+    font-size: 0.7em;
 }
 .session-container-1 div{
-    height: 50vh;
+    height: auto;
 }
 }
