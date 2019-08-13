@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Mentor</title>
+    <link rel="stylesheet" href="/css/mentor.css">
+</head>
+<body>
+    <header id="nav-container">
+         <div class="logo"><a href="/index.html">Free Mentor</a></div>
+         <div><a href="/pages/sign-in.html">Log out</a> </div>
+    </header>
+        <!-- End of Navigation -->
+    <section>
+        <div class="main-grid">
+            <div id="left-main">
+                <button class="left-links active" onclick="openCity(event, 'Dashboard')" >Dash board</button>
+                <button class="left-links" onclick="openCity(event, 'mentors')">Mentorship Request</button>
+            </div>
+            <div  class="top-container main-content" id="Dashboard">
+                <!-- Mentor dashboard report  -->
+                <div class="up-box">
+                    <div class="number-user" >
+                        <p>Requested Mentorship</p>
+                        <p>5</p>
+
+                    </div>
+                    <div class="number-user">
+                        <p>Rejected Mentee</p>
+                        <p>5</p>
+
+                    </div>
+                    <div class="number-user">
+                        <p>Accepted Mentee</p>
+                        <p>5</p>
+                    </div>
+                </div>
+                <div>
+                    <table>
+                        <tr>
+                            <th>#</th>
+                            <th>Menntee Name</th>
+                             <th>Title of problem</th>
+                            <th>Status</th>
+                            <th id="action-clmn">Action</th>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>KIMENKI Kevin</td>
+                            <td>Advice me how can i improve my career in Software development</td>
+                            <td>Progress</td>
+                            <td> <button class="mentor-box left-links" onclick="openCity(event, 'create-session')"> Reply Message</button> </td>
+                        </tr>
+                        <tr>
+                                <td>2</td>
+                                <td>KIMENKI Kevin</td>
+                                <td>Advice me how can i improve my career in Software development</td>
+                                <td>Progress</td>
+                                <td> <button class="mentor-box left-links" onclick="openCity(event, 'create-session')">Reply Message</button> </td>
+                        </tr>
+                        <tr>
+                                <td>3</td>
+                                <td>KIMENKI Kevin</td>
+                                <td>Advice me how can i improve my career in Software development</td>
+                                <td>Completed</td>
+                                <td> <button> View FeedBack</button> </td>
+                        </tr>
+                        <tr>
+                                <td>3</td>
+                                <td>KIMENKI Kevin</td>
+                                <td>Advice me how can i improve my career in Software development</td>
+                                <td>Completed</td>
+                                <td> <button>View FeedBack</button> </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- displaying all  mentorship request -->
+        <div  class="top-container main-content" id="mentors">
+                <div class="search-container">
+                    <h1>List Of All Mentorship Request</h1>
+                        <form>
+                          <input type="text" placeholder="Search a mentor.." name="search">
+                          <button type="submit">Submit</button>
+                        </form>
+                </div>
+                <div class="mentor-container">
+                    <div class="mentor-box">
+                        <img src="/images/icon.png" alt="">
+                        <h3>KIMENYI Kevin</h3>
+                        <p>kimenyikevin@gmail.com</p>
+                        <button>Accept</button>
+                        <button>Decline</button>
+                    </div>
+                <div class="mentor-box">
+                        <img src="/images/icon.png" alt="">
+                        <h3>KIMENYI Kevin</h3>
+                        <p>kimenyikevin@gmail.com</p>
+                        <button>Accept</button>
+                        <button>Decline</button>
+        
+                </div>
+                <div class="mentor-box ">
+                        <img src="/images/icon.png" alt="">
+                        <h3>KIMENYI Kevin</h3>
+                        <p>kimenyikevin@gmail.com</p>
+                        <button>Accept</button>
+                        <button>Decline</button>
+                </div>
+                <div class="mentor-box ">
+                        <img src="/images/icon.png" alt="">
+                        <h3>KIMENYI Kevin</h3>
+                        <p>kimenyikevin@gmail.com</p>
+                        <button>Accept</button>
+                        <button>Decline</button>
+                </div>
+        </div>
+            <div class="mentor-container">
+                <div class="mentor-box ">
+                        <img src="/images/icon.png" alt="">
+                        <h3>KIMENYI Kevin</h3>
+                        <p>kimenyikevin@gmail.com</p>
+                        <button>Accept</button>
+                        <button>Decline</button>
+                </div>
+                <div class="mentor-box ">
+                        <img src="/images/icon.png" alt="">
+                        <h3>KIMENYI Kevin</h3>
+                        <p>kimenyikevin@gmail.com</p>
+                        <button>Accept</button>
+                        <button>Decline</button>
+            
+                </div>
+                <div class="mentor-box ">
+                        <img src="/images/icon.png" alt="">
+                        <h3>KIMENYI Kevin</h3>
+                        <p>kimenyikevin@gmail.com</p>
+                        <button>Accept</button>
+                        <button>Decline</button>
+                </div>
+                <div class="mentor-box">
+                        <img src="/images/icon.png" alt="">
+                        <h3>KIMENYI Kevin</h3>
+                        <p>kimenyikevin@gmail.com</p>
+                        <button>Accept</button>
+                        <button>Decline</button>  
+                </div>
+            </div>  
+                <div class="mentor-container">
+                    <div class="mentor-box ">
+                        <img src="/images/icon.png" alt="">
+                        <h3>KIMENYI Kevin</h3>
+                        <p>kimenyikevin@gmail.com</p>
+                        <button>Accept</button>
+                        <button>Decline</button>
+                    </div>
+                    <div class="mentor-box ">
+                        <img src="/images/icon.png" alt="">
+                        <h3>KIMENYI Kevin</h3>
+                        <p>kimenyikevin@gmail.com</p>
+                        <button>Accept</button>
+                        <button>Decline</button>             
+                    </div>
+                    <div class="mentor-box ">
+                        <img src="/images/icon.png" alt="">
+                        <h3>KIMENYI Kevin</h3>
+                        <p>kimenyikevin@gmail.com</p>
+                        <button>Accept</button>
+                        <button>Decline</button>
+                    </div>
+                    <div class="mentor-box ">
+                            <img src="/images/icon.png" alt="">
+                            <h3>KIMENYI Kevin</h3>
+                            <p>kimenyikevin@gmail.com</p>
+                            <button>Accept</button>
+                            <button>Decline</button>
+                    </div>
+                </div>    
+                <div class="mentor-page">
+                        <a href="#">&laquo;</a>
+                        <a class="active" href="#">1</a>
+                        <a href="#">2</a>
+                        <a href="#">3</a>
+                        <a href="#">4</a>
+                        <a href="#">5</a>
+                        <a href="#">6</a>
+                        <a href="#">&raquo;</a>
+                 </div>              
+            </div>
+
+           <!-- display all mentorship session -->
+
+            <div  class="session-container main-content" id="create-session">
+                <div class="session-container-1">
+                        <div class="session-area">
+                                <h1>Mentorship Session</h1>
+                                <label >From: </label>
+                                <h4>KIMENYI Kevin</h4>
+                                <label >Subject: </label>
+                                <h4>Advice me how can i improve my career in Software development</h4>
+                                <div id="user-sms"><p>Lorem ipsum dolor sit amet consectetur 
+                                    adipisicing elit. Maxime suscipit fuga aliquid illum, aperiam ratione
+                                     provident voluptatum tenetur. Ullam ut culpa commodi voluptate 
+                                     inventore doloribus numquam odio veritatis vel consequatur aliquid,
+                                      nulla fugit unde corporis soluta reprehenderit sint atque placeat 
+                                      totam id ex voluptatum non! Minus nam magnam vel quaerat?</p></div>
+                                <h2>Reply this Message</h2>
+                                <textarea ></textarea>
+                                <button>Send Message</button>
+                        </div>
+                        <div class="session-completed">
+                                <h1>Recent Mentorship Completed</h1>
+                                <table>
+                                    <tr><td><p>KIMENYI Kevin</p><p>Thanks for working with us</p></td></tr>
+                                    <tr><td><p>KIMENYI Kevin</p><p>Thanks for working with us</p></td></tr>
+                                    <tr><td><p>KIMENYI Kevin</p><p>Thanks for working with us</p></td></tr>
+                                </table>
+                        </div>
+
+                </div>
+
+            </div>
+                        
+    </div>
+    </div>
+    </section>
+    <!-- <footer>
+
+    </footer> -->
+    <script src="/javascript/user.js"></script>
+</body>
+</html>
