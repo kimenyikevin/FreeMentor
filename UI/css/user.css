@@ -29,6 +29,14 @@ grid-template-columns: 3fr 1fr;
     color: #ffffff;
     font-size: 2em;
 }
+@media (max-width: 425px){
+    .logo a{
+        font-size: 1.3em;
+    }
+    #nav-container > :nth-child(even){
+        font-size: 1.1em;
+    }
+}
 /* End of navigator */
 .main-grid{
     display: grid;
@@ -209,6 +217,16 @@ grid-template-columns: 3fr 1fr;
         } 
     }
     @media (max-width: 425px){
+        .main-grid{
+            display: grid;
+            /* grid-gap: 0.8rem; */
+            grid-template-columns: 1fr;
+            /* padding: 0rem 1.2rem; */
+        }
+        #left-main{
+            height: 10vh;
+            padding: 20px 0px;
+        }
         .mentor-container{
             display: grid;
             grid-gap: 20px;
