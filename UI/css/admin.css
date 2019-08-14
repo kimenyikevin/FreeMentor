@@ -4,7 +4,7 @@ body{
     background: #f1f1f1;
 }
 header{
-    height: 60px;
+    height: 10vh;
     background-color: #111111;
 }
 #nav-container{
@@ -26,7 +26,7 @@ grid-template-columns: 3fr 1fr;
 .logo a{
     text-decoration: none;
     color: #ffffff;
-    font-size: 2em;
+    font-size: 1.5em;
 }
 /* End of navigator */
 .main-grid{
@@ -55,20 +55,12 @@ grid-template-columns: 3fr 1fr;
 #left-main button.active{
     background-color: #000000;
 }
-.top-container{
-    display: grid;
-    grid-gap: 10px;
-    grid-template-rows: 30% 50% 10%;
-    padding: 1rem;
-}
-.top-container div {
-    
-}
 .up-box{
     display: grid;
     grid-gap: 20px;
     grid-template-columns: 1fr 1fr 1fr;
     padding: 10px;
+    height: 10vh;
 }
 .number-user{
     background-color:#c9c9c9;
@@ -84,16 +76,15 @@ grid-template-columns: 3fr 1fr;
     grid-gap: 20px;
     grid-template-columns: 1fr 1fr 1fr;
     padding: 10px;
+    margin-top: 80px;
 }
 .down-box div{
-    /* border: 1px solid red; */
     background-color:#c9c9c9;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19);  
 }
 .review-container{
     border-radius: 5px;
-    padding: 10px;
-    
+    padding: 10px; 
 }
 .review-container img{
     width: 40%;
@@ -158,6 +149,7 @@ grid-template-columns: 3fr 1fr;
     cursor: pointer;
     color: #ffffff;
     background-color: #28a745;
+    border: 0px;
 }
 .mentor-box  button:focus {
     outline: none;
@@ -185,6 +177,9 @@ grid-template-columns: 3fr 1fr;
   .mentor-page a:hover:not(.active) {
       background-color: #ddd;
     }
+    #Users .mentor-container  .mentor-box button{
+        font-size: 1em;
+    }
     @media (max-width:800px){
         .down-box{
             display: grid;
@@ -200,16 +195,26 @@ grid-template-columns: 3fr 1fr;
         }
     }
     @media (max-width: 425px){
+        .up-box{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+        .up-box div{
+            height: 20vh;
+        }
         .down-box{
             display: grid;
-            grid-gap: 20px;
             grid-template-columns: 1fr;
-            padding: 10px;
+        }
+        .down-box div{
+            height: 50vh;
+
         }
         .mentor-container{
             display: grid;
-            grid-gap: 20px;
             grid-template-columns: 1fr;
-            padding: 10px;
+        }
+        #nav-container > :nth-child(even){
+            font-size: 1em;
         }
     }
