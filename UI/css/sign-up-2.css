@@ -4,65 +4,56 @@ body{
     background: #f1f1f1;
 }
 header{
-    height: 80px;
-    background-color: #111111;
+    height: 10vh;
 }
 .logo{
-    position: absolute;
-    padding: 20px 20px 20px 80px;
+    position: fixed;
+    padding: 10px 20px 10px 80px;
     cursor: pointer;
+    background-color: #111111;
+    width: 100%;
+    height: 7vh;  
+    z-index: 1;
 }
 .logo a{
     text-decoration: none;
     color: #ffffff;
-    font-size: 2em;
+    font-size: 1.5em;
 }
 /* End of navigator */
 .container{
     display: grid;
-    grid-template-columns: 70% 30% ;
-    
+    grid-template-columns: 75% 25% ;   
 }
 .container > div:nth-child(even){
     background-color: #c7b9b9;
     height: 545px;
-}
-.sign-up-container-cln{
-    /* border: 4px solid red; */
-    display: grid;
-    grid-template-columns: 20% 80% ;
+    position: fixed;
+    left: 75%;
+    width: 25%;
+    padding-left: 4%;
 }
 .sign-up-container-cln h1{
-    font-size: 2em;
+    font-size: 1.8em;
     margin-top: 50px;
+    font-family: 'Times New Roman', Times, serif;
 }
-
-.sign-up-container-cln >div:nth-child(odd){
-     border: 1px solid #ffffff;
-     border-radius: 50%;
-     width: 50%;
-     height: 20%;
-     color:  #c7b9b9;
-     margin-left: 5px;
-     background-color: #ddd;
-}
-#sign-up-point{
+.sign-up-container-cln p.active{
     color: #ffffff;
-    font-weight: 900;
-    font-size: 1.5em;
 }
 .sign-up-container{
     margin-top: 50px;
+    margin-left: 10%;
 }
 .sign-up-container h1{
-    font-size: 1.5em
+    font-size: 1.3em
 }
 .sign-up-container label b{
     font-size: 0.9em;
 }
 .sign-up-container input{
     margin-bottom: 30px;
-    width: 60%;
+    width: 70%;
     padding: 10px 10px;
     font-size: 1em;
     border: none;
@@ -72,7 +63,7 @@ header{
     font-size: 1.2em;
     border: none;
     margin-bottom: 30px;
-    width: 60%;
+    width: 70%;
 }
 .sign-up-container  textarea:focus {
     background-color: #ddd;
@@ -84,6 +75,7 @@ header{
   }
   .sign-up-container p a{
     text-decoration: none;
+    color: blue;
 }
 button {
     background-color: #4CAF50;
@@ -92,37 +84,38 @@ button {
     cursor: pointer; 
     font-size:1.1em;
     border-radius: 5px;
-    padding:  15px 30px 15px 30px;
+    padding:  10px 30px 10px 30px;
   }
-  .sign-up-container .sign-up-btn h3{
+  .sign-up-btn{
+      margin-left: 10%;
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+  }
+ .sign-up-btn h3{
     font-weight: 200;
     margin-left: 5px;
     font-size: 1.1em;
     }
-    @media (min-width: 768px){
-        .sign-up-btn {
-           display: grid;
-           grid-template-columns: 1fr 3fr ;
-           justify-self: start;
-       }
-       .sign-up-container-cln >div:nth-child(odd){
-        width: 30%;
-        height: 30%;
-        margin-left: 40px;
-   }
-   .sign-up-container-cln h1{
-    font-size: 2em;
-    margin-top: 100px;
-    width: 400%;
-    height: 30%;
-    margin-left: 30px;
-    color: #ffffff;
-    font-weight: 900;
-}
-.sign-up-container-cln{
-    height: 545px;
-}
-.container > div:nth-child(odd){
-    margin-left: 10%;
-}
+    .sign-up-btn h3 a{
+        color: blue;
+    }
+    @media (max-width: 768px){
+        .sign-up-btn{
+            display: grid;
+            grid-template-columns: 1fr;
+        }  
+    }
+    @media (max-width: 430px){
+        .container > div:nth-child(even){
+       display: none;
+        }
+        .sign-up-container h1{
+            font-size: 1.2em
+        }
+        .logo{
+            padding: 10px 20px 10px 10px;
+        }
+        .sign-up-btn h3{
+            font-size: 1em;
+            }
     }
