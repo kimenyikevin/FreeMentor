@@ -1,24 +1,32 @@
-
 window.onscroll = function() {
   scrollFunction()};
 function scrollFunction() {
   if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
     document.getElementById("navigator").style.padding = "20px 100px";
-    document.getElementById("logo").style.fontSize = "30px";
+    document.getElementById("logo").style.fontSize = "1.3em";
   } else {
     document.getElementById("navigator").style.padding = "15px 80px";
-    document.getElementById("logo").style.fontSize = "35px";
+    document.getElementById("logo").style.fontSize = "1.6em";
   }
 }
+var menuBox = document.getElementById('navbar-left'); 
 function toggleMenu() {
-  var menuBox = document.getElementById('navbar-left'); 
-  if(menuBox.style.display == "block")
-  {
-      menuBox.style.display = "none";
-  } else{
-      menuBox.style.display = "block";
+  if (x.matches){  
+    if(menuBox.style.display == "block")
+    {
+        menuBox.style.display = "none";
+        console.log(menuBox);
+    } else{
+        menuBox.style.display = "block";
+        console.log(menuBox);
+    }
+  } else {
+    menuBox.style.display = "none"
   }
 }
+var x = window.matchMedia("(max-width: 450px");
+toggleMenu(x);
+x.addListener(toggleMenu);
 // End of navigator
 
 var myIndex = 0;
