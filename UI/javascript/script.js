@@ -12,16 +12,14 @@ function scrollFunction() {
 var menuBox = document.getElementById('navbar-left'); 
 function toggleMenu() {
   if (x.matches){  
-    if(menuBox.style.display == "block")
+    if(menuBox.style.display == "none")
     {
-        menuBox.style.display = "none";
-        console.log(menuBox);
-    } else{
         menuBox.style.display = "block";
-        console.log(menuBox);
+    } else{
+        menuBox.style.display = "none";
     }
   } else {
-    menuBox.style.display = "none"
+    menuBox.style.display = "none";
   }
 }
 var x = window.matchMedia("(max-width: 450px");
