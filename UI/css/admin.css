@@ -195,6 +195,15 @@ grid-template-columns: 3fr 1fr;
         }
     }
     @media (max-width: 425px){
+        .main-grid{
+            display: grid;
+            grid-gap: 0.8rem;
+            grid-template-columns: 1fr;
+            /* padding: 0rem 1.2rem; */
+        }
+        #left-main{
+            height: 20vh;
+        }
         .up-box{
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -207,8 +216,7 @@ grid-template-columns: 3fr 1fr;
             grid-template-columns: 1fr;
         }
         .down-box div{
-            height: 50vh;
-
+            height: 60vh;
         }
         .mentor-container{
             display: grid;
@@ -216,5 +224,8 @@ grid-template-columns: 3fr 1fr;
         }
         #nav-container > :nth-child(even){
             font-size: 1em;
+        }
+        .mentor-page {
+            margin-left: 10%;
         }
     }

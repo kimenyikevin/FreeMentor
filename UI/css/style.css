@@ -110,7 +110,7 @@ main{
 }
 .welcome-image{
   width: 100%;
-  background-image: url('/images/coach-mentor-1.jpg');
+  background-image: url('/UI/images/coach-mentor-1.jpg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -383,7 +383,7 @@ main{
  object-fit: cover;
  z-index:-1;
  list-style: none;
- opacity: 1;
+ opacity: 0;
  transition: opacity 0.75s ease-in-out
 }
 .review-container .review-slideshow li img{

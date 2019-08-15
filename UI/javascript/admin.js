@@ -1,4 +1,4 @@
-function openCity(evt, cityName) {
+function ShowChange(evt, cityName) {
     var i, tabcontent, tablinks; 
     tabcontent = document.getElementsByClassName("main-content");
     for (i = 0; i < tabcontent.length; i++) {
