@@ -170,6 +170,9 @@ button:focus {
   .welcome-image h3{
     font-size: 1em;
   }
+  .welcome-image button{
+    top:60%;
+  }
 }
 /* start of second section */
 .service-container{
@@ -283,7 +286,7 @@ button:focus {
 }
 @media (max-width: 450px){
   .intro-cover div img{
-    margin-left: 5%;
+    margin-left: 25%;
    }
 }
 /* Recently Mentors section  */
@@ -358,6 +361,9 @@ button:focus {
   }
   .mentor-detail h3{
     font-size: 1.3em;
+  }
+  .mentors-cover .mentor-image img{
+    width: 100%;
   }
 }
 @media (max-width: 430px){
