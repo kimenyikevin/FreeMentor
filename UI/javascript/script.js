@@ -11,19 +11,15 @@ function scrollFunction() {
 }
 var menuBox = document.getElementById('navbar-left'); 
 function toggleMenu() {
-  if (x.matches){  
-    if(menuBox.style.display == "none")
-    {
-        menuBox.style.display = "block";
-    } else{
-        menuBox.style.display = "none";
-    }
+  if (x.matches && menuBox.style.display == "none"){ 
+    menuBox.style.display= "block";
+    console.log(menuBox); 
   } else {
     menuBox.style.display = "none";
   }
 }
 var x = window.matchMedia("(max-width: 450px");
-toggleMenu(x);
+ toggleMenu(x);
 x.addListener(toggleMenu);
 // End of navigator
 
@@ -50,4 +46,19 @@ function nextImage() {
   slideshowImages[currentImageCounter].style.opacity = 0;
   currentImageCounter = (currentImageCounter+1) % slideshowImages.length;
   slideshowImages[currentImageCounter].style.opacity = 1;
+}
+
+// Admin dashboard , user and mentor dashoard
+function ShowChange(evt, cityName) {
+  var i, tabcontent, tablinks; 
+  tabcontent = document.getElementsByClassName("main-content");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("left-links");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
 }
