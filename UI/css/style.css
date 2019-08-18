@@ -109,7 +109,7 @@ main{
 }
 .welcome-image{
   width: 100%;
-  background-image: url('/UI/images/coach-mentor-1.jpg');
+  background-image: url('../images/coach-mentor-1.jpg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
