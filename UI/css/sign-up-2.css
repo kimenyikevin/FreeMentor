@@ -56,7 +56,7 @@ header{
     width: 70%;
     padding: 10px 10px;
     font-size: 1em;
-    border: none;
+    border: 1px solid #ddd;
 }
 .sign-up-container textarea{
     padding: 10px 10px;

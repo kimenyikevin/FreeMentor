@@ -11,13 +11,9 @@ function scrollFunction() {
 }
 var menuBox = document.getElementById('navbar-left'); 
 function toggleMenu() {
-  if (x.matches){  
-    if(menuBox.style.display == "none")
-    {
-        menuBox.style.display = "block";
-    } else{
-        menuBox.style.display = "none";
-    }
+  if (x.matches && menuBox.style.display == "none"){ 
+    menuBox.style.display= "block";
+    console.log(menuBox); 
   } else {
     menuBox.style.display = "none";
   }
