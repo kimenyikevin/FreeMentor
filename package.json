@@ -1,0 +1,39 @@
+{
+  "name": "freementor-api",
+  "version": "1.0.0",
+  "description": "Free Mentors is a social initiative where accomplished professionals become role models to young people to provide free mentorship sessions.",
+  "main": "index.js",
+  "dependencies": {
+    "config": "^3.2.2",
+    "express": "^4.17.1",
+    "mocha": "^6.2.0",
+    "moment": "^2.24.0",
+    "uuid": "^3.3.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-watch": "^7.0.0",
+    "eslint": "^6.2.1"
+  },
+  "scripts": {
+    "build": "babel ./server/server.js --out-dir build",
+    "dev-start": "babel-watch ./server/server.js",
+    "test": "mocha --recursive"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kimenyikevin/FreeMentor.git"
+  },
+  "keywords": [
+    "JavaScript"
+  ],
+  "author": "kimenyi kevin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kimenyikevin/FreeMentor/issues"
+  },
+  "homepage": "https://github.com/kimenyikevin/FreeMentor#readme"
+}
