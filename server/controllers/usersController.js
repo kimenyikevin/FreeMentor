@@ -1,53 +1,52 @@
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
 import user from "../models/usersModels/userModels";
-import Joi from "@hapi/joi";
+
 dotenv.config();
 const Registered = {
-  create(req, res) {
-    const schema = Joi.object().keys({
-      firstName: Joi.string().required(),
-      lastName: Joi.string().required(),
-      email: Joi.string()
-        .email()
-        .required(),
-      password: Joi.string()
-        .min(5)
-        .max(10)
-        .required(),
-      address: Joi.string().required(),
-      bio: Joi.string().required(),
-      occupation: Joi.string().required(),
-      expertise: Joi.string().required()
-    });
-    Joi.validate(req.body, schema, (err, registeredUser) => {
-      if (err) {
-        return res.status(400).send({
-          status: 400,
-          error: "invalid data"
-        });
-      } else {
-        const emailexit = user.find(req.body.email);
-        if (emailexit) {
-          return res.status(400).send({
-            status: 400,
-            error: "Email already exist"
-          });
-        } else {
-          registeredUser = user.create(req.body);
-          const token = jwt.sign({ id: user.id }, process.env.SECRET_KEY);
-          const { password, ...newUser } = registeredUser;
-          return res.status(201).send({
-            status: 201,
-            message: "User created successfully",
-            data: {
-              token,
-              ...newUser
-            }
-          });
+  signup(req, res) {
+    const emailexit = user.find(req.body.email);
+    if (emailexit) {
+      return res.status(401).send({
+        status: 401,
+        error: "Email already exist"
+      });
+    } else {
+      const registeredUser = user.create(req.body);
+      const token = jwt.sign({ id: user.id }, process.env.SECRET_KEY);
+      const { password, ...newUser } = registeredUser;
+      return res.status(201).send({
+        status: 201,
+        message: "User created successfully",
+        data: {
+          token,
+          ...newUser
         }
-      }
-    });
+      });
+    }
+  },
+  // user login
+  signIn(req, res) {
+    const logindetail = user.find(req.body.email);
+    const token = jwt.sign({ id: user.id }, process.env.SECRET_KEY);
+    if (
+      logindetail.email === req.body.email &&
+      logindetail.password == req.body.password
+    ) {
+      return res.status(200).send({
+        status: 200,
+        message: "User is successfully logged in",
+        data: {
+          token: token,
+          ...logindetail
+        }
+      });
+    } else {
+      return res.status(401).send({
+        status: 401,
+        error: "Email or password is wrong"
+      });
+    }
   }
 };
 

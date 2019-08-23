@@ -11,6 +11,7 @@ class User {
         password: "kigali",
         address: "kigali",
         bio: "engineer",
+        status: "mentor",
         occupation: "engineer",
         expertise: "engineer"
       },
@@ -22,6 +23,7 @@ class User {
         password: "kigali",
         address: "kigali",
         bio: "engineer",
+        status: "user",
         occupation: "engineer",
         expertise: "engineer"
       },
@@ -33,6 +35,7 @@ class User {
         password: "kigali",
         address: "kigali",
         bio: "engineer",
+        status: "admin",
         occupation: "engineer",
         expertise: "engineer"
       }
@@ -48,6 +51,7 @@ class User {
       password: data.password || "",
       address: data.address || "",
       bio: data.bio || "",
+      status: data.status || "",
       occupation: data.occupation || "",
       expertise: data.expertise || "",
       createdDate: moment.now(),

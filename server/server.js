@@ -1,17 +1,14 @@
 // server.js
 import express from "express";
-import user from "./controllers/usersController";
+import bodyParser from 'body-parser';
 import users from "./routes/usersRoutes";
+import errorHandler from "./middleware/error.handler"
 const app = express();
 app.use(express.json());
 
-// app.get('/', (req, res) => {
-//   return res.status(200).send({'message': '' });
-// })
-
+app.use(errorHandler);
 const port = process.env.PORT || 3000;
 app.listen(port);
 
-app.post("/api/v1/signup", user.create);
-app.use("/api/users", users);
+app.use("/api/v1/auth", users);
 console.log("app running on port ", port);
