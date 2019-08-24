@@ -2,7 +2,8 @@ import user from "../models/usersModels/userModels";
 const changeUser = {
   changeStatus(req, res) {
     let Status = user.findOne(parseInt(req.params.id));
-    if (!Status) {
+    let Adminstatus = user.findAdmin("admin");
+        if (!Status) {
       res.status(201).send({
         status: 201,
         message: "data not  found"

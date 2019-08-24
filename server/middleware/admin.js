@@ -1,5 +1,4 @@
 import jwt from "jsonwebtoken";
-
 const adminAuth = {
   verifyToken(req, res, next) {
     const Header = req.headers["authorization"];

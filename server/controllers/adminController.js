@@ -2,7 +2,6 @@ import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
 import user from "../models/usersModels/userModels";
 dotenv.config();
-
 const adminSign = {
   adminLogin(req, res) {
     try {
@@ -30,7 +29,7 @@ const adminSign = {
     } catch (error) {
       return res.status(401).send({
         status: 401,
-        error: "Email or password is wrong"
+        error: "try to signin first"
       });
     }
   }

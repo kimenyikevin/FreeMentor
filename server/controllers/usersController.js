@@ -14,13 +14,12 @@ const Registered = {
     } else {
       const registeredUser = user.create(req.body);
       const token = jwt.sign({ id: user.id }, process.env.SECRET_KEY);
-      const { password, ...newUser } = registeredUser;
       return res.status(201).send({
         status: 201,
         message: "User created successfully",
         data: {
           token,
-          ...newUser
+          ...registeredUser 
         }
       });
     }
@@ -49,9 +48,10 @@ const Registered = {
         });
       }
     } catch (error) {
+      console.log(error.message)
       return res.status(401).send({
         status: 401,
-        error: "Email or password is wrong"
+        error: "email does not exist in our data stucture"
       });
     }
   }
