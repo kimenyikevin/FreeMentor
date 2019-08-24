@@ -1,38 +1,17 @@
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
 import user from "../models/usersModels/userModels";
-
 dotenv.config();
-const Registered = {
-  signup(req, res) {
-    const emailexit = user.find(req.body.email);
-    if (emailexit) {
-      return res.status(401).send({
-        status: 401,
-        error: "Email already exist"
-      });
-    } else {
-      const registeredUser = user.create(req.body);
-      const token = jwt.sign({ id: user.id }, process.env.SECRET_KEY);
-      const { password, ...newUser } = registeredUser;
-      return res.status(201).send({
-        status: 201,
-        message: "User created successfully",
-        data: {
-          token,
-          ...newUser
-        }
-      });
-    }
-  },
-  // user login
-  signIn(req, res) {
+
+const adminSign = {
+  adminLogin(req, res) {
     try {
       const logindetail = user.find(req.body.email);
       const token = jwt.sign({ id: user.id }, process.env.SECRET_KEY);
       if (
         logindetail.email === req.body.email &&
-        logindetail.password == req.body.password
+        logindetail.password == req.body.password &&
+        logindetail.status == "admin"
       ) {
         return res.status(200).send({
           status: 200,
@@ -57,4 +36,4 @@ const Registered = {
   }
 };
 
-export default Registered;
+export default adminSign;
