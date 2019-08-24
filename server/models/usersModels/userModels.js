@@ -61,7 +61,7 @@ class User {
     return newUser;
   }
   find(email) {
-    return this.User.find(found => found.email === email);
+    return this.User.find(found => found.email == email);
   }
   findOne(id) {
     return this.User.find(found => found.id == id);
