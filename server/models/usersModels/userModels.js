@@ -77,13 +77,12 @@ class User {
     return this.User.find(found => found.id == id);
   }
   findAll() {
-      return this.User.filter(found => found.status == "mentor");
+    return this.User.filter(found => found.status == "mentor");
   }
   update(id) {
     const reflection = this.findOne(id);
     const index = this.User.indexOf(reflection);
     return this.User[index].status;
   }
-
 }
 export default new User();

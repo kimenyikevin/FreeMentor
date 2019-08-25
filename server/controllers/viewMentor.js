@@ -4,9 +4,8 @@ class vMentors{
         const mentors = allMentors.findAll();
         return res.status(200).send({
            status: 200,
-           data: [
-               mentors
-           ]  
+           data: 
+             mentors
         });
     }
 }
