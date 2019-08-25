@@ -33,5 +33,22 @@ class inputSession {
       });
     }
   }
+  reject(req, res) {
+    const session = sessionModel.findById(req.params.sessionId);
+    if (!session) {
+      return res.status(404).send({
+        error: "id you try to access is not found"
+      });
+    }
+    if (session.status == "pending") {
+      session.status = "reject";
+      return res.status(200).send({
+        status: 200,
+        data: {
+          ...session
+        }
+      });
+    }
+  }
 }
 export default new inputSession();
