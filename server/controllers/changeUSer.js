@@ -1,7 +1,7 @@
 import user from "../models/usersModels/userModels";
 const changeUser = {
   changeStatus(req, res) {
-    const Status = user.findOne(parseInt(req.params.id));
+    const Status = user.findById(parseInt(req.params.id));
         if (!Status) {
       res.status(201).send({
         status: 201,

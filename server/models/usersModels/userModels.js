@@ -70,17 +70,17 @@ class User {
     this.User.push(newUser);
     return newUser;
   }
-  find(email) {
+  findByEmail(email) {
     return this.User.find(found => found.email == email);
   }
-  findOne(id) {
+  findById(id) {
     return this.User.find(found => found.id == id);
   }
   findAll() {
     return this.User.filter(found => found.status == "mentor");
   }
   update(id) {
-    const reflection = this.findOne(id);
+    const reflection = this.findById(id);
     const index = this.User.indexOf(reflection);
     return this.User[index].status;
   }

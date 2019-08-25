@@ -34,7 +34,7 @@ const adminAuth = {
             error: "you do not have access to this service (invalid token)"
           });
         }
-        const user = userModel.findOne(id);
+        const user = userModel.findById(id);
         if (!user) {
           return res.status(404).send({
             status: 404,
