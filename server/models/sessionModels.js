@@ -48,5 +48,8 @@ class session {
     this.Session.push(newSession);
     return newSession;
   }
+  findById(id) {
+    return this.Session.find(found => found.Sessionid == id);
+  }
 }
 export default new session();

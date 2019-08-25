@@ -11,6 +11,16 @@ const adminAuth = {
     }
     next();
   },
+  verifyMentor(req, res, next) {
+    const { status } = req.currentUser;
+    if (status !== "mentor") {
+      return res.status(401).send({
+        status: 401,
+        error: "you are not authorized"
+      });
+    }
+    next();
+  },
   verifyUser(req, res, next) {
     const { status } = req.currentUser;
     if (status !== "user") {
