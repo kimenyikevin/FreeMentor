@@ -39,7 +39,7 @@ const Registered = {
       });
     }
     const token = jwt.sign(
-      { id: user.id, userType: user.status },
+      { id: user.id, userType: user.status, email: user.email },
       process.env.SECRET_KEY
     );
     if (user.email === email && user.password == password) {
