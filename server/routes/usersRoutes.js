@@ -11,4 +11,5 @@ router.post("/signup", validate.uservalidation, signup);
 router.post("/signin", signIn);
 router.patch("/user/:id", verify.verifyToken, verify.verifyAdmin, changeUser.changeStatus);
 router.get('/mentors',verify.verifyToken, verify.verifyUser, mentors.get);
+router.get('/mentors/:id',verify.verifyToken, verify.verifyUser, mentors.getOne);
 export default router;

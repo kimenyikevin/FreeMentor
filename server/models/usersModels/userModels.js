@@ -70,10 +70,10 @@ class User {
     this.User.push(newUser);
     return newUser;
   }
-  find(email) {
+  findByEmail(email) {
     return this.User.find(found => found.email == email);
   }
-  findOne(id) {
+  findById(id) {
     return this.User.find(found => found.id == id);
   }
   findAll() {
