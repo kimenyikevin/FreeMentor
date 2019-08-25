@@ -38,6 +38,18 @@ class User {
         status: "admin",
         occupation: "engineer",
         expertise: "engineer"
+      },
+      {
+        id: 4,
+        firstName: "bavakure",
+        lastName: "eric",
+        email: "kimenyike@gmail.com",
+        password: "kigali",
+        address: "kigali",
+        bio: "engineer",
+        status: "mentor",
+        occupation: "engineer",
+        expertise: "engineer"
       }
     ];
   }
@@ -51,11 +63,9 @@ class User {
       password: data.password || "",
       address: data.address || "",
       bio: data.bio || "",
-      status: data.status || "",
+      status: data.status || "user",
       occupation: data.occupation || "",
-      expertise: data.expertise || "",
-      createdDate: moment.now(),
-      modifiedDate: moment.now()
+      expertise: data.expertise || ""
     };
     this.User.push(newUser);
     return newUser;
@@ -66,11 +76,13 @@ class User {
   findOne(id) {
     return this.User.find(found => found.id == id);
   }
+  findAll() {
+    return this.User.filter(found => found.status == "mentor");
+  }
   update(id) {
     const reflection = this.findOne(id);
     const index = this.User.indexOf(reflection);
     return this.User[index].status;
   }
-
 }
 export default new User();
