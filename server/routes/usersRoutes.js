@@ -7,7 +7,7 @@ import mentors from "../controllers/viewMentor";
 import session from "../controllers/sessionController";
 
 const { signup, signIn } = User;
-const {verifyToken, verifyUser, verifyAdmin} = verify;
+const {verifyToken, verifyUser, verifyAdmin, verifyMentor} = verify;
 const { get, getOne } = mentors;
 const router = express.Router();
 router.post("/signup", validate.uservalidation, signup);
@@ -16,4 +16,5 @@ router.patch("/user/:id", verifyToken, verifyAdmin, changeUser.changeStatus);
 router.get('/mentors',verifyToken, verifyUser, get);
 router.get('/mentors/:id',verifyToken, verifyUser,getOne);
 router.post("/sessions",verifyToken, verifyUser,session.fillSession);
+router.patch("/sessions/:sessionId/accept",verifyToken, verifyMentor, session.accept);
 export default router;

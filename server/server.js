@@ -1,6 +1,5 @@
 // server.js
 import express from "express";
-import bodyParser from 'body-parser';
 import users from "./routes/usersRoutes";
 import errorHandler from "./middleware/error.handler"
 const app = express();
