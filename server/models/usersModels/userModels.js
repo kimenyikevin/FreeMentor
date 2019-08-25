@@ -80,7 +80,7 @@ class User {
     return this.User.filter(found => found.status == "mentor");
   }
   update(id) {
-    const reflection = this.findOne(id);
+    const reflection = this.findById(id);
     const index = this.User.indexOf(reflection);
     return this.User[index].status;
   }
