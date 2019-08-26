@@ -20,10 +20,10 @@ class inputSession {
     const session = sessionModel.findById(req.params.sessionId);
     if (!session) {
       return res.status(404).send({
+        status: 404,
         error: "id you try to access is not found"
       });
     }
-    if (session.status == "pending") {
       session.status = "accept";
       return res.status(200).send({
         status: 200,
@@ -31,16 +31,15 @@ class inputSession {
           ...session
         }
       });
-    }
   }
   reject(req, res) {
     const session = sessionModel.findById(req.params.sessionId);
     if (!session) {
       return res.status(404).send({
+        status: 404,
         error: "id you try to access is not found"
       });
     }
-    if (session.status == "pending") {
       session.status = "reject";
       return res.status(200).send({
         status: 200,
@@ -48,7 +47,6 @@ class inputSession {
           ...session
         }
       });
-    }
   }
 }
 export default new inputSession();
