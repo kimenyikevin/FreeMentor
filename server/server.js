@@ -6,6 +6,7 @@ const app = express();
 app.use(express.json());
 
 app.use(errorHandler);
+// eslint-disable-next-line no-undef
 const port = process.env.PORT || 3000;
 app.listen(port);
 
