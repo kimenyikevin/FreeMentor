@@ -13,6 +13,16 @@ const data = {
   occupation: 'engineer',
   expertise: 'engineer'
 };
+const validation = {
+  firstName: 'bavakure',
+  lastName: '',
+  email: 'kimenyik.com',
+  password: 'ki',
+  address: 'kigali',
+  bio: 'engineer',
+  occupation: 'engineer',
+  expertise: 'engineer'
+};
 const dataexist = {
   firstName: 'bavakure',
   lastName: 'eric',
@@ -23,7 +33,8 @@ const dataexist = {
   occupation: 'engineer',
   expertise: 'engineer'
 };
-describe('Test for user sign up', () => {
+describe('Test for user sign up', () => { 
+
   it('should return error if an email is already exist', done => {
     chai
       .request(server)
@@ -37,6 +48,7 @@ describe('Test for user sign up', () => {
         done();
       });
   });
+
   it('should return User created successfully', done => {
     chai
       .request(server)
@@ -48,6 +60,19 @@ describe('Test for user sign up', () => {
         expect(res.status).to.equal(201);
         expect(res.body.message).to.be.equal('User created successfully');
         expect(res.body.data).to.have.property('token');
+        done();
+      });
+  });
+  it('should return error if validation meet with error', done => {
+    chai
+      .request(server)
+      .post('/api/v1/auth/signup')
+      .set('accept', 'application/json')
+      .send(validation)
+      .end((err, res) => {
+        expect(res.body).to.be.an('object');
+        expect(res.status).to.equal(400);
+        // expect(res.body.error).to.be.include()
         done();
       });
   });

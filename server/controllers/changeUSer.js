@@ -3,9 +3,9 @@ const changeUser = {
   changeStatus(req, res) {
     const Status = user.findById(parseInt(req.params.id));
     if (!Status) {
-      res.status(201).send({
-        status: 201,
-        message: "data not  found"
+      res.status(404).send({
+        status: 404,
+        error: "data not  found"
       });
     } else {
       const updatedStatus = user.update(req.params.id);
