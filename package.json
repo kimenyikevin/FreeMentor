@@ -8,7 +8,7 @@
     "babel-eslint": "^10.0.3",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
-    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
     "config": "^3.2.2",
     "custom-env": "^1.0.2",
     "eslint-config-airbnb-base": "^14.0.0",
@@ -16,6 +16,7 @@
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
+    "nyc": "^14.1.1",
     "uuid": "^3.3.3"
   },
   "devDependencies": {
@@ -24,10 +25,12 @@
     "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
     "@hapi/joi": "^15.1.0",
+    "babel": "^6.23.0",
     "babel-cli": "^6.26.0",
     "babel-eslint": "^10.0.2",
     "babel-preset-env": "^1.7.0",
     "babel-watch": "^7.0.0",
+    "chai": "^4.2.0",
     "dotenv": "^8.1.0",
     "eslint": "^6.1.0",
     "eslint-config-airbnb": "^18.0.1",
@@ -37,13 +40,15 @@
     "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-react": "^7.14.3",
     "eslint-plugin-react-hooks": "^1.7.0",
+    "isparta": "^4.1.1",
+    "istanbul": "^0.4.5",
     "mocha": "^6.2.0",
     "prettier": "^1.18.2"
   },
   "scripts": {
     "build": "babel ./server/server.js --out-dir build",
     "dev-start": "babel-watch ./server/server.js",
-    "test": " mocha server/test --require @babel/polyfill --require @babel/register --timeout 10000 --exit",
+    "test": "nyc mocha server/test --require @babel/polyfill --require @babel/register --timeout 10000 --exit",
     "coverage": "nyc npm run test"
   },
   "repository": {
