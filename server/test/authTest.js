@@ -42,6 +42,7 @@ let realAdmin = jwt.sign(
 const findEmail = user.findByEmail('kimenyikevin@gmail.com');
 const findId = user.findById(1);
 const findAll = user.findAll();
+const update = user.update(1);
 describe('Test for user model', () => {
  it('find by email', () => {
     expect(findEmail).to.be.an('object');
@@ -52,6 +53,9 @@ describe('Test for user model', () => {
  it('find all', () => {
     expect(findAll).to.be.an('Array');
  });
+ it('update function', () => {
+   expect(update).to.be.an('String');
+ })
 });
 
 describe('Test for verifying Token', () => {
@@ -291,7 +295,7 @@ describe('Test for specific mentor', () => {
             done();
           });
       });
-      it('should return message User account changed to mentor and data of user', done => {
+      it('should return message User account is a mentor', done => {
         chai
           .request(server)
           .patch('/api/v1/auth/user/1')

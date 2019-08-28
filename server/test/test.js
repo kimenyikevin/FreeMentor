@@ -125,6 +125,3 @@ describe('Test for user sign in', () => {
       });
   });
 });
-
-/*****************Session Controllers************************* */
-
