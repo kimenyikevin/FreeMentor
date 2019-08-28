@@ -10,6 +10,7 @@
     "body-parser": "^1.19.0",
     "chai-http": "^4.3.0",
     "config": "^3.2.2",
+    "coveralls": "^3.0.6",
     "custom-env": "^1.0.2",
     "eslint-config-airbnb-base": "^14.0.0",
     "express": "^4.17.1",
