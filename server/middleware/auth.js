@@ -64,7 +64,7 @@ const adminAuth = {
     } catch (error) {
       return res.status(404).send({
         status: 404,
-        error: "you do not have access to this service (invalid token)"
+        error: "you do not have access to this service"
       });
     }
   }

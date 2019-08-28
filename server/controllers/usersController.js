@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
 import userModel from "../models/usersModels/userModels";
 
+
 dotenv.config();
 const Registered = {
   signup(req, res) {
@@ -9,7 +10,7 @@ const Registered = {
     if (emailexit) {
       return res.status(401).send({
         status: 401,
-        error: "Email already exist"
+        error: `${emailexit.email}Email already exist`
       });
     } else {
       const registeredUser = userModel.create(req.body);

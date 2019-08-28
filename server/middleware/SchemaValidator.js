@@ -18,7 +18,7 @@ const validation = {
     };
     const result = Joi.validate(req.body, schema);
     if (result.error) {
-      res.status(400).send({
+     return res.status(400).send({
         status: 400,
         error: result.error.details[0].message
       });
