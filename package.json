@@ -43,13 +43,15 @@
     "isparta": "^4.1.1",
     "istanbul": "^0.4.5",
     "mocha": "^6.2.0",
+    "mocha-lcov-reporter": "^1.3.0",
     "prettier": "^1.18.2"
   },
   "scripts": {
     "build": "babel ./server/server.js --out-dir build",
     "dev-start": "babel-watch ./server/server.js",
     "test": "nyc mocha server/test --require @babel/polyfill --require @babel/register --timeout 10000 --exit",
-    "coverage": "nyc npm run test"
+    "coverage": "nyc npm run test && nyc report --reporter=text-lcov | coveralls",
+    "showCoverage": "start coverage/server/index.html"
   },
   "repository": {
     "type": "git",
