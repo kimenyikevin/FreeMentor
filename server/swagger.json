@@ -1,0 +1,422 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Documentation for Free Mentors service",
+    "version": "1.0.0",
+    "title": "Free Mentor",
+    "termsOfService": "https://kimenyikevin.github.io/FreeMentor/UI/",
+    "contact": {
+      "email": "kimenyikevin@gmail.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "localhost:3000",
+  "basePath": "/api/v1/auth",
+  "tags": [
+    {
+      "name": "signup",
+      "description": "New user registration"
+    },
+    {
+      "name": "signin",
+      "description": "Existing user signin"
+    },
+    {
+      "name": "Change user to Mentor",
+      "description": "Admin can change user to mentor"
+    },
+    {
+      "name": "view all Mentors",
+      "description": "view all mentors"
+    },
+    {
+      "name": "Specific mentor",
+      "description": "view specific mentor details"
+    },
+    {
+      "name": "Create Mentorship session",
+      "description": "user can create mentorship session"
+    },
+    {
+      "name": "Reject Mentorship session",
+      "description": "mentor can reject mentorship session request"
+    },
+    {
+      "name": "Accept Mentorship session",
+      "description": "mentor can accept mentorship session request"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/signup": {
+      "post": {
+        "tags": [
+          "signup"
+        ],
+        "summary": "Create New Account",
+        "description": "If you don't have account yet register",
+        "operationId": "createUser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Created user object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "User created successfully",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "401": {
+            "description": "user already exist"
+          }
+        }
+      }
+    },
+    "/signin": {
+      "post": {
+        "tags": [
+          "signin"
+        ],
+        "summary": "user sign in",
+        "description": "",
+        "operationId": "loginUser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "login user object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/login"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "user successful login",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "400": {
+            "description": "Invalid username/password supplied"
+          },
+          "404":{
+            "description": "E-mail does not exist"
+          },
+          "401": {
+            "description": " E-mail or password is wrong"
+          }
+        }
+      }
+    },
+    "/user/{id}": {
+        "patch": {
+          "tags": [
+            "Change user to Mentor"
+          ],
+          "summary": "change user to mentor",
+          "description": " ",
+          "operationId": "getuserById",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "ID of the user",
+              "required": true,
+              "type": "integer",
+              "format": "int64"
+            },
+            {
+              "name": "authorization",
+              "in": "header",
+              "required": true,
+              "type": "string",
+              "description": "The value to provide in the  header of API request"
+             }
+          ],
+          "responses": {
+            "200": {
+              "description": "User account changed to mentor"
+            },
+            "401": {
+              "description": "you are not an admin"
+            },
+            "404": {
+              "description": "you do not have access to this service"
+            }
+          }
+        }
+      },
+      "/mentors": {
+        "get": {
+          "tags": [
+            "view all Mentors"
+          ],
+          "summary": "Returns all mentors",
+          "description": "",
+          "operationId": "get all mentors",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "authorization",
+              "in": "header",
+              "required": true,
+              "type": "string",
+              "description": "The value to provide in the  header of API request"
+             }
+          ],
+          "responses": {
+            "200": {
+              "description": "List of all mentor",
+              "schema": {
+                "type": "object",
+                "example": {
+                  "id": 4,
+                  "firstName": "bavakure",
+                  "lastName": "eric",
+                  "email": "kimenyike@gmail.com",
+                  "password": "kigali",
+                  "address": "kigali",
+                  "bio": "engineer",
+                  "status": "mentor",
+                  "occupation": "engineer",
+                  "expertise": "engineer"
+                }
+              }
+            },
+            "401":{
+              "description": "you are not user"
+            }
+          }
+        }
+      },
+      "/mentors{id}": {
+        "get": {
+          "tags": [
+            "Specific mentor"
+          ],
+          "summary": "Returns one mentor",
+          "description": " ",
+          "operationId": "getmentor",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "ID of the mentor",
+              "required": true,
+              "type": "integer",
+              "format": "int64"
+            },
+            {
+              "name": "authorization",
+              "in": "header",
+              "required": true,
+              "type": "string",
+              "description": "The value to provide in the  header of API request"
+             }
+          ],
+          "responses": {
+            "200": {
+              "description": "List of all mentor",
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      },
+      "/sessions": {
+        "post": {
+          "tags": [
+            "Create Mentorship session"
+          ],
+          "summary": "Create mentorship session",
+          "description": "",
+          "operationId": "create sessions",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "authorization",
+              "in": "header",
+              "required": true,
+              "type": "string",
+              "description": "The value to provide in the  header of API request"
+             },
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Created session object",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/sessions"
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "sessions created successfully"
+            }
+          }
+        }
+      },
+      "/sessions/{id}/accept": {
+        "patch": {
+          "tags": [
+            "Accept Mentorship session"
+          ],
+          "summary": "reject mentorship request",
+          "description": "",
+          "operationId": "acceptRequest",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "authorization",
+              "in": "header",
+              "required": true,
+              "type": "string",
+              "description": "The value to provide in the  header of API request"
+             },
+            {
+              "in": "path",
+              "name": "id",
+              "description": "acccept mentorship request",
+              "required": true
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "accepted mentorship successfully"
+            },
+            "404":{
+              "description": "data not found"
+            }
+          }
+        }
+      },
+      "/sessions/{id}/reject": {
+        "patch": {
+          "tags": [
+            "Reject Mentorship session"
+          ],
+          "summary": "reject mentorship request",
+          "description": "",
+          "operationId": "rejectRequest",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "authorization",
+              "in": "header",
+              "required": true,
+              "type": "string",
+              "description": "The value to provide in the  header of API request"
+             },
+            {
+              "in": "path",
+              "name": "id",
+              "description": "acccept mentorship request",
+              "required": true
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "accepted mentorship successfully"
+            },
+            "404":{
+              "description": "data not found"
+            }
+          }
+        }
+      }
+  },
+  "definitions": {
+    "User": {
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "bio": {
+          "type": "string"
+        },
+        "occupation": {
+          "type": "string"
+        },
+        "expertise": {
+          "type": "string"
+        }
+      }
+    },
+    "login": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "sessions": {
+      "type": "object",
+      "properties": {
+        "mentorId": {
+          "type": "integer"
+        },
+        "questions": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "FreeMentor",
+    "url": "https://kimenyikevin.github.io/FreeMentor/UI "
+  }
+}
