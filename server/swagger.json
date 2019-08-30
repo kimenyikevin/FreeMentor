@@ -17,8 +17,36 @@
   "basePath": "/api/v1/auth",
   "tags": [
     {
-      "name": "user",
+      "name": "signup",
       "description": "New user registration"
+    },
+    {
+      "name": "signin",
+      "description": "Existing user signin"
+    },
+    {
+      "name": "Change user to Mentor",
+      "description": "Admin can change user to mentor"
+    },
+    {
+      "name": "view all Mentors",
+      "description": "view all mentors"
+    },
+    {
+      "name": "Specific mentor",
+      "description": "view specific mentor details"
+    },
+    {
+      "name": "Create Mentorship session",
+      "description": "user can create mentorship session"
+    },
+    {
+      "name": "Reject Mentorship session",
+      "description": "mentor can reject mentorship session request"
+    },
+    {
+      "name": "Accept Mentorship session",
+      "description": "mentor can accept mentorship session request"
     }
   ],
   "schemes": [
@@ -28,9 +56,9 @@
     "/signup": {
       "post": {
         "tags": [
-          "user"
+          "signup"
         ],
-        "summary": "Create New user",
+        "summary": "Create New Account",
         "description": "If you don't have account yet register",
         "operationId": "createUser",
         "produces": [
@@ -49,7 +77,13 @@
         ],
         "responses": {
           "201": {
-            "description": "User created successfully"
+            "description": "User created successfully",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "401": {
+            "description": "user already exist"
           }
         }
       }
@@ -57,7 +91,7 @@
     "/signin": {
       "post": {
         "tags": [
-          "user"
+          "signin"
         ],
         "summary": "user sign in",
         "description": "",
@@ -69,7 +103,7 @@
           {
             "in": "body",
             "name": "body",
-            "description": "Created user object",
+            "description": "login user object",
             "required": true,
             "schema": {
               "$ref": "#/definitions/login"
@@ -85,6 +119,12 @@
           },
           "400": {
             "description": "Invalid username/password supplied"
+          },
+          "404":{
+            "description": "E-mail does not exist"
+          },
+          "401": {
+            "description": " E-mail or password is wrong"
           }
         }
       }
@@ -92,11 +132,11 @@
     "/user/{id}": {
         "patch": {
           "tags": [
-            "user"
+            "Change user to Mentor"
           ],
           "summary": "change user to mentor",
           "description": " ",
-          "operationId": "getPetById",
+          "operationId": "getuserById",
           "produces": [
             "application/json"
           ],
@@ -112,19 +152,20 @@
             {
               "name": "authorization",
               "in": "header",
+              "required": true,
               "type": "string",
               "description": "The value to provide in the  header of API request"
              }
           ],
           "responses": {
             "200": {
-              "description": "successful operation"
+              "description": "User account changed to mentor"
             },
-            "400": {
-              "description": "Invalid ID supplied"
+            "401": {
+              "description": "you are not an admin"
             },
             "404": {
-              "description": "Pet not found"
+              "description": "you do not have access to this service"
             }
           }
         }
@@ -132,7 +173,7 @@
       "/mentors": {
         "get": {
           "tags": [
-            "user"
+            "view all Mentors"
           ],
           "summary": "Returns all mentors",
           "description": "",
@@ -144,6 +185,7 @@
             {
               "name": "authorization",
               "in": "header",
+              "required": true,
               "type": "string",
               "description": "The value to provide in the  header of API request"
              }
@@ -152,8 +194,23 @@
             "200": {
               "description": "List of all mentor",
               "schema": {
-                "type": "object"
+                "type": "object",
+                "example": {
+                  "id": 4,
+                  "firstName": "bavakure",
+                  "lastName": "eric",
+                  "email": "kimenyike@gmail.com",
+                  "password": "kigali",
+                  "address": "kigali",
+                  "bio": "engineer",
+                  "status": "mentor",
+                  "occupation": "engineer",
+                  "expertise": "engineer"
+                }
               }
+            },
+            "401":{
+              "description": "you are not user"
             }
           }
         }
@@ -161,7 +218,7 @@
       "/mentors{id}": {
         "get": {
           "tags": [
-            "user"
+            "Specific mentor"
           ],
           "summary": "Returns one mentor",
           "description": " ",
@@ -199,7 +256,7 @@
       "/sessions": {
         "post": {
           "tags": [
-            "user"
+            "Create Mentorship session"
           ],
           "summary": "Create mentorship session",
           "description": "",
@@ -235,7 +292,7 @@
       "/sessions/{id}/accept": {
         "patch": {
           "tags": [
-            "user"
+            "Accept Mentorship session"
           ],
           "summary": "reject mentorship request",
           "description": "",
@@ -271,7 +328,7 @@
       "/sessions/{id}/reject": {
         "patch": {
           "tags": [
-            "user"
+            "Reject Mentorship session"
           ],
           "summary": "reject mentorship request",
           "description": "",
