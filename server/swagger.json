@@ -13,7 +13,7 @@
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
     }
   },
-  "host": "localhost:3000",
+  "host": "https://freementorss.herokuapp.com",
   "basePath": "/api/v1/auth",
   "tags": [
     {
@@ -79,7 +79,23 @@
           "201": {
             "description": "User created successfully",
             "schema": {
-              "type": "object"
+              "type": "object",
+              "example":{
+                  "status": 201,
+                  "message": "User created successfully",
+                  "data": {
+                      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiaWF0IjoxNTY3Mjg2NTIxfQ.fJyiqLzJPs8D3NiUz_a0-NQBN1YUEfAP3sIyjhNkaqk",
+                      "id": 5,
+                      "firstName": "kevin",
+                      "lastName": "kevin",
+                      "email": "kimenyis@gmail.com",
+                      "address": "kigali",
+                      "bio": " engineeer",
+                      "status": "user",
+                      "occupation": "engineer",
+                      "expertise": " engineer"
+                  }
+              }
             }
           },
           "401": {
@@ -114,7 +130,23 @@
           "200": {
             "description": "user successful login",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "example":{
+                "status": 200,
+                "message": "User is successfully logged in",
+                "data": {
+                    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlclR5cGUiOiJ1c2VyIiwiZW1haWwiOiJoYWJpbWFuYWVtbXlAZ21haWwuY29tIiwiaWF0IjoxNTY3Mjg2NjczfQ.PNeEYEUwEVI0DNtzyyBDh9DfMD5t0tABtex0gVfGmtg",
+                    "id": 2,
+                    "firstName": "habimana",
+                    "lastName": "emmy",
+                    "email": "habimanaemmy@gmail.com",
+                    "address": "kigali",
+                    "bio": "engineer",
+                    "status": "user",
+                    "occupation": "engineer",
+                    "expertise": "engineer"
+                }
+              }
             }
           },
           "400": {
@@ -135,7 +167,7 @@
             "Change user to Mentor"
           ],
           "summary": "change user to mentor",
-          "description": " ",
+          "description": "",
           "operationId": "getuserById",
           "produces": [
             "application/json"
@@ -154,12 +186,30 @@
               "in": "header",
               "required": true,
               "type": "string",
-              "description": "The value to provide in the  header of API request"
+              "description": "The token to provide in this box must start with adminToken then space"
              }
           ],
           "responses": {
             "200": {
-              "description": "User account changed to mentor"
+              "description": "User account changed to mentor",
+              "schema":{
+                "type": "object",
+                "example":{
+                  "status": 200,
+                  "data": {
+                      "message": "User account changed to mentor",
+                      "id": 2,
+                      "firstName": "habimana",
+                      "lastName": "emmy",
+                      "email": "habimanaemmy@gmail.com",
+                      "address": "kigali",
+                      "bio": "engineer",
+                      "status": "mentor",
+                      "occupation": "engineer",
+                      "expertise": "engineer"
+                  }
+                }
+              }
             },
             "401": {
               "description": "you are not an admin"
@@ -187,7 +237,7 @@
               "in": "header",
               "required": true,
               "type": "string",
-              "description": "The value to provide in the  header of API request"
+              "description": "The token to provide in this box must start with adminToken then space"
              }
           ],
           "responses": {
@@ -240,14 +290,26 @@
               "in": "header",
               "required": true,
               "type": "string",
-              "description": "The value to provide in the  header of API request"
+              "description": "The token to provide in this box must start with adminToken then space"
              }
           ],
           "responses": {
             "200": {
-              "description": "List of all mentor",
+              "description": "specific mentor",
               "schema": {
-                "type": "object"
+                "type": "object",
+                "example": {
+                  "id": 4,
+                  "firstName": "bavakure",
+                  "lastName": "eric",
+                  "email": "kimenyike@gmail.com",
+                  "password": "kigali",
+                  "address": "kigali",
+                  "bio": "engineer",
+                  "status": "mentor",
+                  "occupation": "engineer",
+                  "expertise": "engineer"
+                }
               }
             }
           }
@@ -270,7 +332,7 @@
               "in": "header",
               "required": true,
               "type": "string",
-              "description": "The value to provide in the  header of API request"
+              "description": "The token to provide in this box must start with adminToken then space"
              },
             {
               "in": "body",
@@ -284,7 +346,20 @@
           ],
           "responses": {
             "201": {
-              "description": "sessions created successfully"
+              "description": "sessions created successfully",
+              "schema":{
+                "type":"object",
+                "example": {
+                  "status": 200,
+                  "data": {
+                      "Sessionid": 5,
+                      "mentorId": 1,
+                      "menteeId": 5,
+                      "questions": "i need help",
+                      "status": "pending"
+                  }
+                }
+              }
             }
           }
         }
@@ -306,7 +381,7 @@
               "in": "header",
               "required": true,
               "type": "string",
-              "description": "The value to provide in the  header of API request"
+              "description": "The token to provide in this box must start with adminToken then space"
              },
             {
               "in": "path",
@@ -317,7 +392,20 @@
           ],
           "responses": {
             "201": {
-              "description": "accepted mentorship successfully"
+              "description": "accepted mentorship successfully",
+              "schema":{
+                "example":{
+                  "status": 200,
+                  "data": {
+                      "Sessionid": 2,
+                      "mentorId": 3,
+                      "menteeId": 1,
+                      "questions": "i need help",
+                      "menteeEmail": "kimenyikevin@gmail.com",
+                      "status": "accepted"
+                  }
+                }
+              }
             },
             "404":{
               "description": "data not found"
@@ -342,7 +430,7 @@
               "in": "header",
               "required": true,
               "type": "string",
-              "description": "The value to provide in the  header of API request"
+              "description": "The token to provide in this box must start with adminToken then space"
              },
             {
               "in": "path",
@@ -353,7 +441,20 @@
           ],
           "responses": {
             "201": {
-              "description": "accepted mentorship successfully"
+              "description": "rejected mentorship successfully",
+              "schema":{
+                "example":{
+                  "status": 200,
+                  "data": {
+                      "Sessionid": 2,
+                      "mentorId": 3,
+                      "menteeId": 1,
+                      "questions": "i need help",
+                      "menteeEmail": "kimenyikevin@gmail.com",
+                      "status": "reject"
+                  }
+                }
+              }
             },
             "404":{
               "description": "data not found"
