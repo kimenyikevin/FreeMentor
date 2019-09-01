@@ -17,11 +17,18 @@ body{
 }
 #navigator #logo{
   color: black;
-  height: 30px;
-  line-height: 30px;
-  font-size: 1em;
+  height: 40px;
   float: left;
   font-weight: bold;
+  font-size: 1.5em
+}
+#navigator #logo p{
+  margin-top: -5px;
+  font-size: 14px
+}
+#navigator #logo img{
+  width: 64%;
+  height: 25px;
 }
 #navigator nav {
   float: right;
@@ -495,8 +502,21 @@ grid-template-columns: 3fr 1fr;
   color: #ffffff;
 }
 .logo{
-  margin: 2% 6%; 
   cursor: pointer;
+  height: 40px;
+  float: left;
+  font-weight: bold;
+  font-size: 1.5em;
+  margin-left: 5%;
+  margin-top: -10px
+}
+.logo p{
+  margin-top: -12px;
+  font-size: 14px
+}
+.logo img{
+  width: 30px;
+  height: 25px;
 }
 .logo a{
   text-decoration: none;
@@ -808,11 +828,19 @@ grid-template-columns: 3fr 1fr;
 .session-container-1 .session-area h1{
   text-align: center;
   font-family: 'Courier New', Courier, monospace;
-  font-size: 2em
+  font-size: 1.5em
 }
 .session-container-1 .session-area h2{
   font-family: 'Courier New', Courier, monospace;
-  font-size: 1.5em;
+  font-size: 1.2em;
+}
+.session-container-1 .session-area input{
+  width: 80%;
+  font-size: 1.3em;
+  font-weight: bold;
+  font-family: 'Times New Roman', Times, serif;
+  padding: 5px;
+  outline: none;
 }
 .session-container-1 .session-area textarea{
   width: 80%;
