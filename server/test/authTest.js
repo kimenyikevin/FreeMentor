@@ -34,28 +34,28 @@ let setMentorToken = `adminToken ${realMentor}`;
 
 // real admin token
 let realAdmin = jwt.sign(
-    { id: 3, userType: 'admin', email: 'kwizeraeric@gmail.com' },
-    process.env.SECRET_KEY
-  );
-  let setAdminToken = `adminToken ${realAdmin}`;
+  { id: 3, userType: 'admin', email: 'kwizeraeric@gmail.com' },
+  process.env.SECRET_KEY
+);
+let setAdminToken = `adminToken ${realAdmin}`;
 // Test for user model
 const findEmail = user.findByEmail('kimenyikevin@gmail.com');
 const findId = user.findById(1);
 const findAll = user.findAll();
 const update = user.update(1);
 describe('Test for user model', () => {
- it('find by email', () => {
+  it('find by email', () => {
     expect(findEmail).to.be.an('object');
- });
- it('find by id', () => {
+  });
+  it('find by id', () => {
     expect(findId).to.be.an('object');
- });
- it('find all', () => {
+  });
+  it('find all', () => {
     expect(findAll).to.be.an('Array');
- });
- it('update function', () => {
-   expect(update).to.be.an('String');
- })
+  });
+  it('update function', () => {
+    expect(update).to.be.an('String');
+  });
 });
 
 describe('Test for verifying Token', () => {
@@ -84,7 +84,7 @@ describe('Test for verifying Token', () => {
         done();
       });
   });
-  it('should return error if still testing', done => {
+  it('should return error if user in token no longer available', done => {
     chai
       .request(server)
       .patch('/api/v1/auth/sessions/2/reject')
@@ -109,7 +109,7 @@ describe('Test for verifying Token', () => {
         expect(res.body.error).to.be.equal('you are not authorized');
         done();
       });
-    });
+  });
   // reject session request
   it('should return error if id of session is not exist', done => {
     chai
@@ -148,7 +148,7 @@ describe('Test for verifying Token', () => {
         done();
       });
   });
-  it('should return data of session after rejection', done => {
+  it('should return data of session after accepted', done => {
     chai
       .request(server)
       .patch('/api/v1/auth/sessions/2/accept')
@@ -196,7 +196,7 @@ describe('Test for view all mentor', () => {
         done();
       });
   });
-  //verify user 
+  //verify user
   it('test for verify user', done => {
     chai
       .request(server)
@@ -210,52 +210,50 @@ describe('Test for view all mentor', () => {
       });
   });
 });
-
-
 describe('Test for specific mentor', () => {
-    it('should return error if a mentor does not exit', done => {
-      chai
-        .request(server)
-        .get('/api/v1/auth/mentors/0')
-        .set('authorization', setUserToken)
-        .end((err, res) => {
-          expect(res.body).to.be.an('object');
-          expect(res.status).to.equal(404);
-          expect(res.body.error).to.be.equal('mentors does not exist');
-          done();
-        });
-    });
-    const mentorData = user.User[0];
-    const {password, ...newMentorData} = mentorData;
-    it('should return error if a mentor does not exit', done => {
-        chai
-          .request(server)
-          .get('/api/v1/auth/mentors/1')
-          .set('authorization', setUserToken)
-          .end((err, res) => {
-            expect(res.body).to.be.an('object');
-            expect(res.status).to.equal(200);
-            expect(res.body.data).to.include(newMentorData);
-            done();
-          });
-      });
-      it('should return error if a mentor does not exit', done => {
-        chai
-          .request(server)
-          .get('/api/v1/auth/mentors/2')
-          .set('authorization', setUserToken)
-          .end((err, res) => {
-            expect(res.body).to.be.an('object');
-            expect(res.status).to.equal(404);
-            expect(res.body.error).to.be.equal('user you try to access is not mentor');
-            done();
-          });
+  it('should return error if a mentor does not exit', done => {
+    chai
+      .request(server)
+      .get('/api/v1/auth/mentors/0')
+      .set('authorization', setUserToken)
+      .end((err, res) => {
+        expect(res.body).to.be.an('object');
+        expect(res.status).to.equal(404);
+        expect(res.body.error).to.be.equal('mentors does not exist');
+        done();
       });
   });
+  const mentorData = user.User[0];
+  const { password, ...newMentorData } = mentorData;
+  it('should show details of specific mentor', done => {
+    chai
+      .request(server)
+      .get('/api/v1/auth/mentors/1')
+      .set('authorization', setUserToken)
+      .end((err, res) => {
+        expect(res.body).to.be.an('object');
+        expect(res.status).to.equal(200);
+        expect(res.body.data).to.include(newMentorData);
+        done();
+      });
+  });
+  it('should return error if user is not mentor', done => {
+    chai
+      .request(server)
+      .get('/api/v1/auth/mentors/2')
+      .set('authorization', setUserToken)
+      .end((err, res) => {
+        expect(res.body).to.be.an('object');
+        expect(res.status).to.equal(404);
+        expect(res.body.error).to.be.equal('user you try to access is not mentor');
+        done();
+      });
+  });
+});
 
-  // change user to mentors                                
-  describe('Test for admin to change user to a mentor', () => {
-//verify Admin
+// change user to mentors
+describe('Test for admin to change user to a mentor', () => {
+  //verify Admin
   it('should return error if user is not admin', done => {
     chai
       .request(server)
@@ -268,45 +266,43 @@ describe('Test for specific mentor', () => {
         done();
       });
   });
-    it('should return error if user does not exit', done => {
-      chai
-        .request(server)
-        .patch('/api/v1/auth/user/0')
-        .set('authorization', setAdminToken)
-        .end((err, res) => {
-          expect(res.body).to.be.an('object');
-          expect(res.status).to.equal(404);
-          expect(res.body.error).to.be.equal('data not  found');
-          done();
-        });
-    });
-    const mentorData = user.User[1];
-    const {password,status, ...newMentorData} = mentorData;
-    it('should return message User account changed to mentor and data of user', done => {
-        chai
-          .request(server)
-          .patch('/api/v1/auth/user/2')
-          .set('authorization', setAdminToken)
-          .end((err, res) => {
-            expect(res.body).to.be.an('object');
-            expect(res.status).to.equal(200);
-            expect(res.body.data.message).to.be.equal('User account changed to mentor');
-            expect(res.body.data).to.include(newMentorData);
-            done();
-          });
+  it('should return error if user does not exit', done => {
+    chai
+      .request(server)
+      .patch('/api/v1/auth/user/0')
+      .set('authorization', setAdminToken)
+      .end((err, res) => {
+        expect(res.body).to.be.an('object');
+        expect(res.status).to.equal(404);
+        expect(res.body.error).to.be.equal('data not  found');
+        done();
       });
-      it('should return message User account is a mentor', done => {
-        chai
-          .request(server)
-          .patch('/api/v1/auth/user/1')
-          .set('authorization', setAdminToken)
-          .end((err, res) => {
-            expect(res.body).to.be.an('object');
-            expect(res.status).to.equal(401);
-            expect(res.body.error).to.be.equal('this user is a mentor');
-            done();
-          });
+  });
+  const mentorData = user.User[1];
+  const { password, status, ...newMentorData } = mentorData;
+  it('should return message User account changed to mentor and data of user', done => {
+    chai
+      .request(server)
+      .patch('/api/v1/auth/user/2')
+      .set('authorization', setAdminToken)
+      .end((err, res) => {
+        expect(res.body).to.be.an('object');
+        expect(res.status).to.equal(200);
+        expect(res.body.data.message).to.be.equal('User account changed to mentor');
+        expect(res.body.data).to.include(newMentorData);
+        done();
       });
-
+  });
+  it('should return message User account is a mentor', done => {
+    chai
+      .request(server)
+      .patch('/api/v1/auth/user/1')
+      .set('authorization', setAdminToken)
+      .end((err, res) => {
+        expect(res.body).to.be.an('object');
+        expect(res.status).to.equal(401);
+        expect(res.body.error).to.be.equal('this user is a mentor');
+        done();
+      });
+  });
 });
-  

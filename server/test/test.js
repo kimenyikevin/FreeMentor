@@ -1,50 +1,26 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import server from '../server';
+import userData from '../models/usersModels/userModels';
+import mochData from '../helpers/mochData';
 const { expect } = chai;
 chai.use(chaiHttp);
-const data = {
-  firstName: 'bavakure',
-  lastName: 'eric',
-  email: 'kimenyik@gmail.com',
-  password: 'kigali',
-  address: 'kigali',
-  bio: 'engineer',
-  occupation: 'engineer',
-  expertise: 'engineer'
-};
-const validation = {
-  firstName: 'bavakure',
-  lastName: '',
-  email: 'kimenyik.com',
-  password: 'ki',
-  address: 'kigali',
-  bio: 'engineer',
-  occupation: 'engineer',
-  expertise: 'engineer'
-};
-const dataexist = {
-  firstName: 'bavakure',
-  lastName: 'eric',
-  email: 'habimanaemmy@gmail.com',
-  password: 'kigali',
-  address: 'kigali',
-  bio: 'engineer',
-  occupation: 'engineer',
-  expertise: 'engineer'
-};
-describe('Test for user sign up', () => { 
 
+const newUser = mochData.userdata;
+const validation = mochData.otherdata;
+const dataExist = userData.User[1];
+const { id, status, ...newDataExist } = dataExist;
+describe('Test for user sign up', () => {
   it('should return error if an email is already exist', done => {
     chai
       .request(server)
       .post('/api/v1/auth/signup')
       .set('accept', 'application/json')
-      .send(dataexist)
+      .send(newDataExist)
       .end((err, res) => {
         expect(res.body).to.be.an('object');
         expect(res.status).to.equal(401);
-        expect(res.body.error).to.be.equal(`${dataexist.email}Email already exist`);
+        expect(res.body.error).to.be.equal(`${newDataExist.email}Email already exist`);
         done();
       });
   });
@@ -54,7 +30,7 @@ describe('Test for user sign up', () => {
       .request(server)
       .post('/api/v1/auth/signup')
       .set('accept', 'application/json')
-      .send(data)
+      .send(newUser)
       .end((err, res) => {
         expect(res.body).to.be.an('object');
         expect(res.status).to.equal(201);
@@ -79,8 +55,8 @@ describe('Test for user sign up', () => {
 });
 
 /*******************SignIn**********************************/
-const signInData = { email: '@gmail.com', password: 'kigali' };
-const wrongData = { email: 'habimanaemmy@gmail.com', password: '' };
+const signInData = mochData.signIn;
+const wrongData = mochData.signInWrongData;
 describe('Test for user sign in', () => {
   it('should return error if user is not exit', done => {
     chai
@@ -101,7 +77,7 @@ describe('Test for user sign in', () => {
       .request(server)
       .post('/api/v1/auth/signin')
       .set('accept', 'application/json')
-      .send(dataexist)
+      .send(newDataExist)
       .end((err, res) => {
         expect(res.body).to.be.an('object');
         expect(res.status).to.equal(200);
