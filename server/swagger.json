@@ -13,7 +13,7 @@
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
     }
   },
-  "host": "https://freementorss.herokuapp.com",
+  "host": "freementorss.herokuapp.com",
   "basePath": "/api/v1/auth",
   "tags": [
     {
