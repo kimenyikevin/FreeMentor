@@ -14,13 +14,14 @@
    </header>
     <!-- End of Navigation -->
     <main>
-        <form action="./user.html" class="log-in-container">
+        <form  class="log-in-container" >
             <div class="sign-in-container">
                 <h1>Log in</h1>
                 <label>Email address</label> <br>
-                <input type="text" placeholder="Enter Email"  required><br>
+                <input type="email" placeholder="Enter Email"  name="userid"  required><br>
                 <label>Password</label><br>
-                <input type="password" placeholder="Enter Password"  required><br>
+                <input type="password" placeholder="Enter Password"  name="pswrd" required><br>
+                <div id="wrong"></div>
                 <div class="wrapper">
                     <div >
                         <input type="checkbox" name="" id="">
@@ -33,12 +34,13 @@
                     </div>
                 </div>
                 <div class="sign-in-btn">
-                    <div ><button type="submit">Log in</button></div> 
+                    <div ><button type="submit" class="submit" onclick="check(this.form)">Log in</button></div> 
                     <hr>
                     <div id="sign-in-txt"><h3>Don't have an account? <a href="sign-up.html">Sign Up</a></h3></div>
                 </div> 
             </div>
         </form>
     </main>   
+    <script src="../javascript/script.js"></script>
 </body>
 </html>

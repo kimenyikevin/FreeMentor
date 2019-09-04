@@ -49,7 +49,7 @@ function nextImage() {
 }
 
 // Admin dashboard , user and mentor dashoard
-function ShowChange(evt, cityName) {
+function ShowChange(evt, mentorName) {
   var i, tabcontent, tablinks; 
   tabcontent = document.getElementsByClassName("main-content");
   for (i = 0; i < tabcontent.length; i++) {
@@ -57,8 +57,42 @@ function ShowChange(evt, cityName) {
   }
   tablinks = document.getElementsByClassName("left-links");
   for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" active", "");
+    tablinks[i].className = tablinks[i].className.replace("active", "");
   }
-  document.getElementById(cityName).style.display = "block";
+  document.getElementById(mentorName).style.display = "block";
   evt.currentTarget.className += " active";
 }
+function check(form) {
+
+ if(form.userid.value == "user@gmail.com" && form.pswrd.value == "user")
+  { 
+    window.open('../pages/user.html');
+    window.close();
+  } else if( form.userid.value == "mentor@gmail.com" && form.pswrd.value == "mentor"){
+  window.open('../pages/mentor.html');
+  window.close();
+}else if(form.userid.value == "admin@gmail.com" && form.pswrd.value == "admin"){
+  window.open('../pages/admin.html');
+  window.close();
+} else{
+  document.getElementById("wrong").innerHTML = 'Email or password is wrong';
+} 
+}
+///  feedback form
+function popup(evt, mentorName) {
+  document.getElementById(mentorName).style.display = "block";
+  evt.currentTarget.className += " active";
+  var span = document.getElementsByClassName("close")[0];
+  span.onclick = function() {
+    mov.style.display = "none";
+  }
+  var mov = document.getElementById('feedBack');
+     window.onclick = function(event) {
+   if (event.target == mov) {
+    mov.style.display = "none";
+  }
+}
+}
+
+
+
