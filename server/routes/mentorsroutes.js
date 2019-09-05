@@ -1,7 +1,6 @@
 import express from 'express';
 import verify from '../middleware/auth';
 import mentors from '../controllers/viewMentor';
-import validation from '../middleware/SchemaValidator'
 const router = express.Router();
 
 const {
@@ -9,5 +8,5 @@ const {
   } = verify;
   const { get, getOne } = mentors;
 router.get('/mentors', verifyToken, verifyUser, get);
-router.get('/mentors/:id',validation.pathVaridete, verifyToken, verifyUser, getOne);
+router.get('/mentors/:id', verifyToken, verifyUser, getOne);
 export default router;

@@ -1,6 +1,6 @@
 import Joi from "@hapi/joi";
-class validation {
-  uservalidation(req, res, next) {
+class Validation {
+  uservalidation = (req, res, next) => {
     const schema = {
       firstName: Joi.string().required(),
       lastName: Joi.string().required(),
@@ -25,31 +25,5 @@ class validation {
     } 
       next();
   }
-  pathVaridete(req, res, next){
-    const schema = {
-      id: Joi.number().required()
-    };
-    const result = Joi.validate(req.params, schema);
-    if (result.error) {
-     return res.status(400).send({
-        status: 400,
-        error: result.error.details[0].message
-      });
-    } 
-    next();
-  }
-  pathValidate(req, res, next){
-    const schema = {
-      sessionId: Joi.number().required()
-    };
-    const result = Joi.validate(req.params, schema);
-    if (result.error) {
-     return res.status(400).send({
-        status: 400,
-        error: result.error.details[0].message
-      });
-    } 
-    next();
-  }
 }
-export default new validation();
+export default new Validation();

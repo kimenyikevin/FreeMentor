@@ -2,12 +2,15 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 import server from '../server';
 import userModel from '../models/usersModels/userModels';
-import {userData} from '../helpers/mock';
+import { userData } from '../helpers/mock';
 import mochData from '../helpers/mochData';
+
 const { expect } = chai;
 chai.use(chaiHttp);
 const fromMocha = mochData.data;
-const {userdata, otherdata, signIn, signInWrongData} = fromMocha;
+const {
+  userdata, otherdata, signIn, signInWrongData,
+} = fromMocha;
 const dataExist = userData[1];
 const { id, status, ...newDataExist } = dataExist;
 userModel.create(userData[0]);
@@ -16,7 +19,7 @@ userModel.create(userData[2]);
 userModel.create(userData[3]);
 
 describe('Test for user sign up', () => {
-  it('should return error if an email is already exist', done => {
+  it('should return error if an email is already exist', (done) => {
     chai
       .request(server)
       .post('/api/v1/auth/signup')
@@ -29,7 +32,7 @@ describe('Test for user sign up', () => {
         done();
       });
   });
-  it('should return User created successfully', done => {
+  it('should return User created successfully', (done) => {
     chai
       .request(server)
       .post('/api/v1/auth/signup')
@@ -43,7 +46,7 @@ describe('Test for user sign up', () => {
         done();
       });
   });
-  it('should return error if validation meet with error', done => {
+  it('should return error if validation meet with error', (done) => {
     chai
       .request(server)
       .post('/api/v1/auth/signup')
@@ -60,7 +63,7 @@ describe('Test for user sign up', () => {
 
 // /*******************SignIn**********************************/
 describe('Test for user sign in', () => {
-  it('should return error if user is not exit', done => {
+  it('should return error if user is not exit', (done) => {
     chai
       .request(server)
       .post('/api/v1/auth/signin')
@@ -74,7 +77,7 @@ describe('Test for user sign in', () => {
       });
   });
 
-  it('should return User is successfully logged in', done => {
+  it('should return User is successfully logged in', (done) => {
     chai
       .request(server)
       .post('/api/v1/auth/signin')
@@ -89,7 +92,7 @@ describe('Test for user sign in', () => {
       });
   });
 
-  it('should return error if Email and password did not match', done => {
+  it('should return error if Email and password did not match', (done) => {
     chai
       .request(server)
       .post('/api/v1/auth/signin')

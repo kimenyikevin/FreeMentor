@@ -212,12 +212,12 @@ describe('Test for specific mentor', () => {
   it('should return error if a mentor does not exit', done => {
     chai
       .request(server)
-      .get('/api/v1/auth/mentors/0')
+      .get('/api/v1/auth/mentors/0kkk')
       .set('authorization', setUserToken)
       .end((err, res) => {
         expect(res.body).to.be.an('object');
-        expect(res.status).to.equal(404);
-        expect(res.body.error).to.be.equal('mentors does not exist');
+        expect(res.status).to.equal(401);
+        expect(res.body.error).to.be.equal('id must be a number');
         done();
       });
   });

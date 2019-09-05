@@ -1,6 +1,6 @@
 import allMentors from '../models/usersModels/userModels';
 class vMentors{
-    get(req, res){
+    get = (req, res)=>{
         const mentors = allMentors.findAll();
        const data = mentors.map(mentor => {
             const {password, ...mentorInfo} = mentor;
@@ -11,7 +11,13 @@ class vMentors{
            data,
         });
     }
-    getOne(req, res){
+    getOne = (req, res) => {
+        if(isNaN(req.params.id)){
+            return res.status(401).send({
+              status: 401,
+              error: 'id must be a number',
+            });
+          }
         const { id } = req.params;
         const mentor = allMentors.findById(parseInt(id));
         if(!mentor){
