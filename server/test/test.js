@@ -1,15 +1,20 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import server from '../server';
-import userData from '../models/usersModels/userModels';
+import userModel from '../models/usersModels/userModels';
+import {userData} from '../helpers/mock';
 import mochData from '../helpers/mochData';
 const { expect } = chai;
 chai.use(chaiHttp);
-
-const newUser = mochData.userdata;
-const validation = mochData.otherdata;
-const dataExist = userData.User[1];
+const fromMocha = mochData.data;
+const {userdata, otherdata, signIn, signInWrongData} = fromMocha;
+const dataExist = userData[1];
 const { id, status, ...newDataExist } = dataExist;
+userModel.create(userData[0]);
+userModel.create(userData[1]);
+userModel.create(userData[2]);
+userModel.create(userData[3]);
+
 describe('Test for user sign up', () => {
   it('should return error if an email is already exist', done => {
     chai
@@ -24,13 +29,12 @@ describe('Test for user sign up', () => {
         done();
       });
   });
-
   it('should return User created successfully', done => {
     chai
       .request(server)
       .post('/api/v1/auth/signup')
       .set('accept', 'application/json')
-      .send(newUser)
+      .send(userdata)
       .end((err, res) => {
         expect(res.body).to.be.an('object');
         expect(res.status).to.equal(201);
@@ -44,7 +48,7 @@ describe('Test for user sign up', () => {
       .request(server)
       .post('/api/v1/auth/signup')
       .set('accept', 'application/json')
-      .send(validation)
+      .send(otherdata)
       .end((err, res) => {
         expect(res.body).to.be.an('object');
         expect(res.status).to.equal(400);
@@ -54,16 +58,14 @@ describe('Test for user sign up', () => {
   });
 });
 
-/*******************SignIn**********************************/
-const signInData = mochData.signIn;
-const wrongData = mochData.signInWrongData;
+// /*******************SignIn**********************************/
 describe('Test for user sign in', () => {
   it('should return error if user is not exit', done => {
     chai
       .request(server)
       .post('/api/v1/auth/signin')
       .set('accept', 'application/json')
-      .send(signInData)
+      .send(signIn)
       .end((err, res) => {
         expect(res.body).to.be.an('object');
         expect(res.status).to.equal(404);
@@ -92,7 +94,7 @@ describe('Test for user sign in', () => {
       .request(server)
       .post('/api/v1/auth/signin')
       .set('accept', 'application/json')
-      .send(wrongData)
+      .send(signInWrongData)
       .end((err, res) => {
         expect(res.body).to.be.an('object');
         expect(res.status).to.equal(401);

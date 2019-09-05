@@ -1,36 +1,36 @@
 import jwt from "jsonwebtoken";
 import userModel from "../models/usersModels/userModels";
-const adminAuth = {
+class adminAuth {
   verifyAdmin(req, res, next) {
     const { status } = req.currentUser;
     if (status !== "admin") {
-      return res.status(401).send({
-        status: 401,
+      return res.status(403).send({
+        status: 403,
         error: "you are not an admin"
       });
     }
     next();
-  },
+  }
   verifyMentor(req, res, next) {
     const { status } = req.currentUser;
     if (status !== "mentor") {
-      return res.status(401).send({
-        status: 401,
-        error: "you are not authorized"
+      return res.status(403).send({
+        status: 403,
+        error: "you are not mentor"
       });
     }
     next();
-  },
+  }
   verifyUser(req, res, next) {
     const { status } = req.currentUser;
     if (status !== "user") {
-      return res.status(401).send({
-        status: 401,
-        error: "you are not authorized"
+      return res.status(403).send({
+        status: 403,
+        error: "you are not user"
       });
     }
     next();
-  },
+  }
   verifyToken(req, res, next) {
     try {
       const Header = req.headers["authorization"];
@@ -49,13 +49,14 @@ const adminAuth = {
           if (!user) {
             return res.status(404).send({
               status: 404,
-              error: "user not found"
+              error: "user with this token is not found in our data structure"
             });
           }
           req.currentUser = user;
           next();
+          return 0;
         });
-      } else {
+      } else{
         return res.status(401).send({
           status: 401,
           error: "please specify head of token"
@@ -64,9 +65,9 @@ const adminAuth = {
     } catch (error) {
       return res.status(404).send({
         status: 404,
-        error: "you do not have access to this service"
+        error: "your data do not found in our data stucture"
       });
     }
   }
-};
-export default adminAuth;
+}
+export default new adminAuth();

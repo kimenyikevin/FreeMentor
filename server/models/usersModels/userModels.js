@@ -1,55 +1,6 @@
 class User {
   constructor() {
-    this.User = [
-      {
-        id: 1,
-        firstName: "kimenyi",
-        lastName: "kevin",
-        email: "kimenyikevin@gmail.com",
-        password: "kigali",
-        address: "kigali",
-        bio: "engineer",
-        status: "mentor",
-        occupation: "engineer",
-        expertise: "engineer"
-      },
-      {
-        id: 2,
-        firstName: "habimana",
-        lastName: "emmy",
-        email: "habimanaemmy@gmail.com",
-        password: "kigali",
-        address: "kigali",
-        bio: "engineer",
-        status: "user",
-        occupation: "engineer",
-        expertise: "engineer"
-      },
-      {
-        id: 3,
-        firstName: "kwizera",
-        lastName: "eric",
-        email: "kwizeraeric@gmail.com",
-        password: "kigali",
-        address: "kigali",
-        bio: "engineer",
-        status: "admin",
-        occupation: "engineer",
-        expertise: "engineer"
-      },
-      {
-        id: 4,
-        firstName: "bavakure",
-        lastName: "eric",
-        email: "kimenyike@gmail.com",
-        password: "kigali",
-        address: "kigali",
-        bio: "engineer",
-        status: "mentor",
-        occupation: "engineer",
-        expertise: "engineer"
-      }
-    ];
+    this.User = [];
   }
   create(data) {
     let userid = this.User.length + 1;

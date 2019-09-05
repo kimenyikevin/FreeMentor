@@ -11,6 +11,6 @@ const {
 const router = express.Router();
 router.post('/signup', validate.uservalidation, signup);
 router.post('/signin', signIn);
-router.patch('/user/:id', verifyToken, verifyAdmin, changeUser.changeStatus);
+router.patch('/user/:id',validate.pathVaridete, verifyToken, verifyAdmin, changeUser.changeStatus);
 
 export default router;
