@@ -1,6 +1,6 @@
 import Joi from "@hapi/joi";
-const validation = {
-  uservalidation(req, res, next) {
+class Validation {
+  uservalidation = (req, res, next) => {
     const schema = {
       firstName: Joi.string().required(),
       lastName: Joi.string().required(),
@@ -22,9 +22,8 @@ const validation = {
         status: 400,
         error: result.error.details[0].message
       });
-    } else {
+    } 
       next();
-    }
   }
-};
-export default validation;
+}
+export default new Validation();

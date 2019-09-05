@@ -1,43 +1,44 @@
-import jwt from 'jsonwebtoken';
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import server from '../server';
 import dotenv from 'dotenv';
+import mochData from '../helpers/mochData';
+import session from '../models/sessionModels';
 import user from '../models/usersModels/userModels';
-import { assert } from '@hapi/hoek';
+import { userData, sessionData } from '../helpers/mock';
+user.create(userData[0]);
+user.create(userData[1]);
+user.create(userData[2]);
+user.create(userData[3]);
+
 dotenv.config();
 chai.use(chaiHttp);
 const { expect } = chai;
-//invald token
-let invaldToken = jwt.sign(
-  { id: 0, userType: 'user', email: '@gmail.com' },
-  process.env.SECRET_KEY
-);
+
+session.create(sessionData[0]);
+session.create(sessionData[1]);
+session.create(sessionData[2]);
+session.create(sessionData[3]);
+
+let invaldToken = mochData.mochData();
 // when user does not exist
-let notExistUserToken = jwt.sign(
-  { id: 0, userType: 'user', email: 'habimanaemmy@gmail.com' },
-  process.env.SECRET_KEY
-);
+let notExistUserToken = mochData.mochDataNotExist();
 let set = `adminToken ${notExistUserToken}`;
 // real token for user
-let realToken = jwt.sign(
-  { id: 2, userType: 'user', email: 'habimanaemmy@gmail.com' },
-  process.env.SECRET_KEY
-);
+let realToken = mochData.mochDataRealToken();
 let setUserToken = `adminToken ${realToken}`;
 // real token for Mentor
-let realMentor = jwt.sign(
-  { id: 1, userType: 'mentor', email: 'kimenyikevin@gmail.com' },
-  process.env.SECRET_KEY
-);
+let realMentor = mochData.mochDataRealMentor();
 let setMentorToken = `adminToken ${realMentor}`;
 
 // real admin token
-let realAdmin = jwt.sign(
-  { id: 3, userType: 'admin', email: 'kwizeraeric@gmail.com' },
-  process.env.SECRET_KEY
-);
+let realAdmin = mochData.mochDataRealAdmin();
 let setAdminToken = `adminToken ${realAdmin}`;
+
+// create session
+const fromMocha = mochData.data;
+const {createSession} = fromMocha;
+const testSession = createSession
 // Test for user model
 const findEmail = user.findByEmail('kimenyikevin@gmail.com');
 const findId = user.findById(1);
@@ -67,7 +68,7 @@ describe('Test for verifying Token', () => {
       .end((err, res) => {
         expect(res.body).to.be.an('object');
         expect(res.status).to.equal(404);
-        expect(res.body.error).to.be.equal(`you do not have access to this service`);
+        expect(res.body.error).to.be.equal(`your data do not found in our data stucture`);
         done();
       });
   });
@@ -92,7 +93,7 @@ describe('Test for verifying Token', () => {
       .end((err, res) => {
         expect(res.body).to.be.an('object');
         expect(res.status).to.equal(404);
-        expect(res.body.error).to.be.equal(`user not found`);
+        expect(res.body.error).to.be.equal(`user with this token is not found in our data structure`);
         done();
       });
   });
@@ -105,8 +106,8 @@ describe('Test for verifying Token', () => {
       .set('authorization', setUserToken)
       .end((err, res) => {
         expect(res.body).to.be.an('object');
-        expect(res.status).to.equal(401);
-        expect(res.body.error).to.be.equal('you are not authorized');
+        expect(res.status).to.equal(403);
+        expect(res.body.error).to.be.equal('you are not mentor');
         done();
       });
   });
@@ -162,12 +163,9 @@ describe('Test for verifying Token', () => {
   });
 });
 //create sessions
-const testSession = {
-  mentorId: 3,
-  questions: 'i need help'
-};
+
 describe('Test for create a sessions', () => {
-  it('user can create ', done => {
+  it('user can create sessions ', done => {
     chai
       .request(server)
       .post('/api/v1/auth/sessions')
@@ -176,7 +174,7 @@ describe('Test for create a sessions', () => {
       .end((err, res) => {
         expect(res.body).to.be.an('object');
         expect(res.status).to.equal(200);
-        expect(res.body.data).to.include(testSession);
+        expect(res.body.message).to.be.equal('session created successful');
         done();
       });
   });
@@ -204,8 +202,8 @@ describe('Test for view all mentor', () => {
       .set('authorization', setMentorToken)
       .end((err, res) => {
         expect(res.body).to.be.an('object');
-        expect(res.status).to.equal(401);
-        expect(res.body.error).to.be.equal('you are not authorized');
+        expect(res.status).to.equal(403);
+        expect(res.body.error).to.be.equal('you are not user');
         done();
       });
   });
@@ -214,12 +212,12 @@ describe('Test for specific mentor', () => {
   it('should return error if a mentor does not exit', done => {
     chai
       .request(server)
-      .get('/api/v1/auth/mentors/0')
+      .get('/api/v1/auth/mentors/0kkk')
       .set('authorization', setUserToken)
       .end((err, res) => {
         expect(res.body).to.be.an('object');
-        expect(res.status).to.equal(404);
-        expect(res.body.error).to.be.equal('mentors does not exist');
+        expect(res.status).to.equal(401);
+        expect(res.body.error).to.be.equal('id must be a number');
         done();
       });
   });
@@ -261,7 +259,7 @@ describe('Test for admin to change user to a mentor', () => {
       .set('authorization', setMentorToken)
       .end((err, res) => {
         expect(res.body).to.be.an('object');
-        expect(res.status).to.equal(401);
+        expect(res.status).to.equal(403);
         expect(res.body.error).to.be.equal('you are not an admin');
         done();
       });
