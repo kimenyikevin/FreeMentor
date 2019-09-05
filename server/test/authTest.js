@@ -21,25 +21,25 @@ session.create(sessionData[2]);
 session.create(sessionData[3]);
 
 let invaldToken = mochData.mochData();
-// when user does not exist
+
 let notExistUserToken = mochData.mochDataNotExist();
 let set = `adminToken ${notExistUserToken}`;
-// real token for user
+
 let realToken = mochData.mochDataRealToken();
 let setUserToken = `adminToken ${realToken}`;
-// real token for Mentor
+
 let realMentor = mochData.mochDataRealMentor();
 let setMentorToken = `adminToken ${realMentor}`;
 
-// real admin token
+
 let realAdmin = mochData.mochDataRealAdmin();
 let setAdminToken = `adminToken ${realAdmin}`;
 
-// create session
+
 const fromMocha = mochData.data;
 const {createSession} = fromMocha;
-const testSession = createSession
-// Test for user model
+const testSession = createSession ;
+
 const findEmail = user.findByEmail('kimenyikevin@gmail.com');
 const findId = user.findById(1);
 const findAll = user.findAll();
@@ -98,7 +98,7 @@ describe('Test for verifying Token', () => {
       });
   });
 
-  //verify mentor
+
   it('should return error if uer is not mentor', done => {
     chai
       .request(server)
@@ -111,7 +111,7 @@ describe('Test for verifying Token', () => {
         done();
       });
   });
-  // reject session request
+ 
   it('should return error if id of session is not exist', done => {
     chai
       .request(server)
@@ -136,7 +136,7 @@ describe('Test for verifying Token', () => {
         done();
       });
   });
-  // accept session request
+
   it('should return error if id of session is not exist', done => {
     chai
       .request(server)
@@ -162,7 +162,7 @@ describe('Test for verifying Token', () => {
       });
   });
 });
-//create sessions
+
 
 describe('Test for create a sessions', () => {
   it('user can create sessions ', done => {
@@ -179,7 +179,7 @@ describe('Test for create a sessions', () => {
       });
   });
 });
-//view Mentors
+
 
 describe('Test for view all mentor', () => {
   it('view all mentor available', done => {
@@ -194,7 +194,7 @@ describe('Test for view all mentor', () => {
         done();
       });
   });
-  //verify user
+
   it('test for verify user', done => {
     chai
       .request(server)
@@ -249,9 +249,9 @@ describe('Test for specific mentor', () => {
   });
 });
 
-// change user to mentors
+
 describe('Test for admin to change user to a mentor', () => {
-  //verify Admin
+
   it('should return error if user is not admin', done => {
     chai
       .request(server)
