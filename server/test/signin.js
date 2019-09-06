@@ -55,7 +55,7 @@ describe('Test for user sign in', () => {
       .send(signInWrongData)
       .end((err, res) => {
         expect(res.body).to.be.an('object');
-        expect(res.status).to.equal(401);
+        expect(res.status).to.equal(403);
         expect(res.body.error).to.be.equal('Email or password is wrong');
         done();
       });

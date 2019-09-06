@@ -29,7 +29,7 @@ class changeUser {
     } catch (error) {
       res.status(404).send({
         status: 404,
-        error: 'data not  found',
+        error: 'id you is not found in our data structure',
       });
     }
   };

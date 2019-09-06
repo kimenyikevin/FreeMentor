@@ -7,8 +7,8 @@ class Registered {
   signup = (req, res) => {
     const emailexit = userModel.findByEmail(req.body.email);
     if (emailexit) {
-      return res.status(401).send({
-        status: 401,
+      return res.status(409).send({
+        status: 409,
         error: `${emailexit.email}Email already exist`,
       });
     }
@@ -46,8 +46,8 @@ class Registered {
           },
         });
       }
-      return res.status(401).send({
-        status: 401,
+      return res.status(403).send({
+        status: 403,
         error: 'Email or password is wrong',
       });
     } catch (error) {
