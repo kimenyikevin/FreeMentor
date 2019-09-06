@@ -4,17 +4,17 @@ class inputSession {
     try {
         const {id,email} = req.currentUser;
         const createSession = sessionModel.create(req.body, id, email);
-        return res.status(200).send({
-          status: 200,
+        return res.status(201).send({
+          status: 201,
           message: "session created successful",
           data: {
             createSession
           }
         });
     } catch (error) {
-      return res.status(401).send({
-        status: 401,
-        error: "you do not have access to this service (invalid token)"
+      return res.status(403).send({
+        status: 403,
+        error: "you do not have access to this service"
       });
     }
   }

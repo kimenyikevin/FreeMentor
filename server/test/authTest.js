@@ -92,7 +92,7 @@ describe('Test for verifying Token', () => {
       .set('authorization', set)
       .end((err, res) => {
         expect(res.body).to.be.an('object');
-        expect(res.status).to.equal(404);
+        expect(res.status).to.equal(403);
         expect(res.body.error).to.be.equal(
           'user with this token is not found in our data structure',
         );
@@ -173,7 +173,7 @@ describe('Test for create a sessions', () => {
       .send(testSession)
       .end((err, res) => {
         expect(res.body).to.be.an('object');
-        expect(res.status).to.equal(200);
+        expect(res.status).to.equal(201);
         expect(res.body.message).to.be.equal('session created successful');
         done();
       });
