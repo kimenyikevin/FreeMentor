@@ -269,7 +269,7 @@ describe('Test for admin to change user to a mentor', () => {
       .end((err, res) => {
         expect(res.body).to.be.an('object');
         expect(res.status).to.equal(404);
-        expect(res.body.error).to.be.equal('data not  found');
+        expect(res.body.error).to.be.equal('id you is not found in our data structure');
         done();
       });
   });

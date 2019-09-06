@@ -29,7 +29,7 @@ describe('Test for user sign up', () => {
       .send(newDataExist)
       .end((err, res) => {
         expect(res.body).to.be.an('object');
-        expect(res.status).to.equal(401);
+        expect(res.status).to.equal(409);
         expect(res.body.error).to.be.equal(`${newDataExist.email}Email already exist`);
         done();
       });
