@@ -13,6 +13,8 @@ const {
 } = fromMocha;
 const dataExist = userData[1];
 const { id, status, ...newDataExist } = dataExist;
+
+userModel.User = [];
 userModel.create(userData[0]);
 userModel.create(userData[1]);
 userModel.create(userData[2]);
@@ -59,5 +61,3 @@ describe('Test for user sign up', () => {
       });
   });
 });
-
-

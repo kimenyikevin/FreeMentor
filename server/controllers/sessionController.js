@@ -1,6 +1,6 @@
 import sessionModel from "../models/sessionModels";
 class inputSession {
-  fillSession(req, res) {
+  fillSession = (req, res) => {
     try {
         const {id,email} = req.currentUser;
         const createSession = sessionModel.create(req.body, id, email);

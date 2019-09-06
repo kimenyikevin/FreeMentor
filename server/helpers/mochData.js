@@ -39,35 +39,35 @@ class usefulData {
       }
     }
     }
-mochData () {
+mochData = () => {
     const invaldToken = jwt.sign(
             { id: 0, userType: 'user', email: '@gmail.com' },
             process.env.SECRET_KEY
           );
           return invaldToken;
 }
-mochDataNotExist(){
+mochDataNotExist = () => {
     let notExistUserToken = jwt.sign(
         { id: 0, userType: 'user', email: 'habimanaemmy@gmail.com' },
         process.env.SECRET_KEY
       );
       return notExistUserToken;
 }
-mochDataRealToken(){
+mochDataRealToken = () => {
     let realToken = jwt.sign(
         { id: 2, userType: 'user', email: 'habimanaemmy@gmail.com' },
         process.env.SECRET_KEY
       );
       return realToken;
 }
-mochDataRealMentor(){
+mochDataRealMentor = () => {
     let realMentor = jwt.sign(
         { id: 1, userType: 'mentor', email: 'kimenyikevin@gmail.com' },
         process.env.SECRET_KEY
       );
       return realMentor;
 }
-mochDataRealAdmin(){
+mochDataRealAdmin = () => {
     let realAdmin = jwt.sign(
         { id: 3, userType: 'admin', email: 'kwizeraeric@gmail.com' },
         process.env.SECRET_KEY
