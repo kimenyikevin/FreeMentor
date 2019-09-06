@@ -4,7 +4,7 @@ import userModel from '../models/usersModels/userModels';
 
 dotenv.config();
 class Registered {
-  signup(req, res) {
+  signup = (req, res) => {
     const emailexit = userModel.findByEmail(req.body.email);
     if (emailexit) {
       return res.status(401).send({
@@ -26,8 +26,8 @@ class Registered {
     });
   }
 
-  // user login
-  signIn(req, res) {
+
+  signIn = (req, res) => {
     const { email, password } = req.body;
     const user = userModel.findByEmail(email);
     try {

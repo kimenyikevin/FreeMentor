@@ -1,6 +1,19 @@
 class User {
   constructor() {
-    this.User = [];
+    this.User = [
+      {
+        id: 1,
+        firstName: 'kwizera',
+        lastName: 'eric',
+        email: 'admin@gmail.com',
+        password: 'kigali',
+        address: 'kigali',
+        bio: 'engineer',
+        status: 'admin',
+        occupation: 'engineer',
+        expertise: 'engineer'
+      },
+    ];
   }
 
   create(data) {
@@ -20,20 +33,19 @@ class User {
     this.User.push(newUser);
     return newUser;
   }
-
-  findByEmail(email) {
+  findByEmail = (email) => {
     return this.User.find((found) => found.email == email);
   }
 
-  findById(id) {
+  findById = (id) => {
     return this.User.find((found) => found.id == id);
   }
 
-  findAll() {
+  findAll = () => {
     return this.User.filter((found) => found.status == 'mentor');
   }
 
-  update(id) {
+  update = (id) => {
     const reflection = this.findById(id);
     const index = this.User.indexOf(reflection);
     return this.User[index].status;

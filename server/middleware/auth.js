@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import userModel from '../models/usersModels/userModels';
 
 class adminAuth {
-  verifyAdmin(req, res, next) {
+  verifyAdmin = (req, res, next) => {
     const { status } = req.currentUser;
     if (status !== 'admin') {
       return res.status(403).send({
@@ -13,7 +13,7 @@ class adminAuth {
     next();
   }
 
-  verifyMentor(req, res, next) {
+  verifyMentor = (req, res, next) => {
     const { status } = req.currentUser;
     if (status !== 'mentor') {
       return res.status(403).send({
@@ -24,7 +24,7 @@ class adminAuth {
     next();
   }
 
-  verifyUser(req, res, next) {
+  verifyUser = (req, res, next) => {
     const { status } = req.currentUser;
     if (status !== 'user') {
       return res.status(403).send({
@@ -35,7 +35,7 @@ class adminAuth {
     next();
   }
 
-  verifyToken(req, res, next) {
+  verifyToken = (req, res, next) => {
     try {
       const Header = req.headers.authorization;
       if (typeof Header !== 'undefined') {

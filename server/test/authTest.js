@@ -1,11 +1,13 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
-import server from '../server';
 import dotenv from 'dotenv';
+import server from '../server';
 import mochData from '../helpers/mochData';
 import session from '../models/sessionModels';
 import user from '../models/usersModels/userModels';
 import { userData, sessionData } from '../helpers/mock';
+
+user.User = [];
 user.create(userData[0]);
 user.create(userData[1]);
 user.create(userData[2]);
@@ -21,7 +23,7 @@ session.create(sessionData[2]);
 session.create(sessionData[3]);
 
 let invaldToken = mochData.mochData();
-
+ 
 let notExistUserToken = mochData.mochDataNotExist();
 let set = `adminToken ${notExistUserToken}`;
 
@@ -31,14 +33,12 @@ let setUserToken = `adminToken ${realToken}`;
 let realMentor = mochData.mochDataRealMentor();
 let setMentorToken = `adminToken ${realMentor}`;
 
-
 let realAdmin = mochData.mochDataRealAdmin();
 let setAdminToken = `adminToken ${realAdmin}`;
 
-
 const fromMocha = mochData.data;
-const {createSession} = fromMocha;
-const testSession = createSession ;
+const { createSession } = fromMocha;
+const testSession = createSession;
 
 const findEmail = user.findByEmail('kimenyikevin@gmail.com');
 const findId = user.findById(1);
@@ -60,7 +60,7 @@ describe('Test for user model', () => {
 });
 
 describe('Test for verifying Token', () => {
-  it('should return error if Token is invalid', done => {
+  it('should return error if Token is invalid', (done) => {
     chai
       .request(server)
       .patch('/api/v1/auth/sessions/2/reject')
@@ -68,12 +68,12 @@ describe('Test for verifying Token', () => {
       .end((err, res) => {
         expect(res.body).to.be.an('object');
         expect(res.status).to.equal(404);
-        expect(res.body.error).to.be.equal(`your data do not found in our data stucture`);
+        expect(res.body.error).to.be.equal('your data do not found in our data stucture');
         done();
       });
   });
 
-  it('should return error if head of token is undefined', done => {
+  it('should return error if head of token is undefined', (done) => {
     chai
       .request(server)
       .patch('/api/v1/auth/sessions/2/reject')
@@ -81,11 +81,11 @@ describe('Test for verifying Token', () => {
       .end((err, res) => {
         expect(res.body).to.be.an('object');
         expect(res.status).to.equal(401);
-        expect(res.body.error).to.be.equal(`please specify head of token`);
+        expect(res.body.error).to.be.equal('please specify head of token');
         done();
       });
   });
-  it('should return error if user in token no longer available', done => {
+  it('should return error if user in token no longer available', (done) => {
     chai
       .request(server)
       .patch('/api/v1/auth/sessions/2/reject')
@@ -93,13 +93,14 @@ describe('Test for verifying Token', () => {
       .end((err, res) => {
         expect(res.body).to.be.an('object');
         expect(res.status).to.equal(404);
-        expect(res.body.error).to.be.equal(`user with this token is not found in our data structure`);
+        expect(res.body.error).to.be.equal(
+          'user with this token is not found in our data structure',
+        );
         done();
       });
   });
 
-
-  it('should return error if uer is not mentor', done => {
+  it('should return error if uer is not mentor', (done) => {
     chai
       .request(server)
       .patch('/api/v1/auth/sessions/2/reject')
@@ -111,8 +112,8 @@ describe('Test for verifying Token', () => {
         done();
       });
   });
- 
-  it('should return error if id of session is not exist', done => {
+
+  it('should return error if id of session is not exist', (done) => {
     chai
       .request(server)
       .patch('/api/v1/auth/sessions/0/reject')
@@ -124,7 +125,7 @@ describe('Test for verifying Token', () => {
         done();
       });
   });
-  it('should return data of session after rejection', done => {
+  it('should return data of session after rejection', (done) => {
     chai
       .request(server)
       .patch('/api/v1/auth/sessions/2/reject')
@@ -137,7 +138,7 @@ describe('Test for verifying Token', () => {
       });
   });
 
-  it('should return error if id of session is not exist', done => {
+  it('should return error if id of session is not exist', (done) => {
     chai
       .request(server)
       .patch('/api/v1/auth/sessions/0/accept')
@@ -149,7 +150,7 @@ describe('Test for verifying Token', () => {
         done();
       });
   });
-  it('should return data of session after accepted', done => {
+  it('should return data of session after accepted', (done) => {
     chai
       .request(server)
       .patch('/api/v1/auth/sessions/2/accept')
@@ -163,9 +164,8 @@ describe('Test for verifying Token', () => {
   });
 });
 
-
 describe('Test for create a sessions', () => {
-  it('user can create sessions ', done => {
+  it('user can create sessions ', (done) => {
     chai
       .request(server)
       .post('/api/v1/auth/sessions')
@@ -180,9 +180,8 @@ describe('Test for create a sessions', () => {
   });
 });
 
-
 describe('Test for view all mentor', () => {
-  it('view all mentor available', done => {
+  it('view all mentor available', (done) => {
     chai
       .request(server)
       .get('/api/v1/auth/mentors')
@@ -195,7 +194,7 @@ describe('Test for view all mentor', () => {
       });
   });
 
-  it('test for verify user', done => {
+  it('test for verify user', (done) => {
     chai
       .request(server)
       .get('/api/v1/auth/mentors')
@@ -209,7 +208,7 @@ describe('Test for view all mentor', () => {
   });
 });
 describe('Test for specific mentor', () => {
-  it('should return error if a mentor does not exit', done => {
+  it('should return error if a mentor does not exit', (done) => {
     chai
       .request(server)
       .get('/api/v1/auth/mentors/0kkk')
@@ -223,7 +222,7 @@ describe('Test for specific mentor', () => {
   });
   const mentorData = user.User[0];
   const { password, ...newMentorData } = mentorData;
-  it('should show details of specific mentor', done => {
+  it('should show details of specific mentor', (done) => {
     chai
       .request(server)
       .get('/api/v1/auth/mentors/1')
@@ -235,7 +234,7 @@ describe('Test for specific mentor', () => {
         done();
       });
   });
-  it('should return error if user is not mentor', done => {
+  it('should return error if user is not mentor', (done) => {
     chai
       .request(server)
       .get('/api/v1/auth/mentors/2')
@@ -249,10 +248,8 @@ describe('Test for specific mentor', () => {
   });
 });
 
-
 describe('Test for admin to change user to a mentor', () => {
-
-  it('should return error if user is not admin', done => {
+  it('should return error if user is not admin', (done) => {
     chai
       .request(server)
       .patch('/api/v1/auth/user/2')
@@ -264,7 +261,7 @@ describe('Test for admin to change user to a mentor', () => {
         done();
       });
   });
-  it('should return error if user does not exit', done => {
+  it('should return error if user does not exit', (done) => {
     chai
       .request(server)
       .patch('/api/v1/auth/user/0')
@@ -278,7 +275,7 @@ describe('Test for admin to change user to a mentor', () => {
   });
   const mentorData = user.User[1];
   const { password, status, ...newMentorData } = mentorData;
-  it('should return message User account changed to mentor and data of user', done => {
+  it('should return message User account changed to mentor and data of user', (done) => {
     chai
       .request(server)
       .patch('/api/v1/auth/user/2')
@@ -291,7 +288,7 @@ describe('Test for admin to change user to a mentor', () => {
         done();
       });
   });
-  it('should return message User account is a mentor', done => {
+  it('should return message User account is a mentor', (done) => {
     chai
       .request(server)
       .patch('/api/v1/auth/user/1')

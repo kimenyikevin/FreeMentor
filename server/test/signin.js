@@ -11,13 +11,14 @@ const fromMocha = mochData.data;
 const { signIn, signInWrongData } = fromMocha;
 const dataExist = userData[1];
 const { id, status, ...newDataExist } = dataExist;
+userModel.User = [];
 userModel.create(userData[0]);
 userModel.create(userData[1]);
 userModel.create(userData[2]);
 userModel.create(userData[3]);
 
 describe('Test for user sign in', () => {
-  it('should return error if user is not exit', done => {
+  it('should return error if user is not exit', (done) => {
     chai
       .request(server)
       .post('/api/v1/auth/signin')
@@ -31,7 +32,7 @@ describe('Test for user sign in', () => {
       });
   });
 
-  it('should return User is successfully logged in', done => {
+  it('should return User is successfully logged in', (done) => {
     chai
       .request(server)
       .post('/api/v1/auth/signin')
@@ -46,7 +47,7 @@ describe('Test for user sign in', () => {
       });
   });
 
-  it('should return error if Email and password did not match', done => {
+  it('should return error if Email and password did not match', (done) => {
     chai
       .request(server)
       .post('/api/v1/auth/signin')

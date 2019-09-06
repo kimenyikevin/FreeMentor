@@ -17,7 +17,7 @@ class Session {
     return newSession;
   }
 
-  findById(id) {
+  findById = (id) => {
     return this.Session.find((found) => found.Sessionid == id);
   }
 }
