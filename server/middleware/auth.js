@@ -51,8 +51,8 @@ class adminAuth {
           }
           const user = userModel.findById(id);
           if (!user) {
-            return res.status(404).send({
-              status: 404,
+            return res.status(403).send({
+              status: 403,
               error: 'user with this token is not found in our data structure',
             });
           }
