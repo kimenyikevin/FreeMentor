@@ -2,25 +2,27 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 import server from '../server';
 import userModel from '../models/usersModels/userModels';
-import { userData } from '../helpers/mock';
-import mochData from '../helpers/mochData';
+import { userData, testingData } from '../helpers/mock';
+
 
 const { expect } = chai;
 chai.use(chaiHttp);
-const fromMocha = mochData.data;
-const {
-  userdata, otherdata,
-} = fromMocha;
+
 const dataExist = userData[1];
 const { id, status, ...newDataExist } = dataExist;
-
-userModel.User = [];
-userModel.create(userData[0]);
-userModel.create(userData[1]);
-userModel.create(userData[2]);
-userModel.create(userData[3]);
+const newData = testingData[0];
+const validateDate = testingData[1];
 
 describe('Test for user sign up', () => {
+  before('Clear data from database', (done) => {
+    chai.request(server);
+    userModel.User = [];
+    userModel.create(userData[0]);
+    userModel.create(userData[1]);
+    userModel.create(userData[2]);
+    userModel.create(userData[3]);
+    done();
+  });
   it('should return error if an email is already exist', (done) => {
     chai
       .request(server)
@@ -39,7 +41,7 @@ describe('Test for user sign up', () => {
       .request(server)
       .post('/api/v1/auth/signup')
       .set('accept', 'application/json')
-      .send(userdata)
+      .send(newData)
       .end((err, res) => {
         expect(res.body).to.be.an('object');
         expect(res.status).to.equal(201);
@@ -53,11 +55,16 @@ describe('Test for user sign up', () => {
       .request(server)
       .post('/api/v1/auth/signup')
       .set('accept', 'application/json')
-      .send(otherdata)
+      .send(validateDate)
       .end((err, res) => {
         expect(res.body).to.be.an('object');
         expect(res.status).to.equal(400);
         done();
       });
+  });
+  after('Clear data from database', (done) => {
+    chai.request(server);
+    userModel.User = [];
+    done();
   });
 });

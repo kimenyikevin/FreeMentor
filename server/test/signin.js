@@ -2,22 +2,26 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 import server from '../server';
 import userModel from '../models/usersModels/userModels';
-import { userData } from '../helpers/mock';
-import mochData from '../helpers/mochData';
+import { userData, testingData } from '../helpers/mock';
+
 
 const { expect } = chai;
 chai.use(chaiHttp);
-const fromMocha = mochData.data;
-const { signIn, signInWrongData } = fromMocha;
+const signIn = testingData[3];
+const signInWrongData = testingData[2];
 const dataExist = userData[1];
 const { id, status, ...newDataExist } = dataExist;
-userModel.User = [];
-userModel.create(userData[0]);
-userModel.create(userData[1]);
-userModel.create(userData[2]);
-userModel.create(userData[3]);
 
 describe('Test for user sign in', () => {
+  before('Clear data from database', (done) => {
+    chai.request(server);
+    userModel.User = [];
+    userModel.create(userData[0]);
+    userModel.create(userData[1]);
+    userModel.create(userData[2]);
+    userModel.create(userData[3]);
+    done();
+  });
   it('should return error if user is not exit', (done) => {
     chai
       .request(server)
@@ -59,5 +63,10 @@ describe('Test for user sign in', () => {
         expect(res.body.error).to.be.equal('Email or password is wrong');
         done();
       });
+  });
+  after('Clear data from database', (done) => {
+    chai.request(server);
+    userModel.User = [];
+    done();
   });
 });
