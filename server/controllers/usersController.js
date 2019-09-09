@@ -32,6 +32,9 @@ class Registered {
     });
   }
 
+
+
+
 //Db controllers
 async create(req, res) {
   const text = `INSERT INTO users
