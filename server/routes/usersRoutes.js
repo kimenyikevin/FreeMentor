@@ -3,7 +3,8 @@ import validate from '../middleware/SchemaValidator';
 import User from '../controllers/usersController';
 import changeUser from '../controllers/changeUSer';
 import verify from '../middleware/auth';
-// verifyToken, verifyAdmin,
+
+
 const { signup, signIn, create  } = User;
 const {
   verifyToken, verifyAdmin,
