@@ -7,11 +7,10 @@ import { userData, testingData } from '../helpers/mock';
 
 const { expect } = chai;
 chai.use(chaiHttp);
-
+const signIn = testingData[3];
+const signInWrongData = testingData[2];
 const dataExist = userData[1];
 const { id, status, ...newDataExist } = dataExist;
-const newData = testingData[0];
-const validateDate = testingData[1];
 
 describe('test for database', () => {
   before('Clear data from database', (done) => {
@@ -24,7 +23,7 @@ describe('test for database', () => {
       .request(server)
       .post('/api/v2/auth/signUp')
       .set('accept', 'application/json')
-      .send(newData)
+      .send(newDataExist)
       .end((err, res) => {
         expect(res.body).to.be.an('object');
         expect(res.status).to.equal(201);
@@ -38,41 +37,52 @@ describe('test for database', () => {
       .request(server)
       .post('/api/v2/auth/signUp')
       .set('accept', 'application/json')
-      .send(newData)
+      .send(newDataExist)
       .end((err, res) => {
         expect(res.body).to.be.an('object');
         expect(res.status).to.equal(409);
-        expect(res.body.error).to.be.equal(`E-mail ${newData.email} is alrady exist`);
+        expect(res.body.error).to.be.equal(`E-mail ${newDataExist.email} is alrady exist`);
         done();
       });
   });
-});
-
-describe('Test for user sign up', () => {
-  before('Clear data from database', (done) => {
-    chai.request(server);
-    userModel.User = [];
-    userModel.create(userData[0]);
-    userModel.create(userData[1]);
-    userModel.create(userData[2]);
-    userModel.create(userData[3]);
-    done();
-  });
-  it('should return error if validation meet with error', (done) => {
+  it('should return error if user is not exit', (done) => {
     chai
       .request(server)
-      .post('/api/v1/auth/signup')
+      .post('/api/v2/auth/signIn')
       .set('accept', 'application/json')
-      .send(validateDate)
+      .send(signIn)
+      .end((err, res) => {
+        expect(res.body).to.be.an('object');
+        expect(res.status).to.equal(404);
+        expect(res.body.error).to.be.equal(`${signIn.email} does not exist in our database`);
+        done();
+      });
+  });
+  it('should return User is successfully logged in', (done) => {
+    chai
+      .request(server)
+      .post('/api/v2/auth/signIn')
+      .set('accept', 'application/json')
+      .send(newDataExist)
+      .end((err, res) => {
+        expect(res.body).to.be.an('object');
+        expect(res.status).to.equal(200);
+        expect(res.body.message).to.be.equal('User is successfully logged in');
+        expect(res.body.token).to.be.an('string');
+        done();
+      });
+  });
+  it('should return error if Email and password did not match', (done) => {
+    chai
+      .request(server)
+      .post('/api/v2/auth/signIn')
+      .set('accept', 'application/json')
+      .send(signInWrongData)
       .end((err, res) => {
         expect(res.body).to.be.an('object');
         expect(res.status).to.equal(400);
+        expect(res.body.error).to.be.equal('E-mail and password do not match');
         done();
       });
-  });
-  after('Clear data from database', (done) => {
-    chai.request(server);
-    userModel.User = [];
-    done();
   });
 });
