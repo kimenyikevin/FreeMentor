@@ -7,3 +7,4 @@ swagger-ui-dist/
 .nyc_output/processinfo/index.json 
 .vscode/
 server/change user.postman_collection.json
+.env

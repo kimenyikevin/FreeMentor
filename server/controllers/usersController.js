@@ -4,7 +4,7 @@ import userModel from '../models/usersModels/userModels';
 import moment from 'moment';
 import uuid from 'uuid/v4';
 import Helper from '../helpers/helper';
-import db from '../models/usersModels/userModels';
+import services from '../services/services'
 import 'idempotent-babel-polyfill';
 
 
@@ -44,38 +44,22 @@ async create(req, res) {
     firstName, lastName, email, password, address, bio, occupation, expertise,
   } = req.body;
   const hashPassword = Helper.hashPassword(password);
-  const values = [
-    uuid(),
-    firstName,
-    lastName,
-    email,
-    hashPassword,
-    address,
-    bio,
-    occupation,
-    expertise,
-    moment(new Date()),
-    moment(new Date()),
-  ];
+  const values = [ uuid(), firstName, lastName, email, hashPassword, address, bio, occupation, expertise, moment(new Date()), moment(new Date()),];
   try {
-    if (!Helper.isValidEmail(req.body.email)) {
-      return res.status(400).send({ message: 'Please enter a valid email address' });
-    }
-    const newUser = await db.execute(text, values);
-    if (newUser.routine === '_bt_check_unique') {
+    const newUser = await services.servicer(values);
+    if(newUser == undefined){
       return res.status(409).send({
         status: 409,
         error: `E-mail ${req.body.email} is alrady exist`,
       });
     }
-    const { rows } = newUser;
-    const token = Helper.generateToken(rows[0].id, rows[0].email);
+    const token = Helper.generateToken(newUser.id, newUser.email);
     return res.status(201).send({
       status: 201,
       message: 'User created successfully',
       token,
       data: {
-        data: rows[0],
+        data: newUser,
       },
     });
   } catch (error) {
