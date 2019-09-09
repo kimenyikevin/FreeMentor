@@ -69,6 +69,40 @@ async create(req, res) {
   }
 }
 
+//db sign in
+async login(req, res) {
+  const {email, password} = req.body;
+  try {
+    const signedUser = await services.loginService(email, password);
+    if (signedUser == undefined) {
+      return res.status(404).send({
+        status: 404,
+         error: `${email} does not exist in our database` 
+        });
+    }
+    if(signedUser == false) {
+      return res.status(400).send({ 
+        status: 400,
+        error: 'E-mail and password do not match' 
+      });
+    }
+    const token = Helper.generateToken(signedUser.id, signedUser.email);
+    return res.status(200).send({
+      status: 200,
+      message: 'User is successfully logged in',
+      token:  token,
+       signedUser 
+      });
+  } catch (error) {
+    return res.status(400).send({
+      error: `error accured ${error}`,
+    });
+  }
+}
+
+
+
+
   signIn = (req, res) => {
     const { email, password } = req.body;
     const user = userModel.findByEmail(email);
