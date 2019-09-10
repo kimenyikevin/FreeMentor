@@ -1,57 +1,11 @@
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
+import moment from 'moment';
+import helper from './helper';
+import db from '../models/userModels';
 
 dotenv.config();
-export const userData = [
-  {
-    id: 1,
-    firstName: 'kimenyi',
-    lastName: 'kevin',
-    email: 'kimenyikevin@gmail.com',
-    password: 'kigali',
-    address: 'kigali',
-    bio: 'engineer',
-    status: 'mentor',
-    occupation: 'engineer',
-    expertise: 'engineer',
-  },
-  {
-    id: 2,
-    firstName: 'habimana',
-    lastName: 'emmy',
-    email: 'habimanaemmy@gmail.com',
-    password: 'kigali',
-    address: 'kigali',
-    bio: 'engineer',
-    status: 'user',
-    occupation: 'engineer',
-    expertise: 'engineer',
-  },
-  {
-    id: 3,
-    firstName: 'kwizera',
-    lastName: 'eric',
-    email: 'admin@gmail.com',
-    password: 'kigali',
-    address: 'kigali',
-    bio: 'engineer',
-    status: 'admin',
-    occupation: 'engineer',
-    expertise: 'engineer',
-  },
-  {
-    id: 4,
-    firstName: 'bavakure',
-    lastName: 'eric',
-    email: 'kimenyike@gmail.com',
-    password: 'kigali',
-    address: 'kigali',
-    bio: 'engineer',
-    status: 'mentor',
-    occupation: 'engineer',
-    expertise: 'engineer',
-  },
-];
+
 export const sessionData = [
   {
     Sessionid: 1,
@@ -88,56 +42,112 @@ export const sessionData = [
 ];
 export const testingData = [
   {
-    firstName: 'bavakure',
-    lastName: 'eric',
-    email: 'kimenyik@gmail.com',
-    password: 'kigali',
-    address: 'kigali',
-    bio: 'engineer',
-    occupation: 'engineer',
-    expertise: 'engineer',
-  },
-  {
-    firstName: 'bavakure',
-    lastName: '',
-    email: ' kimenyik.com',
-    password: 'ki',
-    address: 'kigali',
-    bio: 'engineer',
-    occupation: 'engineer',
-    expertise: 'engineer',
-  },
-  {
+    firstName: 'habimana',
+    lastName: 'emmy',
     email: 'habimanaemmy@gmail.com',
-    password: '',
-  },
-  {
-    email: ' @gmail.com',
     password: 'kigali',
+    address: 'kigali',
+    bio: 'engineer',
+    occupation: 'engineer',
+    expertise: 'engineer',
   },
   {
-    mentorId: 3,
-    questions: 'i need help',
+    firstName: 'kimenyi',
+    lastName: 'kevin',
+    email: 'kimenyikevin@gmail.com',
+    password: 'password',
+    address: 'kigali',
+    bio: 'engineer',
+    occupation: 'engineer',
+    expertise: 'engineer',
+  },
+  {
+    firstName: 'undefined',
+    lastName: 'user',
+    email: 'undefineduser@gmail.com',
+    password: 'password',
+    address: 'kigali',
+    bio: 'engineer',
+    occupation: 'engineer',
+    expertise: 'engineer',
+  },
+  {
+    firstName: 'habimana',
+    lastName: 'emmy',
+    email: 'habimanaemmy@gmail.com',
+    password: 'kigalii',
+    address: 'kigali',
+    bio: 'engineer',
+    occupation: 'engineer',
+    expertise: 'engineer',
   },
 ];
-export const invaldToken = jwt.sign(
-  { id: 0, userType: 'user', email: '@gmail.com' },
-  process.env.SECRET_KEY,
-);
+export const invaldToken = helper.generateToken(0, '@gmail.com');
 
-export const notExistUserToken = jwt.sign(
-  { id: 0, userType: 'user', email: 'habimanaemmy@gmail.com' },
-  process.env.SECRET_KEY,
-);
-export const realToken = jwt.sign(
-  { id: 2, userType: 'user', email: 'habimanaemmy@gmail.com' },
-  process.env.SECRET_KEY,
-);
-export const realMentor = jwt.sign(
-  { id: 1, userType: 'mentor', email: 'kimenyikevin@gmail.com' },
-  process.env.SECRET_KEY,
-);
-export const realAdmin = jwt.sign(
-  { id: 3, userType: 'admin', email: 'kwizeraeric@gmail.com' },
-  process.env.SECRET_KEY,
-);
+export const notExistUserToken = helper.generateToken(0, 'testuser@gmail.com');
+
+export const realToken = helper.generateToken(3, 'testuser@gmail.com');
+
+export const realMentor = helper.generateToken(2, 'mentor@gmail.com');
+
+export const realAdmin = helper.generateToken(1, 'kimenyikevin@gmail.com');
+
+
+export const createAdmin = async () => {
+  const createAdminTable = `
+  INSERT INTO users (id, firstName, lastName, email, password, address, bio,status, occupation, expertise, created_date, modified_date)
+  VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
+  `;
+
+  const { rows } = await db.execute('SELECT * FROM users WHERE status = $1', ['Admin']);
+  try {
+    if (!rows[0]) {
+      const hashPassword = helper.hashPassword('password');
+      await db.execute(createAdminTable, [
+        1,
+        'kimenyi',
+        'kevin',
+        'kimenyikevin@gmail.com',
+        hashPassword,
+        'kigali',
+        'engineer',
+        'Admin',
+        'engineer',
+        'engineer',
+        moment(new Date()),
+        moment(new Date()),
+      ]);
+    }
+    const hashPassword = helper.hashPassword('password');
+    await db.execute(createAdminTable, [
+      2,
+      'mentor',
+      'mentor',
+      'mentor@gmail.com',
+      hashPassword,
+      'kigali',
+      'engineer',
+      'mentor',
+      'engineer',
+      'engineer',
+      moment(new Date()),
+      moment(new Date()),
+    ]);
+    await db.execute(createAdminTable, [
+      3,
+      'testuser',
+      'testuser',
+      'testuser@gmail.com',
+      hashPassword,
+      'kigali',
+      'engineer',
+      'user',
+      'engineer',
+      'engineer',
+      moment(new Date()),
+      moment(new Date()),
+    ]);
+  } catch (error) {
+    console.log(`error ${error}`);
+  }
+};

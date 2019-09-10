@@ -1,29 +1,29 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import server from '../server';
-import userModel from '../models/usersModels/userModels';
-import { userData, testingData } from '../helpers/mock';
+import db from '../models/userModels';
+import { testingData,
+} from '../helpers/mock';
 
 
 const { expect } = chai;
 chai.use(chaiHttp);
-const signIn = testingData[3];
-const signInWrongData = testingData[2];
-const dataExist = userData[1];
-const { id, status, ...newDataExist } = dataExist;
 
+const newUser = testingData[0];
+const undefinedUser = testingData[2];
+const notMacth = testingData[3];
 describe('test for database', () => {
   before('Clear data from database', (done) => {
     chai.request(server);
-    userModel.execute('DELETE FROM users');
+    db.execute('DELETE FROM users');
     done();
   });
   it('should return User created successfully', (done) => {
     chai
       .request(server)
-      .post('/api/v2/auth/signUp')
+      .post('/api/v2/auth/signup')
       .set('accept', 'application/json')
-      .send(newDataExist)
+      .send(newUser)
       .end((err, res) => {
         expect(res.body).to.be.an('object');
         expect(res.status).to.equal(201);
@@ -35,26 +35,26 @@ describe('test for database', () => {
   it('should return error if an email is already exist', (done) => {
     chai
       .request(server)
-      .post('/api/v2/auth/signUp')
+      .post('/api/v2/auth/signup')
       .set('accept', 'application/json')
-      .send(newDataExist)
+      .send(newUser)
       .end((err, res) => {
         expect(res.body).to.be.an('object');
         expect(res.status).to.equal(409);
-        expect(res.body.error).to.be.equal(`E-mail ${newDataExist.email} is alrady exist`);
+        expect(res.body.error).to.be.equal(`E-mail ${newUser.email} is alrady exist`);
         done();
       });
   });
   it('should return error if user is not exit', (done) => {
     chai
       .request(server)
-      .post('/api/v2/auth/signIn')
+      .post('/api/v2/auth/signin')
       .set('accept', 'application/json')
-      .send(signIn)
+      .send(undefinedUser)
       .end((err, res) => {
         expect(res.body).to.be.an('object');
         expect(res.status).to.equal(404);
-        expect(res.body.error).to.be.equal(`${signIn.email} does not exist in our database`);
+        expect(res.body.error).to.be.equal(`${undefinedUser.email} does not exist in our database`);
         done();
       });
   });
@@ -63,7 +63,7 @@ describe('test for database', () => {
       .request(server)
       .post('/api/v2/auth/signIn')
       .set('accept', 'application/json')
-      .send(newDataExist)
+      .send(newUser)
       .end((err, res) => {
         expect(res.body).to.be.an('object');
         expect(res.status).to.equal(200);
@@ -77,7 +77,7 @@ describe('test for database', () => {
       .request(server)
       .post('/api/v2/auth/signIn')
       .set('accept', 'application/json')
-      .send(signInWrongData)
+      .send(notMacth)
       .end((err, res) => {
         expect(res.body).to.be.an('object');
         expect(res.status).to.equal(400);

@@ -1,10 +1,10 @@
 import jwt from 'jsonwebtoken';
-import userModel from '../models/usersModels/userModels';
+import db from '../models/userModels';
 
 class adminAuth {
   verifyAdmin = (req, res, next) => {
     const { status } = req.currentUser;
-    if (status !== 'admin') {
+    if (status !== 'Admin') {
       return res.status(403).send({
         status: 403,
         error: 'you are not an admin',
@@ -24,52 +24,31 @@ class adminAuth {
     next();
   }
 
-  verifyUser = (req, res, next) => {
-    const { status } = req.currentUser;
-    if (status !== 'user') {
-      return res.status(403).send({
-        status: 403,
-        error: 'you are not user',
+  async VerifyToken(req, res, next) {
+    const token = req.headers['authorization'];
+    if(!token) {
+      return res.status(401).send({
+        status: 401,
+        error: 'please provide header a long with token',
       });
     }
-    next();
-  }
-
-  verifyToken = (req, res, next) => {
     try {
-      const Header = req.headers.authorization;
-      if (typeof Header !== 'undefined') {
-        const adminToken = Header.split(' ');
-        const Token = adminToken[1];
-        req.token = Token;
-        jwt.verify(req.token, process.env.SECRET_KEY, (err, { id }) => {
-          if (err) {
-            return res.status(401).send({
-              status: 401,
-              error: 'you do not have access to this service (invalid token)',
-            });
-          }
-          const user = userModel.findById(id);
-          if (!user) {
-            return res.status(403).send({
-              status: 403,
-              error: 'user with this token is not found in our data structure',
-            });
-          }
-          req.currentUser = user;
-          next();
-          return 0;
-        });
-      } else {
-        return res.status(401).send({
-          status: 401,
-          error: 'please specify head of token',
+      const decoded = await jwt.verify(token, process.env.SECRET_KEY);
+      const text = 'SELECT * FROM users WHERE id = $1';
+      const { rows } = await db.execute(text, [decoded.userId]);
+      if(!rows[0]) {
+        return res.status(400).send({
+          status: 400,
+          error: 'you do not have access to this service (invalid token)',
         });
       }
-    } catch (error) {
+      req.currentUser = rows[0];
+      req.user = { id: decoded.userId };
+      next();
+    } catch(error) {
       return res.status(404).send({
         status: 404,
-        error: 'your data do not found in our data stucture',
+        error: 'your data do not found in our data base',
       });
     }
   }
