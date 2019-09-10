@@ -1,11 +1,11 @@
-import db from '../models/usersModels/userModels';
+import db from '../models/userModels';
 import Helper from '../helpers/helper';
 import 'idempotent-babel-polyfill';
 
-const sample = {
+const serviceData = {
   async servicer(values) {
-    const text = `INSERT INTO users
-          VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+    const text = `INSERT INTO users ( firstName, lastName, email, password, address, bio, occupation, expertise, created_date, modified_date)
+          VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
           RETURNING *`;
     try {
       const newUser = await db.execute(text, values);
@@ -35,4 +35,4 @@ const sample = {
   },
 };
 
-export default sample;
+export default serviceData;

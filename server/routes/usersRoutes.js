@@ -6,16 +6,14 @@ import verify from '../middleware/auth';
 
 
 const {
-  signup, signIn, create, login,
+  create, login,
 } = User;
 const {
-  verifyToken, verifyAdmin,
+  verifyAdmin, VerifyToken,
 } = verify;
 const router = express.Router();
-router.post('/signUp', validate.uservalidation, create);
-router.post('/signup', validate.uservalidation, signup);
-router.post('/signIn', login);
-router.post('/signin', signIn);
-router.patch('/user/:id', verifyToken, verifyAdmin, changeUser.changeStatus);
+router.post('/signup', validate.uservalidation, create);
+router.post('/signin', login);
+router.patch('/user/:id', VerifyToken, verifyAdmin, changeUser.update);
 
 export default router;

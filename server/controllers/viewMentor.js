@@ -1,4 +1,5 @@
-import allMentors from '../models/usersModels/userModels';
+import allMentors from '../models/userModels';
+import db from '../models/userModels';
 class vMentors{
     get = (req, res)=>{
         const mentors = allMentors.findAll();

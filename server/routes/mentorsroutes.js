@@ -4,10 +4,8 @@ import mentors from '../controllers/viewMentor';
 
 const router = express.Router();
 
-const {
-  verifyToken, verifyUser,
-} = verify;
-const { get, getOne } = mentors;
-router.get('/mentors', verifyToken, verifyUser, get);
-router.get('/mentors/:id', verifyToken, verifyUser, getOne);
+const { getOne, get } = mentors;
+
+router.get('/mentors', get);
+router.get('/mentors/:id', getOne);
 export default router;

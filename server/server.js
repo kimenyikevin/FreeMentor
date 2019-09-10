@@ -6,7 +6,7 @@ import mentors from './routes/mentorsroutes';
 import sessions from './routes/sessionsRoutes';
 import errorHandler from './middleware/error.handler';
 import swaggerdocs from './swagger.json';
-import './models/usersModels/userModels';
+import './models/userModels';
 
 const app = express();
 app.use(express.json());
@@ -19,6 +19,7 @@ app.use('/api/v1/auth', users);
 app.use('/api/v1/auth', mentors);
 app.use('/api/v1/auth', sessions);
 app.use('/api/v2/auth', users);
+app.use('/api/v2/auth', mentors);
 
 app.use('/', (req, res) => {
   res.status(405).send({
