@@ -1,7 +1,6 @@
 import dotenv from 'dotenv';
 import db from '../models/userModels';
 import moment from 'moment';
-import uuid from 'uuid/v4';
 import Helper from '../helpers/helper';
 import services from '../services/services'
 import 'idempotent-babel-polyfill';
