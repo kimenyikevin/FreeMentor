@@ -23,7 +23,7 @@ getAll = async (req, res) => {
 getOne = async (req, res) => {
   try {
     const newMentor = await allMentors.getOneService(req.params.id);
-    if (newMentor == undefined) {
+    if (!newMentor) {
       return res.status(404).send({
         status: 404,
         error: "user you try to access is not mentor"
