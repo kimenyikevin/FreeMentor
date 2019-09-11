@@ -20,5 +20,25 @@ getAll = async (req, res) => {
     });
   }
 }
+getOne = async (req, res) => {
+  try {
+    const newMentor = await allMentors.getOneService(req.params.id);
+    if (newMentor == undefined) {
+      return res.status(404).send({
+        status: 404,
+        error: "user you try to access is not mentor"
+      });
+    }
+    return res.status(200).send({
+      status: 200,
+      data: newMentor
+   });
+  } catch(error) {
+    return res.status(404).send({
+      status: 404,
+      error: "user you try to access is not found"
+    });
+  }
+}
 }
 export default new vMentors();
