@@ -4,8 +4,6 @@ import session from '../controllers/sessionController';
 
 const router = express.Router();
 
-
-router.post('/sessions', session.fillSession);
-router.patch('/sessions/:sessionId/accept', session.accept);
-router.patch('/sessions/:sessionId/reject', session.reject);
+const { VerifyToken, verifyMentor } = verify;
+router.post('/sessions',VerifyToken, session.fillSession);
 export default router;
