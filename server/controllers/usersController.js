@@ -24,13 +24,12 @@ class Registered {
       });
     }
     const token = Helper.generateToken(newUser.id, newUser.email);
+    const {password, ...registeredUser} = newUser;
     return res.status(201).send({
       status: 201,
       message: 'User created successfully',
       token,
-      data: {
-        data: newUser,
-      },
+      data: registeredUser,
     });
   } catch (error) {
     return res.status(400).send({
@@ -61,7 +60,7 @@ async login(req, res) {
       status: 200,
       message: 'User is successfully logged in',
       token:  token,
-       signedUser 
+       data: signedUser
       });
   } catch (error) {
     return res.status(400).send({
@@ -70,11 +69,9 @@ async login(req, res) {
   }
 }
 async createAdmin() {
-  const { rows } = await db.execute('SELECT * FROM users WHERE status = $1', ['Admin']);
   try {
-    if (!rows[0]) {
       const hashPassword = Helper.hashPassword('password');
-       await db.execute(db.createAdminTable, [
+      const values =  [
          1,
         'kimenyi', 
         'kevin', 
@@ -87,8 +84,8 @@ async createAdmin() {
           'engineer',
           moment(new Date()),
           moment(new Date())
-      ]);
-    }
+      ];
+    await services.defaultAdmin(values);
   } catch (error) {
     console.log( `error ${error}`);
   }
