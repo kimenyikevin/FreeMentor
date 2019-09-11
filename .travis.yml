@@ -23,10 +23,19 @@ env:
 before_script:
 - psql -c 'CREATE DATABASE FreeMentor;' -U postgres
 - psql -c "CREATE USER kimenyi WITH PASSWORD 'kigali';" -U postgres
+addons:
+  postgresql: '11'
+  apt:
+    packages:
+      - postgresql-10-postgis-2.4
+      - postgresql-10-postgis-2.4-scripts
+      - postgresql-client-10
+before_install:
+  - sudo -u postgres psql -c "CREATE USER kimenyi WITH PASSWORD 'kigali'"
 notifications: 
   email: false
 script: 
   - "npm run test"
 after_success: npm run coverage
-sudo: false
+sudo: true
 
