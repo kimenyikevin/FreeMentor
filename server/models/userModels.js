@@ -35,6 +35,17 @@ class User {
     created_date TIMESTAMP,
     modified_date TIMESTAMP
   )`;
+  createSessionTable = `CREATE TABLE IF NOT EXISTS
+  sessions(
+    sessionid SERIAL NOT NULL PRIMARY KEY,
+    mentorid INTEGER UNIQUE,
+    menteeid INTEGER ,
+    questions VARCHAR(128) NOT NULL,
+    menteeemail VARCHAR(128) ,
+    status VARCHAR(128) NOT NULL DEFAULT 'pending',
+    created_date TIMESTAMP,
+    modified_date TIMESTAMP
+  )`;
   createAdminTable =`
   INSERT INTO users (id,firstName, lastName, email, password, address, bio,status, occupation, expertise, created_date, modified_date)
   VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
@@ -52,6 +63,7 @@ class User {
   }
   async initialize() {
     await this.execute(this.createUserTable);
+    await this.execute(this.createSessionTable);
     admin.createAdmin();
   }
 }
