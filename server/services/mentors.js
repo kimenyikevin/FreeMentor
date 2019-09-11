@@ -16,6 +16,20 @@ class changeService{
           return console.log(`error accured in service ${error}`);
         }
       }
+      getOneService = async (id) => {
+        const text = 'SELECT * FROM users WHERE id = $1 AND status = $2';
+        try {
+          const { rows } = await db.execute(text, [id, 'mentor']);
+          if (!rows[0]) {
+            return undefined;
+          }
+          const { password, ...newMentor } = rows[0];
+          return newMentor;
+        } catch(error) {
+          return console.log(`error accured in service ${error}`);
+        }
+      }
+
 }
 export default new changeService();
 
