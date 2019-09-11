@@ -2,19 +2,19 @@ import Joi from "@hapi/joi";
 class Validation {
   uservalidation = (req, res, next) => {
     const schema = {
-      firstName: Joi.string().required(),
-      lastName: Joi.string().required(),
+      firstName: Joi.string().required().regex(/^[a-zA-Z]+$/),
+      lastName: Joi.string().required().regex(/^[a-zA-Z]+$/),
       email: Joi.string()
         .email()
         .required(),
       password: Joi.string()
-        .min(5)
-        .max(10)
-        .required(),
-      address: Joi.string().required(),
-      bio: Joi.string().required(),
-      occupation: Joi.string().required(),
-      expertise: Joi.string().required()
+        .min(8)
+        .max(15)
+        .required().alphanum(),
+      address: Joi.string().required().regex(/^[a-zA-Z]+$/),
+      bio: Joi.string().required().regex(/^[a-zA-Z]+$/),
+      occupation: Joi.string().required().regex(/^[a-zA-Z]+$/),
+      expertise: Joi.string().required().regex(/^[a-zA-Z]+$/)
     };
     const result = Joi.validate(req.body, schema);
     if (result.error) {
