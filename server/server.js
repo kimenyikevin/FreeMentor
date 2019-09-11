@@ -15,9 +15,7 @@ app.use(errorHandler);
 const port = process.env.PORT || 3000;
 app.listen(port);
 
-app.use('/api/v1/auth', users);
-app.use('/api/v1/auth', mentors);
-app.use('/api/v1/auth', sessions);
+app.use('/api/v2/auth', sessions);
 app.use('/api/v2/auth', users);
 app.use('/api/v2/auth', mentors);
 
