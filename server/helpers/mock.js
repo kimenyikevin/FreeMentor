@@ -45,7 +45,7 @@ export const testingData = [
     firstName: 'habimana',
     lastName: 'emmy',
     email: 'habimanaemmy@gmail.com',
-    password: 'kigali',
+    password: 'kigalikigali',
     address: 'kigali',
     bio: 'engineer',
     occupation: 'engineer',
@@ -75,79 +75,95 @@ export const testingData = [
     firstName: 'habimana',
     lastName: 'emmy',
     email: 'habimanaemmy@gmail.com',
-    password: 'kigalii',
+    password: 'kigalikigal',
+    address: 'kigali',
+    bio: 'engineer',
+    occupation: 'engineer',
+    expertise: 'engineer',
+  },
+  {
+    firstName: 'testuser',
+    lastName: 'testuser',
+    email: 'testuser@gmail.com',
+    password: 'passwordpass',
     address: 'kigali',
     bio: 'engineer',
     occupation: 'engineer',
     expertise: 'engineer',
   },
 ];
+
 export const invaldToken = helper.generateToken(0, '@gmail.com');
 
 export const notExistUserToken = helper.generateToken(0, 'testuser@gmail.com');
 
-export const realToken = helper.generateToken(3, 'testuser@gmail.com');
+export const realToken = helper.generateToken(2, 'usertest@gmail.com');
 
 export const realMentor = helper.generateToken(2, 'mentor@gmail.com');
 
 export const realAdmin = helper.generateToken(1, 'kimenyikevin@gmail.com');
 
+const hashPassword = helper.hashPassword('kigalikigali');
+export const insertTestData = `INSERT INTO users ( firstName, lastName, email, password, address, bio, occupation, expertise, created_date, modified_date)
+  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+  RETURNING *`;
+export const testData = [
+  'habimana',
+  'emmy',
+  'habimanaemmy@gmail.com',
+  hashPassword,
+  'kigali',
+  'engineer',
+  'engineer',
+  'engineer',
+  moment(new Date()),
+  moment(new Date()),
+];
+export const insertAdmin = `
+INSERT INTO users (id,firstName, lastName, email, password, address, bio,status, occupation, expertise, created_date, modified_date)
+VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
+`;
+const hashPass = helper.hashPassword('passwordpass');
+export const values = [
+  1,
+  'kimenyi',
+  'kevin',
+  'kimenyikevin@gmail.com',
+  hashPass,
+  'kigali',
+  'engineer',
+  'Admin',
+  'engineer',
+  'engineer',
+  moment(new Date()),
+  moment(new Date()),
+];
+export const userTest = [
+  2,
+  'kimenyi',
+  'kevin',
+  'usertest@gmail.com',
+  hashPass,
+  'kigali',
+  'engineer',
+  'user',
+  'engineer',
+  'engineer',
+  moment(new Date()),
+  moment(new Date()),
+];
 
-export const createAdmin = async () => {
-  const createAdminTable = `
-  INSERT INTO users (id, firstName, lastName, email, password, address, bio,status, occupation, expertise, created_date, modified_date)
-  VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
-  `;
-
-  const { rows } = await db.execute('SELECT * FROM users WHERE status = $1', ['Admin']);
-  try {
-    if (!rows[0]) {
-      const hashPassword = helper.hashPassword('password');
-      await db.execute(createAdminTable, [
-        1,
-        'kimenyi',
-        'kevin',
-        'kimenyikevin@gmail.com',
-        hashPassword,
-        'kigali',
-        'engineer',
-        'Admin',
-        'engineer',
-        'engineer',
-        moment(new Date()),
-        moment(new Date()),
-      ]);
-    }
-    const hashPassword = helper.hashPassword('password');
-    await db.execute(createAdminTable, [
-      2,
-      'mentor',
-      'mentor',
-      'mentor@gmail.com',
-      hashPassword,
-      'kigali',
-      'engineer',
-      'mentor',
-      'engineer',
-      'engineer',
-      moment(new Date()),
-      moment(new Date()),
-    ]);
-    await db.execute(createAdminTable, [
-      3,
-      'testuser',
-      'testuser',
-      'testuser@gmail.com',
-      hashPassword,
-      'kigali',
-      'engineer',
-      'user',
-      'engineer',
-      'engineer',
-      moment(new Date()),
-      moment(new Date()),
-    ]);
-  } catch (error) {
-    console.log(`error ${error}`);
-  }
-};
+export const mentorTest = [
+  3,
+  'kimenyi',
+  'kevin',
+  'mentortest@gmail.com',
+  hashPass,
+  'kigali',
+  'engineer',
+  'mentor',
+  'engineer',
+  'engineer',
+  moment(new Date()),
+  moment(new Date()),
+];

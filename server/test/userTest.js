@@ -2,14 +2,16 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 import server from '../server';
 import db from '../models/userModels';
-import { testingData,
+import { testingData, testData, insertTestData,
 } from '../helpers/mock';
+
 
 
 const { expect } = chai;
 chai.use(chaiHttp);
 
 const newUser = testingData[0];
+const existsEmail = testingData[4];
 const undefinedUser = testingData[2];
 const notMacth = testingData[3];
 describe('test for database', () => {
@@ -33,6 +35,7 @@ describe('test for database', () => {
       });
   });
   it('should return error if an email is already exist', (done) => {
+    db.execute(insertTestData, testData);
     chai
       .request(server)
       .post('/api/v2/auth/signup')
@@ -46,6 +49,7 @@ describe('test for database', () => {
       });
   });
   it('should return error if user is not exit', (done) => {
+    db.execute(insertTestData, testData);
     chai
       .request(server)
       .post('/api/v2/auth/signin')
@@ -59,9 +63,10 @@ describe('test for database', () => {
       });
   });
   it('should return User is successfully logged in', (done) => {
+    db.execute(insertTestData, testData);
     chai
       .request(server)
-      .post('/api/v2/auth/signIn')
+      .post('/api/v2/auth/signin')
       .set('accept', 'application/json')
       .send(newUser)
       .end((err, res) => {
@@ -73,9 +78,10 @@ describe('test for database', () => {
       });
   });
   it('should return error if Email and password did not match', (done) => {
+      db.execute(insertTestData, testData)
     chai
       .request(server)
-      .post('/api/v2/auth/signIn')
+      .post('/api/v2/auth/signin')
       .set('accept', 'application/json')
       .send(notMacth)
       .end((err, res) => {

@@ -5,9 +5,8 @@ import server from '../server';
 import db from '../models/userModels';
 import 'idempotent-babel-polyfill';
 
-
 import {
-  createAdmin, invaldToken, realToken, realAdmin,
+  createAdmin, invaldToken, realToken, realAdmin, values, insertAdmin, userTest, mentorTest,
 } from '../helpers/mock';
 
 dotenv.config();
@@ -18,7 +17,6 @@ describe('Test for verifying Token', () => {
   before('Clear data from database', (done) => {
     chai.request(server);
     db.execute('DELETE FROM users');
-    createAdmin();
     done();
   });
   it('should return error if Token is invalid', (done) => {
@@ -46,37 +44,19 @@ describe('Test for verifying Token', () => {
         done();
       });
   });
-
-  it('should return error if uer is not admin', (done) => {
-    chai
-      .request(server)
-      .patch('/api/v2/auth/user/3')
-      .set('authorization', realToken)
-      .end((err, res) => {
-        expect(res.body).to.be.an('object');
-        expect(res.status).to.equal(403);
-        expect(res.body.error).to.be.equal('you are not an admin');
-        done();
-      });
-  });
-  after('Clear data from database', (done) => {
-    chai.request(server);
-    db.execute('DELETE FROM users');
-    done();
-  });
 });
 
 describe('Test for admin to change user to a mentor', () => {
   before('Clear data from database', (done) => {
     chai.request(server);
     db.execute('DELETE FROM users');
-    createAdmin();
     done();
   });
   it('should return error if user does not exit', (done) => {
+    db.execute(insertAdmin, values);
     chai
       .request(server)
-      .patch('/api/v1/auth/user/0')
+      .patch('/api/v2/auth/user/0')
       .set('authorization', realAdmin)
       .end((err, res) => {
         expect(res.body).to.be.an('object');
@@ -87,9 +67,11 @@ describe('Test for admin to change user to a mentor', () => {
   });
 
   it('should return message User account changed to mentor and data of user', (done) => {
+    db.execute(insertAdmin, values);
+    db.execute(insertAdmin, userTest);
     chai
       .request(server)
-      .patch('/api/v2/auth/user/3')
+      .patch('/api/v2/auth/user/2')
       .set('authorization', realAdmin)
       .end((err, res) => {
         expect(res.body).to.be.an('object');
@@ -109,5 +91,100 @@ describe('Test for admin to change user to a mentor', () => {
         expect(res.body.error).to.be.equal('this user is a mentor');
         done();
       });
+  });
+  it('should return error if uer is not admin', (done) => {
+    db.execute(insertAdmin, values);
+    db.execute(insertAdmin, userTest);
+    chai
+      .request(server)
+      .patch('/api/v2/auth/user/2')
+      .set('authorization', realToken)
+      .end((err, res) => {
+        expect(res.body).to.be.an('object');
+        expect(res.status).to.equal(403);
+        expect(res.body.error).to.be.equal('you are not an admin');
+        done();
+      });
+  });
+});
+describe('Test for user to view mentor', () => {
+  it('should return all mentors', (done) => {
+    db.execute(insertAdmin, userTest);
+    chai
+      .request(server)
+      .get('/api/v2/auth/mentors')
+      .set('authorization', realToken)
+      .end((err, res) => {
+        expect(res.body).to.be.an('object');
+        expect(res.status).to.equal(200);
+        expect(res.body.data).to.be.an('Array');
+        done();
+      });
+  });
+  it('should return specific mentor', (done) => {
+    db.execute(insertAdmin, mentorTest);
+    chai
+      .request(server)
+      .get('/api/v2/auth/mentors/3')
+      .set('authorization', realToken)
+      .end((err, res) => {
+        expect(res.body).to.be.an('object');
+        expect(res.status).to.equal(200);
+        expect(res.body.data).to.be.an('object');
+        done();
+      });
+  });
+  it('should return error when id is not found', (done) => {
+    chai
+      .request(server)
+      .get('/api/v2/auth/mentors/0')
+      .set('authorization', realToken)
+      .end((err, res) => {
+        expect(res.body).to.be.an('object');
+        expect(res.status).to.equal(403);
+        expect(res.body.error).to.be.equal('user you try to access is not mentor');
+        done();
+      });
+  });
+});
+const remove = {
+  mentorid: 3,
+  questions: 'i need help',
+};
+describe('Test for creating user', () => {
+  it('should return session createed ', (done) => {
+    db.execute(insertAdmin, userTest);
+    db.execute(insertAdmin, mentorTest);
+    chai
+      .request(server)
+      .post('/api/v2/auth/sessions')
+      .set('authorization', realToken)
+      .send(remove)
+      .end((err, res) => {
+        expect(res.body).to.be.an('object');
+        expect(res.status).to.equal(201);
+        expect(res.body.message).to.be.equal('session created successful');
+        done();
+      });
+  });
+  it('should return error if you created session too times ', (done) => {
+    db.execute(insertAdmin, userTest);
+    db.execute(insertAdmin, mentorTest);
+    chai
+      .request(server)
+      .post('/api/v2/auth/sessions')
+      .set('authorization', realToken)
+      .send(remove)
+      .end((err, res) => {
+        expect(res.body).to.be.an('object');
+        expect(res.status).to.equal(409);
+        expect(res.body.error).to.be.equal('you can not request mentorship twice');
+        done();
+      });
+  });
+  after('Clear data from database', (done) => {
+    chai.request(server);
+    db.execute('DELETE FROM sessions');
+    done();
   });
 });
