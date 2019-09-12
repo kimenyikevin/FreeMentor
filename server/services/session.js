@@ -1,9 +1,9 @@
 import db from '../models/userModels'
-import moment from 'moment'
+
 class sessionService {
    createSession = async (values) => {
-       const text = `INSERT INTO  sessions ( mentorid, menteeid, questions, menteeemail, created_date, modified_date)
-       VALUES ($1, $2, $3, $4, $5, $6)
+       const text = `INSERT INTO  sessions ( mentorid, menteeid, questions, menteeemail)
+       VALUES ($1, $2, $3, $4)
        RETURNING *`;
        const findOne = 'SELECT * FROM users WHERE id=$1';
        try {
@@ -28,8 +28,8 @@ class sessionService {
      acceptService = async (sessionId, values) => {
       const findOne = 'SELECT * FROM sessions WHERE sessionid=$1';
       const updateOne =`UPDATE sessions
-        SET status=$1, modified_date=$2
-        WHERE sessionid=$3 returning *`;
+        SET status=$1
+        WHERE sessionid=$2 returning *`;
       try {
         if(isNaN(sessionId)){
           return undefined;
