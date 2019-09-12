@@ -26,9 +26,7 @@ class User {
     bio VARCHAR(128) NOT NULL,
     status VARCHAR(128) NOT NULL DEFAULT 'user',
     occupation VARCHAR(128) NOT NULL,
-    expertise VARCHAR(128) NOT NULL,
-    created_date TIMESTAMP,
-    modified_date TIMESTAMP
+    expertise VARCHAR(128) NOT NULL
   )`;
   createSessionTable = `CREATE TABLE IF NOT EXISTS
   sessions(
@@ -37,13 +35,11 @@ class User {
     menteeid INTEGER ,
     questions VARCHAR(128) NOT NULL,
     menteeemail VARCHAR(128) ,
-    status VARCHAR(128) NOT NULL DEFAULT 'pending',
-    created_date TIMESTAMP,
-    modified_date TIMESTAMP
+    status VARCHAR(128) NOT NULL DEFAULT 'pending'
   )`;
   createAdminTable =`
-  INSERT INTO users (id,firstName, lastName, email, password, address, bio,status, occupation, expertise, created_date, modified_date)
-  VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
+  INSERT INTO users (id,firstName, lastName, email, password, address, bio,status, occupation, expertise)
+  VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
   `;
   async execute (sql, data = []) {
     const connection = await this.pool.connect() ;

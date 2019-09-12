@@ -1,8 +1,5 @@
-import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
-import moment from 'moment';
 import helper from './helper';
-import db from '../models/userModels';
 
 dotenv.config();
 
@@ -104,8 +101,8 @@ export const realMentor = helper.generateToken(2, 'mentor@gmail.com');
 export const realAdmin = helper.generateToken(1, 'kimenyikevin@gmail.com');
 
 const hashPassword = helper.hashPassword('kigalikigali');
-export const insertTestData = `INSERT INTO users ( firstName, lastName, email, password, address, bio, occupation, expertise, created_date, modified_date)
-  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+export const insertTestData = `INSERT INTO users ( firstName, lastName, email, password, address, bio, occupation, expertise)
+  VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
   RETURNING *`;
 export const testData = [
   'habimana',
@@ -115,13 +112,11 @@ export const testData = [
   'kigali',
   'engineer',
   'engineer',
-  'engineer',
-  moment(new Date()),
-  moment(new Date()),
+  'engineer'
 ];
 export const insertAdmin = `
-INSERT INTO users (id,firstName, lastName, email, password, address, bio,status, occupation, expertise, created_date, modified_date)
-VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
+INSERT INTO users (id,firstName, lastName, email, password, address, bio,status, occupation, expertise)
+VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
 `;
 const hashPass = helper.hashPassword('passwordpass');
 export const values = [
@@ -134,9 +129,7 @@ export const values = [
   'engineer',
   'Admin',
   'engineer',
-  'engineer',
-  moment(new Date()),
-  moment(new Date()),
+  'engineer'
 ];
 export const userTest = [
   2,
@@ -148,9 +141,7 @@ export const userTest = [
   'engineer',
   'user',
   'engineer',
-  'engineer',
-  moment(new Date()),
-  moment(new Date()),
+  'engineer'
 ];
 
 export const mentorTest = [
@@ -163,7 +154,5 @@ export const mentorTest = [
   'engineer',
   'mentor',
   'engineer',
-  'engineer',
-  moment(new Date()),
-  moment(new Date()),
+  'engineer'
 ];

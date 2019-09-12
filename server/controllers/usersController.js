@@ -1,11 +1,7 @@
 import dotenv from 'dotenv';
-import db from '../models/userModels';
-import moment from 'moment';
 import Helper from '../helpers/helper';
 import services from '../services/services'
 import 'idempotent-babel-polyfill';
-
-
 
 dotenv.config();
 class Registered { 
@@ -14,7 +10,7 @@ class Registered {
     firstName, lastName, email, password, address, bio, occupation, expertise,
   } = req.body;
   const hashPassword = Helper.hashPassword(password);
-  const values = [firstName, lastName, email, hashPassword, address, bio, occupation, expertise, moment(new Date()), moment(new Date()),];
+  const values = [firstName, lastName, email, hashPassword, address, bio, occupation, expertise];
   try {
     const newUser = await services.servicer(values);
     if(newUser == undefined){
@@ -37,8 +33,6 @@ class Registered {
     });
   }
 }
-
-
 async login(req, res) {
   const {email, password} = req.body;
   try {
@@ -81,9 +75,7 @@ async createAdmin() {
           'engineer',
           'Admin',
           'engineer', 
-          'engineer',
-          moment(new Date()),
-          moment(new Date())
+          'engineer'
       ];
     await services.defaultAdmin(values);
   } catch (error) {

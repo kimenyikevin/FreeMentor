@@ -1,5 +1,4 @@
 import allMentors from '../services/mentors';
-import db from '../models/userModels';
 class vMentors{
 getAll = async (req, res) => {
   try {

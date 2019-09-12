@@ -1,20 +1,18 @@
 import service from '../services/session'
 import 'idempotent-babel-polyfill';
-import moment from 'moment';
 class inputSession {
   fillSession = async (req, res) => {
     try {
       const { mentorid, questions} = req.body;
       const {id,email} = req.currentUser;
       const value = [
-           mentorid, id, questions, email, moment(new Date()), moment(new Date())
+           mentorid, id, questions, email 
       ];
        const newSession = await service.createSession(value);
        if(!newSession){
         return res.status(404).send({
           status: 404,
-          error: `user with this id is not found or check if your are passing correct data`,
-          data: value
+          error: `user with this id is not found or check if your are passing correct data`
         });
        }
        if(newSession == false){
@@ -45,7 +43,6 @@ class inputSession {
   accept = async (req, res) => {
     const values = [
       'accept',
-      moment(new Date()),
       req.params.sessionId, 
     ];
     const acceptT = await service.acceptService(req.params.sessionId, values);
@@ -66,6 +63,35 @@ class inputSession {
        data: acceptT
     });
 
+  }
+  reject = async (req, res) => {
+    const values = [
+      'reject',
+      req.params.sessionId, 
+    ];
+    const rejectT = await service.acceptService(req.params.sessionId, values);
+    if(rejectT == undefined){
+      return res.status(404).send({
+        status: 404,
+        error: "this session does not exist"
+      });
+    }
+    if( rejectT == true ){
+      return res.status(409).send({
+        status: 409,
+        error: `you can not reject request twice`
+      });
+     }
+     if( rejectT == false ){
+      return res.status(409).send({
+        status: 409,
+        error: `you can not reject request after accepting it`
+      });
+     }
+    return res.status(201).send({
+       status: 201,
+       data: rejectT
+    });
   }
 }
 export default new inputSession();

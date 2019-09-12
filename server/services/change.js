@@ -1,11 +1,10 @@
 import db from '../models/userModels';
-import moment from 'moment';
 class changeService{
     service = async (id) => {
         const findOne = 'SELECT * FROM users WHERE id=$1';
         const updateOne =`UPDATE users
-          SET status=$1, modified_date=$2
-          WHERE id=$3 returning *`;
+          SET status=$1
+          WHERE id=$2 returning *`;
         try {
           if(isNaN(id)){
             return undefined;
@@ -16,7 +15,6 @@ class changeService{
           }
           const values = [
             'mentor',
-            moment(new Date()),
             id, 
           ];
       const newMentor = await db.execute(updateOne, values);
