@@ -2,16 +2,14 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 import server from '../server';
 import db from '../models/userModels';
-import { testingData, testData, insertTestData,
-} from '../helpers/mock';
-
+import { testingData, testData, insertTestData,} from '../helpers/mock';
 
 
 const { expect } = chai;
 chai.use(chaiHttp);
 
 const newUser = testingData[0];
-const existsEmail = testingData[4];
+const validation = testingData[4];
 const undefinedUser = testingData[2];
 const notMacth = testingData[3];
 describe('test for database', () => {
@@ -19,6 +17,19 @@ describe('test for database', () => {
     chai.request(server);
     db.execute('DELETE FROM users');
     done();
+  });
+  it('should return User created successfully', (done) => {
+    chai
+      .request(server)
+      .post('/api/v2/auth/signup')
+      .set('accept', 'application/json')
+      .send(validation)
+      .end((err, res) => {
+        expect(res.body).to.be.an('object');
+        expect(res.status).to.equal(400);
+        expect(res.body.error).to.be.an('String');
+        done();
+      });
   });
   it('should return User created successfully', (done) => {
     chai
@@ -78,7 +89,7 @@ describe('test for database', () => {
       });
   });
   it('should return error if Email and password did not match', (done) => {
-      db.execute(insertTestData, testData)
+    db.execute(insertTestData, testData);
     chai
       .request(server)
       .post('/api/v2/auth/signin')

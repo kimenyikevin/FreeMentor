@@ -11,7 +11,6 @@ class sessionService {
            if(!mentor.rows){
                return undefined;
            }
-          
           if(mentor.rows[0].status !== 'mentor'){
              return false;
           }

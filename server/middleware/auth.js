@@ -12,7 +12,6 @@ class adminAuth {
     }
     next();
   }
-
   verifyMentor = (req, res, next) => {
     const { status } = req.currentUser;
     if (status !== 'mentor') {
@@ -23,7 +22,6 @@ class adminAuth {
     }
     next();
   }
-
   async VerifyToken(req, res, next) {
     const token = req.headers['authorization'];
     if(!token) {
@@ -46,9 +44,9 @@ class adminAuth {
       req.user = { id: decoded.userId };
       next();
     } catch(error) {
-      return res.status(404).send({
-        status: 404,
-        error: 'your data do not found in our data base',
+      return res.status(500).send({
+        status: 500,
+        error: `samething goes wrong in your token ${error}`,
       });
     }
   }

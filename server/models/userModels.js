@@ -31,9 +31,9 @@ class User {
   createSessionTable = `CREATE TABLE IF NOT EXISTS
   sessions(
     sessionid SERIAL NOT NULL PRIMARY KEY,
-    mentorid INTEGER UNIQUE,
+    mentorid INTEGER,
     menteeid INTEGER ,
-    questions VARCHAR(128) NOT NULL,
+    questions VARCHAR(128) NOT NULL UNIQUE,
     menteeemail VARCHAR(128) ,
     status VARCHAR(128) NOT NULL DEFAULT 'pending'
   )`;
