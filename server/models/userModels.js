@@ -8,7 +8,7 @@ dotenv.config();
 class User {
   constructor() {
     this.pool = new Pool({
-      connectionString: process.env.DB_URL
+      connectionString: process.env.DATABASE_URL
     });
   this.pool.connect() 
   .then(()=> console.log('db connected'))
