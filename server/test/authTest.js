@@ -6,7 +6,7 @@ import db from '../models/userModels';
 import 'idempotent-babel-polyfill';
 
 import {
-  createAdmin, invaldToken, realToken, realAdmin, values, insertAdmin, userTest, mentorTest,
+  invaldToken, realToken, realAdmin, values, insertAdmin, userTest, mentorTest, realMentor, insertSesssion, session
 } from '../helpers/mock';
 
 dotenv.config();
@@ -151,7 +151,11 @@ const remove = {
   mentorid: 3,
   questions: 'i need help',
 };
-describe('Test for creating user', () => {
+const invalidId = {
+  mentorid: 0,
+  questions: 'i need help',
+};
+describe('Test for creating session', () => {
   it('should return session createed ', (done) => {
     db.execute(insertAdmin, userTest);
     db.execute(insertAdmin, mentorTest);
@@ -164,6 +168,7 @@ describe('Test for creating user', () => {
         expect(res.body).to.be.an('object');
         expect(res.status).to.equal(201);
         expect(res.body.message).to.be.equal('session created successful');
+        expect(res.body.data).to.be.an('Array');
         done();
       });
   });
@@ -179,6 +184,47 @@ describe('Test for creating user', () => {
         expect(res.body).to.be.an('object');
         expect(res.status).to.equal(409);
         expect(res.body.error).to.be.equal('you can not request mentorship twice');
+        done();
+      });
+  });
+  it('should return error if mentor id does not exist ', (done) => {
+    db.execute(insertAdmin, userTest);
+    db.execute(insertAdmin, mentorTest);
+    chai
+      .request(server)
+      .post('/api/v2/auth/sessions')
+      .set('authorization', realToken)
+      .send(invalidId)
+      .end((err, res) => {
+        expect(res.body).to.be.an('object');
+        expect(res.status).to.equal(404);
+        expect(res.body.error).to.be.equal('user with this id is not found or check if your are passing correct data');
+        done();
+      });
+  });
+  it('should return error if session does not exist ', (done) => {
+    db.execute(insertAdmin, mentorTest);
+    chai
+      .request(server)
+      .patch('/api/v2/auth/sessions/0/accept')
+      .set('authorization', realMentor)
+      .end((err, res) => {
+        expect(res.body).to.be.an('object');
+        expect(res.status).to.equal(404);
+        expect(res.body.error).to.be.equal('this session does not exist');
+        done();
+      });
+  });
+  it('should return error if session does not exist', (done) => {
+    db.execute(insertAdmin, mentorTest);
+    db.execute(insertAdmin, userTest);
+    chai
+      .request(server)
+      .patch('/api/v2/auth/sessions/0/reject')
+      .set('authorization', realMentor)
+      .end((err, res) => {
+        expect(res.status).to.equal(404);
+        expect(res.body.error).to.be.equal('this session does not exist');
         done();
       });
   });

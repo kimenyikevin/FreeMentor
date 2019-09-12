@@ -96,7 +96,7 @@ export const notExistUserToken = helper.generateToken(0, 'testuser@gmail.com');
 
 export const realToken = helper.generateToken(2, 'usertest@gmail.com');
 
-export const realMentor = helper.generateToken(2, 'mentor@gmail.com');
+export const realMentor = helper.generateToken(3, 'mentor@gmail.com');
 
 export const realAdmin = helper.generateToken(1, 'kimenyikevin@gmail.com');
 
@@ -118,6 +118,9 @@ export const insertAdmin = `
 INSERT INTO users (id,firstName, lastName, email, password, address, bio,status, occupation, expertise)
 VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
 `;
+export const insertSesssion = `INSERT INTO  sessions (sessionid, mentorid, menteeid, questions, menteeemail)
+VALUES ($1, $2, $3, $4)
+RETURNING *`;
 const hashPass = helper.hashPassword('passwordpass');
 export const values = [
   1,
@@ -156,3 +159,11 @@ export const mentorTest = [
   'engineer',
   'engineer'
 ];
+
+export const session = [
+  1,
+  2,
+  2,
+  'i need help',
+  'usertest@gmail.com'
+]

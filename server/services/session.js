@@ -29,7 +29,7 @@ class sessionService {
       const findOne = 'SELECT * FROM sessions WHERE sessionid=$1';
       const updateOne =`UPDATE sessions
         SET status=$1
-        WHERE sessionid=$3 returning *`;
+        WHERE sessionid=$2 returning *`;
       try {
         if(isNaN(sessionId)){
           return undefined;
