@@ -25,5 +25,32 @@ class sessionService {
         console.log(`error accured in service ${err}`);
        }
      };
+     acceptService = async (sessionId, values) => {
+      const findOne = 'SELECT * FROM sessions WHERE sessionid=$1';
+      const updateOne =`UPDATE sessions
+        SET status=$1, modified_date=$2
+        WHERE sessionid=$3 returning *`;
+      try {
+        if(isNaN(sessionId)){
+          return undefined;
+        }
+        const { rows } = await db.execute(findOne, [sessionId] );
+        if(rows == ''){
+          return undefined;
+        }
+        const statusType = rows[0].status;
+        if(statusType == 'accept'){
+            return false;
+        }
+        if(statusType == 'reject'){
+          return true;
+      }
+        const newstatus = await db.execute(updateOne, values);
+        const updatedSession = newstatus.rows[0];
+        return updatedSession;
+      } catch(err) {
+       console.log(`error accured in service ${err}`);
+      }
+    };
 }
 export default new sessionService();

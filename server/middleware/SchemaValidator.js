@@ -11,10 +11,10 @@ class Validation {
         .min(8)
         .max(15)
         .required().alphanum(),
-      address: Joi.string().required().regex(/^[a-zA-Z]+$/),
-      bio: Joi.string().required().regex(/^[a-zA-Z]+$/),
-      occupation: Joi.string().required().regex(/^[a-zA-Z]+$/),
-      expertise: Joi.string().required().regex(/^[a-zA-Z]+$/)
+      address: Joi.string().required(),
+      bio: Joi.string().required(),
+      occupation: Joi.string().required(),
+      expertise: Joi.string().required()
     };
     const result = Joi.validate(req.body, schema);
     if (result.error) {

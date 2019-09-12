@@ -13,7 +13,8 @@ class inputSession {
        if(!newSession){
         return res.status(404).send({
           status: 404,
-          error: `user with this id is not found`
+          error: `user with this id is not found or check if your are passing correct data`,
+          data: value
         });
        }
        if(newSession == false){
@@ -40,6 +41,31 @@ class inputSession {
         error: `you do not have access to this service ${error}`
       });
     }
+  }
+  accept = async (req, res) => {
+    const values = [
+      'accept',
+      moment(new Date()),
+      req.params.sessionId, 
+    ];
+    const acceptT = await service.acceptService(req.params.sessionId, values);
+    if(acceptT == undefined){
+      return res.status(404).send({
+        status: 404,
+        error: "this session does not exist"
+      });
+    }
+    if( acceptT == false ){
+      return res.status(409).send({
+        status: 409,
+        error: `you can not accept request twice`
+      });
+     }
+    return res.status(201).send({
+       status: 201,
+       data: acceptT
+    });
+
   }
 }
 export default new inputSession();
