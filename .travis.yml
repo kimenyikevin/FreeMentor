@@ -8,9 +8,6 @@ install:
 - npm install
 services:
 - postgresql
-before_script:
-- psql -c 'CREATE DATABASE FreeMentor;' -U postgres
-- psql -c "CREATE USER kimenyi WITH PASSWORD 'kigali';" -U postgres
 notifications: 
   email: false
 script: 
