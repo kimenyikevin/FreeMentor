@@ -50,6 +50,7 @@ describe('Test for admin to change user to a mentor', () => {
   before('Clear data from database', (done) => {
     chai.request(server);
     db.execute('DELETE FROM users');
+    db.execute(insertAdmin, values);
     done();
   });
   it('should return error if user does not exit', (done) => {
@@ -61,7 +62,7 @@ describe('Test for admin to change user to a mentor', () => {
       .end((err, res) => {
         expect(res.body).to.be.an('object');
         expect(res.status).to.equal(400);
-        expect(res.body.error).to.be.equal('you do not have access to this service (invalid token)');
+        expect(res.body.error).to.be.equal('id must be a number');
         done();
       });
   });

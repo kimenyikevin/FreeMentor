@@ -3,40 +3,6 @@ import helper from './helper';
 
 dotenv.config();
 
-export const sessionData = [
-  {
-    Sessionid: 1,
-    mentorId: 1,
-    menteeId: 2,
-    questions: 'i need help',
-    menteeEmail: 'kimenyikevin@gmail.com',
-    status: 'pending',
-  },
-  {
-    Sessionid: 2,
-    mentorId: 3,
-    menteeId: 1,
-    questions: 'i need help',
-    menteeEmail: 'kimenyikevin@gmail.com',
-    status: 'pending',
-  },
-  {
-    Sessionid: 3,
-    mentorId: 4,
-    menteeId: 2,
-    questions: 'i need help',
-    menteeEmail: 'kimenyikevin@gmail.com',
-    status: 'pending',
-  },
-  {
-    Sessionid: 4,
-    mentorId: 5,
-    menteeId: 3,
-    questions: 'i need help',
-    menteeEmail: 'kimenyikevin@gmail.com',
-    status: 'pending',
-  },
-];
 export const testingData = [
   {
     firstName: 'habimana',
@@ -82,7 +48,7 @@ export const testingData = [
     firstName: 'testuser',
     lastName: 'testuser',
     email: 'testuser@gmail.com',
-    password: 'passwordpass',
+    password: 'pas',
     address: 'kigali',
     bio: 'engineer',
     occupation: 'engineer',

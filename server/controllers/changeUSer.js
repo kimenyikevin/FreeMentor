@@ -5,10 +5,9 @@ class changeUser {
    update = async (req, res) => {
     try {
       const newMentor = await change.service(req.params.id);
-      console.log(newMentor);
       if( newMentor == undefined ){
-        return res.status(401).send({
-          status: 401,
+        return res.status(400).send({
+          status: 400,
           error: 'id must be a number',
         });
       }

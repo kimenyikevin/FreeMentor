@@ -14,8 +14,9 @@ getAll = async (req, res) => {
         data: newMentors
    });
   } catch(error) {
-    return res.status(400).send({
-     error: ` ${error}    `
+    return res.status(500).send({
+      status: 500,
+      error: `something went wrong  ${error} `
     });
   }
 }

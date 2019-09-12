@@ -33,7 +33,6 @@ class inputSession {
           data: newSession
         });
     } catch (error) {
-      console.log(`error ${error}`)
       return res.status(403).send({
         status: 403,
         error: `you do not have access to this service ${error}`
@@ -58,11 +57,10 @@ class inputSession {
         error: `you can not accept request twice`
       });
      }
-    return res.status(201).send({
-       status: 201,
+    return res.status(200).send({
+       status: 200,
        data: acceptT
     });
-
   }
   reject = async (req, res) => {
     const values = [
@@ -88,8 +86,8 @@ class inputSession {
         error: `you can not reject request after accepting it`
       });
      }
-    return res.status(201).send({
-       status: 201,
+    return res.status(200).send({
+       status: 200,
        data: rejectT
     });
   }
