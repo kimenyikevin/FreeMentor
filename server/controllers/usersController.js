@@ -32,7 +32,7 @@ class Registered {
       data: registeredUser,
     });
   } catch (error) {
-    return res.status(400).send({
+    return res.status(500).send({
       error: `error accured ${error}`,
     });
   }
@@ -70,7 +70,7 @@ async login(req, res) {
 }
 async createAdmin() {
   try {
-      const hashPassword = Helper.hashPassword('password');
+      const hashPassword = Helper.hashPassword('passwordpass');
       const values =  [
          1,
         'kimenyi', 
