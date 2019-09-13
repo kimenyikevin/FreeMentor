@@ -1,4 +1,3 @@
-[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 [![Build Status](https://travis-ci.org/kimenyikevin/FreeMentor.svg?branch=develop)](https://travis-ci.org/kimenyikevin/FreeMentor)
 [![Coverage Status](https://coveralls.io/repos/github/kimenyikevin/FreeMentor/badge.svg?branch=develop)](https://coveralls.io/github/kimenyikevin/FreeMentor?branch=develop)
 [![Maintainability](https://api.codeclimate.com/v1/badges/2c52cb512a25aee536bb/maintainability)](https://codeclimate.com/github/kimenyikevin/FreeMentor/maintainability)
@@ -29,27 +28,27 @@ From **Admin dashboard** admin can change user to mentor.
 
 ### FreeMentor API ENDPOINTS
 Here is a list of all API Endpoints that you will find:
-* POST /api/v1/auth/signup: before you do anything first create an account.
-* POST /api/v1/auth/signin: if you already have an acount you can use this EndPoint to sign in.
-* PATCH /api/v1/auth/user/:id : This EndPoint is for admin want to change user to mentor.
-* GET /api/v1/auth/mentors : this EndPoint is for user want to view all mentor.
-* GET /api/v1/auth/mentors/:id : this EndPoint is for user want to view specific mentor profile.
-* POST /api/v1/auth/sessions : this Endpoint is for user want to create sessions.
-* PATCH /api/v1/auth/sessions/:sessionsId/reject : Finally mentor can use this to reject.
-* PATCH /api/v1/auth/sessions/:sessionsId/accept : and also this to to accept mentorship sessions.
+* POST /api/v2/auth/signup: before you do anything first create an account.
+* POST /api/v2/auth/signin: if you already have an acount you can use this EndPoint to sign in.
+* PATCH /api/v2/auth/user/:id : This EndPoint is for admin want to change user to mentor.
+* GET /api/v2/auth/mentors : this EndPoint is for user want to view all mentor.
+* GET /api/v2/auth/mentors/:id : this EndPoint is for user want to view specific mentor profile.
+* POST /api/v2/auth/sessions : this Endpoint is for user want to create sessions.
+* PATCH /api/v2/auth/sessions/:sessionsId/reject : Finally mentor can use this to reject.
+* PATCH /api/v2/auth/sessions/:sessionsId/accept : and also this to to accept mentorship sessions.
 
 ### Technology tools used in this Project
 * Server side Framework : **Node/Express**
 * Linting Library: **ESLint**
 * Style Guide: **Airbnb**
 * Testing Framework: **Mocha**
+* Database: **Postgresql**
 ### Additional Tools
 * JavaScript Es6 with Babel transpiler
 * TravisCI for Continous Integration
 * nyc for test coverage
 * CodeClimate and Coveralls for badges
 * Heroku for Deployment
-* prettier for formating a code
 ### Here there is important link you may visit
 * [freementorss.herokuapp.com](https://freementorss.herokuapp.com/api-docs/) Here is link for documantation for APIs EndPoints
 * [UI Templete](https://kimenyikevin.github.io/FreeMentor/UI/) Here is link for UI templete
@@ -57,6 +56,11 @@ Here is a list of all API Endpoints that you will find:
 ### Setup project locally
 * Install [git](https://git-scm.com/downloads)
 * Install [Node js](https://nodejs.org/en/)
+* Clone Repo [FreeMentor](https://github.com/kimenyikevin/FreeMentor.git)
+
+```
+$ To move into folder
+```
 $ cd FreeMentor-develop
 ```
 Install dependincies as they appear in package.json file by
