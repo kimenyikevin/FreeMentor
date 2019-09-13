@@ -17,6 +17,8 @@ describe('Test for verifying Token', () => {
   before('Clear data from database', (done) => {
     chai.request(server);
     db.execute('DELETE FROM users');
+    db.execute(insertAdmin, userTest);
+    db.execute(insertAdmin, values);
     done();
   });
   it('should return error if Token is invalid', (done) => {
@@ -47,12 +49,6 @@ describe('Test for verifying Token', () => {
 });
 
 describe('Test for admin to change user to a mentor', () => {
-  before('Clear data from database', (done) => {
-    chai.request(server);
-    db.execute('DELETE FROM users');
-    db.execute(insertAdmin, values);
-    done();
-  });
   it('should return error if user does not exit', (done) => {
     db.execute(insertAdmin, values);
     chai
