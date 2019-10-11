@@ -19,6 +19,22 @@
                 <button class="left-links active" onclick="ShowChange(event, 'Dashboard')" >Dash board</button>
                 <button class="left-links" onclick="ShowChange(event, 'mentors')">All Mentors</button>
             </div>
+
+            <div id="feedBack" class=" main-content model"  >
+                <div class="model-content">
+                    <span id="close1" class="close" title="Close Modal">&times;</span>
+                     <h2>Leave FeedBack for this Mentor</h2>
+                     <textarea ></textarea><br>
+                     <div id="radio">
+                     <input type="radio" name="gender" value="male"> 1
+                     <input type="radio" name="gender" value="female"> 2
+                     <input type="radio" name="gender" value="other"> 3
+                     <input type="radio" name="gender" value="other"> 4
+                     <input type="radio" name="gender" value="other"> 5 Star
+                    </div><br>
+                     <button>Submit</button>
+         </div>
+         </div>
             <div  class="top-container main-content" id="Dashboard">
                 <!-- users dashboard report  -->
                 <div class="up-box">
@@ -81,7 +97,7 @@
                                 <td>Kevin</td>
                                 <td>Software Engineering</td>
                                 <td>Completed</td>
-                                <td> <button>FeedBack</button> </td>
+                                <td> <button onclick="popup(event, 'feedBack')">FeedBack</button> </td>
                         </tr>
                     </table>
                 </div>
@@ -93,7 +109,6 @@
                     <h1>List Of All Mentors Available</h1>
                         <form>
                           <input type="text" placeholder="Search a mentor.." name="search">
-                          <button type="submit">Submit</button>
                         </form>
                 </div>
                 <div class="mentor-container">
