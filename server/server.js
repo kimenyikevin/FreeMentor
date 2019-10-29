@@ -1,5 +1,8 @@
-// server.js
 import express from 'express';
+import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
+import logger from 'morgan';
+import path from 'path';
 import swaggerui from 'swagger-ui-express';
 import users from './routes/usersRoutes';
 import mentors from './routes/mentorsroutes';
@@ -10,6 +13,14 @@ import './models/userModels';
 
 const app = express();
 app.use(express.json());
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: false,
+}));
+app.use(cookieParser());
+
+app.use(express.static(path.join(__dirname, '../UI')));
 app.use('/api-docs', swaggerui.serve, swaggerui.setup(swaggerdocs));
 app.use(errorHandler);
 const port = process.env.PORT || 3000;
