@@ -6,6 +6,7 @@ cache:
     - "node_modules"
 install:
 - npm install
+- npm rebuild bcrypt --update-binary
 services:
 - postgresql
 before_script:
