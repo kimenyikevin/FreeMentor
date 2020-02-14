@@ -1,3 +1,4 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/8970944717004206bee0c08f69da544b)](https://app.codacy.com/manual/kimenyikevin/FreeMentor?utm_source=github.com&utm_medium=referral&utm_content=kimenyikevin/FreeMentor&utm_campaign=Badge_Grade_Dashboard)
 [![Build Status](https://travis-ci.org/kimenyikevin/FreeMentor.svg?branch=develop)](https://travis-ci.org/kimenyikevin/FreeMentor)
 [![Coverage Status](https://coveralls.io/repos/github/kimenyikevin/FreeMentor/badge.svg?branch=develop)](https://coveralls.io/github/kimenyikevin/FreeMentor?branch=develop)
 [![Maintainability](https://api.codeclimate.com/v1/badges/2c52cb512a25aee536bb/maintainability)](https://codeclimate.com/github/kimenyikevin/FreeMentor/maintainability)
